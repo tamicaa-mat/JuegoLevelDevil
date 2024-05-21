@@ -31,6 +31,6 @@ int main()
         window.draw(p.getDraw());
         window.display();//PARA MOSTRAR LA PANTALLA
     }
-
+    ////////////////////wwwwwwwwwwwwwwwwwwwwwwwwwww
     return 0;
 }
