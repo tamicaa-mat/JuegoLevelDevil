@@ -12,6 +12,7 @@ int main()
     Personaje pp;
     Moneda m;
     Piso piso(800,150);
+    PuertaBlanca pb(40,65);
     //GAMELOOP
     while (window.isOpen())
     {
@@ -31,6 +32,7 @@ int main()
 
         window.clear();//BORRA LA PANTALLA
         // Dibujar aquí
+        window.draw(pb.getDraw());
         window.draw(piso.getdraw());
         window.draw(m.getDraw());
         window.draw(pp.getDraw());
