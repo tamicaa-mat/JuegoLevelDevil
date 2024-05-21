@@ -524,3 +524,48 @@
 
 1714176489 source:c:\proyects\app1\puertablanca.cpp
 
+1716270535 source:c:\users\54112\onedrive\documentos\github\juegoleveldevil\personaje.cpp
+	"Personaje.h"
+
+1716270270 c:\users\54112\onedrive\documentos\github\juegoleveldevil\personaje.h
+	<SFML/Graphics.hpp>
+
+1716269206 source:c:\users\54112\onedrive\documentos\github\juegoleveldevil\main.cpp
+	<SFML/Graphics.hpp>
+	"gamePlay.h"
+	"Personaje.h"
+	"PuertaBlanca.h"
+	"Monedas.h"
+	"piso.h"
+
+1716264702 c:\users\54112\onedrive\documentos\github\juegoleveldevil\gameplay.h
+	<SFML/Graphics.hpp>
+	"Personaje.h"
+	"PuertaBlanca.h"
+	"Monedas.h"
+
+1716263853 c:\users\54112\onedrive\documentos\github\juegoleveldevil\puertablanca.h
+	<SFML/Graphics.hpp>
+
+1716265349 c:\users\54112\onedrive\documentos\github\juegoleveldevil\monedas.h
+	<SFML/Graphics.hpp>
+
+1716268822 source:c:\users\54112\onedrive\documentos\github\juegoleveldevil\monedas.cpp
+	<SFML/Graphics.hpp>
+	"Monedas.h"
+
+1716263853 source:c:\users\54112\onedrive\documentos\github\juegoleveldevil\puertablanca.cpp
+	<SFML/Graphics.hpp>
+	"PuertaBlanca.h"
+
+1716265501 source:c:\users\54112\onedrive\documentos\github\juegoleveldevil\gameplay.cpp
+	"gamePlay.h"
+	"Personaje.h"
+
+1716266909 source:c:\users\54112\onedrive\documentos\github\juegoleveldevil\piso.cpp
+	<SFML/Graphics.hpp>
+	"piso.h"
+
+1716266716 c:\users\54112\onedrive\documentos\github\juegoleveldevil\piso.h
+	<SFML/Graphics.hpp>
+

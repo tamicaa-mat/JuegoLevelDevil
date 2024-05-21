@@ -60,6 +60,8 @@
 		<Unit filename="gamePlay.cpp" />
 		<Unit filename="gamePlay.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="piso.cpp" />
+		<Unit filename="piso.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

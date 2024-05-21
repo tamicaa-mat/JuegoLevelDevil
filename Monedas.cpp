@@ -2,39 +2,17 @@
 
 #include"Monedas.h"
 
-// Constructor que inicializa la moneda en una posición específica y con un color y radio dados
-Monedas(const sf::Vector2f& posicion, const sf::Color& color, float radio)
-    : _posicionMoneda(posicion), _color(color), _radio(radio) {}
+Moneda::Moneda()
+{
+    _shapeMoneda.setFillColor(sf::Color::Yellow);
+    _shapeMoneda.setRadius(10);
+    _shapeMoneda.setPosition(300,200);
+    _visible=true;
 
-sf::Vector2f getPositionX() const
-{
-    return _posicionMoneda;
-}
-sf::Vector2f getPositionY() const
-{
-    return _posicionMoneda;
 }
 
-sf::Color getColor() const
+sf::CircleShape& Moneda::getDraw()
 {
-    return _color;
+    // Código de la función getDraw()
+    return _shapeMoneda;
 }
-float getRadius() const
-{
-    return _radio;
-}
-
-// Métodos para establecer la posición, el color y el radio de la moneda
-void setPosition(const sf::Vector2f& posicion)
-{
-    _posicionMoneda = posicion;
-}
-void setColor(const sf::Color& color)
-{
-    _color = color;
-}
-void setRadius(float radio)
-{
-    _radio = radio;
-}
-

@@ -8,8 +8,8 @@
 class gamePlay{
 private:
 Personaje _p;
-PuertaBlanca _puerta;
-Monedas _monedas;
+//PuertaBlanca _puerta;
+//Monedas _monedas;
 
 public:
 gamePlay ();

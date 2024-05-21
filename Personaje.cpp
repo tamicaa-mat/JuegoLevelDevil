@@ -5,9 +5,10 @@ Personaje::Personaje() //constructor por defecto
 {
     _shape.setFillColor(sf::Color::Magenta);
     _shape.setRadius(20);
-    _shape.setPosition(100,300);
+    _shape.setPosition(0,400);
     _estado=ESTADO::QUIETO;//inicialmente siempre esta quieto
     _velocidadSalto=0;
+    _velocidadSaltoHorizontal=0;
 
 }
 
@@ -17,8 +18,15 @@ void Personaje::cmd()
     {
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
         {
-            _estado=ESTADO::SALTANDO;
-            _velocidadSalto=10;
+             _estado=ESTADO::SALTANDO;
+            _velocidadSalto=20;
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+            _velocidadSaltoHorizontal=5;
+            }
+             if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
+            _velocidadSaltoHorizontal=5;
+            }
+
         }
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
@@ -60,13 +68,14 @@ void Personaje::update()
         break;
     case SALTANDO:
         _velocidadSalto -= 1;//quito la gravedad al salto
-        _shape.move(0,-_velocidadSalto);
+        _velocidadSaltoVertical-= 2;//quito la gravedad al salto vertical
+        _shape.move(3,-_velocidadSalto);
         // Verificar si el personaje ha alcanzado el límite inferior de la pantalla
-        if (_shape.getPosition().y >500)
+        if (_shape.getPosition().y >400)
         {
             _estado = ESTADO::QUIETO; // Cambiar al estado QUIETO
             _velocidadSalto = 0; // Reiniciar la velocidad de salto
-            _shape.setPosition(_shape.getPosition().x, 500); // Establecer la posición en el límite superior de la pantalla
+            _shape.setPosition(_shape.getPosition().x, 400); // Establecer la posición en el límite superior de la pantalla
         }
         break;
     case CAYENDO:

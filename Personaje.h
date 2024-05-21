@@ -15,6 +15,7 @@ private:
     sf::CircleShape _shape;
     ESTADO _estado;//que esta haciendo el personaje?
     float _velocidadSalto;
+    float  _velocidadSaltoHorizontal;
     sf::Vector2f _posicion;
 
 public:

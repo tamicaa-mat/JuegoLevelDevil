@@ -3,13 +3,15 @@
 #include "Personaje.h"
 #include "PuertaBlanca.h"
 #include "Monedas.h"
-
+#include "piso.h"
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Window");
     window.setFramerateLimit(60);// se ve mas lento el movimiento
 
-    Personaje p;
+    Personaje pp;
+    Moneda m;
+    Piso piso(800,150);
     //GAMELOOP
     while (window.isOpen())
     {
@@ -21,16 +23,19 @@ int main()
                 window.close();
         }
         //PROCESAMIENTO shape
-        p.cmd();//lee teclado
-        p.update();
+
+        pp.cmd();//lee teclado
+        pp.update();
 
 
 
         window.clear();//BORRA LA PANTALLA
         // Dibujar aquí
-        window.draw(p.getDraw());
+        window.draw(piso.getdraw());
+        window.draw(m.getDraw());
+        window.draw(pp.getDraw());
         window.display();//PARA MOSTRAR LA PANTALLA
     }
-    ////////////////////wwwwwwwwwwwwwwwwwwwwwwwwwww
+    ////////////////////wwwwwwwwwwwwwwwwwwwwwwwwwwwtaaaaaaaaaaammmmmmm
     return 0;
 }
