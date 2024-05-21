@@ -524,13 +524,13 @@
 
 1714176489 source:c:\proyects\app1\puertablanca.cpp
 
-1716270535 source:c:\users\54112\onedrive\documentos\github\juegoleveldevil\personaje.cpp
+1716314469 source:c:\users\54112\onedrive\documentos\github\juegoleveldevil\personaje.cpp
 	"Personaje.h"
 
-1716270270 c:\users\54112\onedrive\documentos\github\juegoleveldevil\personaje.h
+1716313313 c:\users\54112\onedrive\documentos\github\juegoleveldevil\personaje.h
 	<SFML/Graphics.hpp>
 
-1716269206 source:c:\users\54112\onedrive\documentos\github\juegoleveldevil\main.cpp
+1716309500 source:c:\users\54112\onedrive\documentos\github\juegoleveldevil\main.cpp
 	<SFML/Graphics.hpp>
 	"gamePlay.h"
 	"Personaje.h"

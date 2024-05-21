@@ -18,31 +18,40 @@ void Personaje::cmd()
     {
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
         {
-             _estado=ESTADO::SALTANDO;
+            _estado=ESTADO::SALTANDO;
             _velocidadSalto=20;
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
-            _velocidadSaltoHorizontal=5;
-            }
-             if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
-            _velocidadSaltoHorizontal=5;
-            }
-
         }
 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-        {
-            _estado=ESTADO::CAMINANDO_ADELANTE;
-
-
-        }
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         {
             _estado=ESTADO::CAMINANDO_ATRAS;
 
         }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        {
+            _estado=ESTADO::CAMINANDO_ADELANTE;
+
+        }
 
     }
+      if(_estado==SALTANDO){
+           if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+        {
+            _estado=ESTADO::SALTANDO_ADELANTE;
+            _velocidadSalto=20;
+            _velocidadSaltoHorizontal=5;
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            _estado=ESTADO::SALTANDO_ATRAS;
+            _velocidadSalto=20;
+            _velocidadSaltoHorizontal=5;
+        }
+
+
+
+      }
 
 
 }
@@ -68,9 +77,19 @@ void Personaje::update()
         break;
     case SALTANDO:
         _velocidadSalto -= 1;//quito la gravedad al salto
-        _velocidadSaltoVertical-= 2;//quito la gravedad al salto vertical
-        _shape.move(3,-_velocidadSalto);
-        // Verificar si el personaje ha alcanzado el límite inferior de la pantalla
+        _shape.move(0,-_velocidadSalto);
+        if (_shape.getPosition().y >400)
+        {
+            _estado = ESTADO::QUIETO; // Cambiar al estado QUIETO
+            _velocidadSalto = 0;// Reiniciar la velocidad de salto
+            _shape.setPosition(_shape.getPosition().x, 400); // Establecer la posición en el límite superior de la pantalla
+        }
+        break;
+    case SALTANDO_ADELANTE:
+         _velocidadSalto -= 1.0f; // Aplica gravedad
+        _velocidadSaltoHorizontal-=2;
+        _shape.move(1,-_velocidadSalto);
+
         if (_shape.getPosition().y >400)
         {
             _estado = ESTADO::QUIETO; // Cambiar al estado QUIETO
@@ -78,6 +97,17 @@ void Personaje::update()
             _shape.setPosition(_shape.getPosition().x, 400); // Establecer la posición en el límite superior de la pantalla
         }
         break;
+    case SALTANDO_ATRAS:
+        _velocidadSalto -= 1.0f;
+        _velocidadSaltoHorizontal-= 2;//quito la gravedad al salto vertical
+        _shape.move(-1,-_velocidadSalto);
+        // Verificar si el personaje ha alcanzado el límite inferior de la pantalla
+        if (_shape.getPosition().y >400)
+        {
+            _estado = ESTADO::QUIETO; // Cambiar al estado QUIETO
+            _velocidadSalto = 0; // Reiniciar la velocidad de salto
+            _shape.setPosition(_shape.getPosition().x, 400); // Establecer la posición en el límite superior de la pantalla
+        }
     case CAYENDO:
 
 
