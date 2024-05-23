@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 #ifndef PERSONAJE_H
 #define PERSONAJE_H
 
@@ -18,7 +18,7 @@ enum ESTADO{
 class Personaje {
 private:
     sf::CircleShape _shape;
-    ESTADO _estado; // Qué está haciendo el personaje
+    ESTADO _estado; // QuÃ© estÃ¡ haciendo el personaje
     float _velocidadSalto;
     float _velocidadSaltoHorizontal;
     float _velocidadMovimiento; // Nueva variable para la velocidad de movimiento
@@ -29,11 +29,11 @@ public:
     void cmd();
     void update();
     sf::CircleShape& getDraw();
-    bool colisionaCon(const Obstaculo& obstaculo); // Nueva función
+    bool colisionaCon(const Obstaculo& obstaculo); // Nueva funciÃ³n
 };
 
 #endif // PERSONAJE_H
-=======
+
 #ifndef PERSONAJE_H
 #define PERSONAJE_H
 
@@ -64,4 +64,4 @@ public:
 };
 
 #endif // PERSONAJE_H
->>>>>>> 6f61caf099bd79490bf4755cf2e83f910632a5e9
+
