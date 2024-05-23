@@ -41,6 +41,7 @@ int main() {
                 if (nivel1.isGameOverResolved()) {
                     juegoIniciado = false;
                     break;
+                    //////con el profeeeee
                 }
             }
         }
