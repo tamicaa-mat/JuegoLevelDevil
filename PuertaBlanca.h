@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 #ifndef PUERTABLANCA_H_INCLUDED
 #define PUERTABLANCA_H_INCLUDED
 #include <SFML/Graphics.hpp>
@@ -11,7 +11,7 @@ private:
 public:
     PuertaBlanca(float ancho, float altura);
 
-    // Método para dibujar la puerta
+    // MÃ©todo para dibujar la puerta
  sf::RectangleShape& getDraw();
 
 };
@@ -28,7 +28,7 @@ public:
 
 
 #endif // PUERTABLANCA_H_INCLUDED
-=======
+
 #ifndef PUERTABLANCA_H_INCLUDED
 #define PUERTABLANCA_H_INCLUDED
 #include <SFML/Graphics.hpp>
@@ -41,7 +41,7 @@ private:
 public:
     PuertaBlanca(float ancho, float altura);
 
-    // Método para dibujar la puerta
+    // MÃ©todo para dibujar la puerta
  sf::RectangleShape& getDraw();
 
 };
@@ -58,4 +58,4 @@ public:
 
 
 #endif // PUERTABLANCA_H_INCLUDED
->>>>>>> 6f61caf099bd79490bf4755cf2e83f910632a5e9
+
