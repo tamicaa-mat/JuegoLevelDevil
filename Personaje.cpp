@@ -1,6 +1,6 @@
 
 #include "Personaje.h"
-
+#include "Monedas.h"
 Personaje::Personaje() //constructor por defecto
 {
     _shape.setFillColor(sf::Color::Magenta);
@@ -130,3 +130,6 @@ bool Personaje::colisionaCon(const Obstaculo& obstaculo) {
     return _shape.getGlobalBounds().intersects(obstaculo.getDraw().getGlobalBounds());
 }
 
+bool Personaje::colisionaCon(const Moneda& moneda)const {
+     return  _shape.getGlobalBounds().intersects(moneda.getDraw().getGlobalBounds());
+}

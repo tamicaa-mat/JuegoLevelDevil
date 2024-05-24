@@ -4,6 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Obstaculo.h"
+#include"Monedas.h"
 
 enum ESTADO{
     QUIETO,
@@ -30,37 +31,7 @@ public:
     void update();
     sf::CircleShape& getDraw();
     bool colisionaCon(const Obstaculo& obstaculo); // Nueva función
-};
-
-#endif // PERSONAJE_H
-
-#ifndef PERSONAJE_H
-#define PERSONAJE_H
-
-#include <SFML/Graphics.hpp>
-
-enum ESTADO{
-QUIETO,
-CAMINANDO_ADELANTE,
-CAMINANDO_ATRAS,
-SALTANDO,
-SALTANDO_ADELANTE,
-SALTANDO_ATRAS,
-CAYENDO,
-};
-class Personaje {
-private:
-    sf::CircleShape _shape;
-    ESTADO _estado;//que esta haciendo el personaje?
-    float _velocidadSalto;
-    float  _velocidadSaltoHorizontal;
-    sf::Vector2f _posicion;
-
-public:
-    Personaje();
-    void cmd();
-    void update();
-    sf::CircleShape& getDraw();
+    bool colisionaCon(const Moneda& moneda) const; // Declaración de colisionaCon
 };
 
 #endif // PERSONAJE_H

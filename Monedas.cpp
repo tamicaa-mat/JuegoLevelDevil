@@ -12,10 +12,19 @@ Moneda::Moneda()
 
 }
 
-sf::CircleShape& Moneda::getDraw()
-{
-    // Código de la función getDraw()
-    return _shapeMoneda;
+void Moneda::desaparecer(){
+
+ _visible=false;
+
 }
 
 
+const sf::CircleShape& Moneda::getDraw() const {
+      if (_visible) {
+        return _shapeMoneda;
+    } else {
+        // Si la moneda no debe ser dibujada, devuelve una forma fuera de la pantalla
+        static sf::CircleShape emptyShape;
+        return emptyShape;
+    }
+}

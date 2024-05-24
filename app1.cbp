@@ -50,8 +50,14 @@
 			<Add library="sfml-system" />
 			<Add directory="C:/Program Files/CodeBlocks/SFML/lib" />
 		</Linker>
+		<Unit filename="MenuPrincipal.cpp" />
+		<Unit filename="MenuPrincipal.h" />
 		<Unit filename="Monedas.cpp" />
 		<Unit filename="Monedas.h" />
+		<Unit filename="Nivel1.cpp" />
+		<Unit filename="Nivel1.h" />
+		<Unit filename="Obstaculo.cpp" />
+		<Unit filename="Obstaculo.h" />
 		<Unit filename="Personaje.cpp" />
 		<Unit filename="Personaje.h" />
 		<Unit filename="PuertaBlanca.cpp" />

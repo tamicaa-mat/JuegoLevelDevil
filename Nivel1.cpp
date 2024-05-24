@@ -45,6 +45,12 @@ void Nivel1::actualizar() {
         }
     }
 
+    if(pp.colisionaCon(m)){
+
+        m.desaparecer();
+
+    }
+
     textoNivel.setString("Nivel 1 Vidas: " + std::to_string(vidas));
 }
 
