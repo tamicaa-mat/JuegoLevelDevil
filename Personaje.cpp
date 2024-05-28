@@ -133,18 +133,19 @@ bool Personaje::colisionaCon(const Obstaculo& obstaculo) {
 bool Personaje::colisionaCon(const Moneda& moneda)const {
      return  _shape.getGlobalBounds().intersects(moneda.getDraw().getGlobalBounds());
 }
-//
-//bool Personaje::colisionaCon(const Trampa& trampa) const {
-// return  _shape.getGlobalBounds().intersects(trampa.getDraw().getGlobalBounds());
-//}
 
 bool Personaje::colisionaCon(const Trampa& trampa) const {
     // Obtiene la posición X del objeto _shape del personaje
     float posXPersonaje = _shape.getPosition().x;
+    float posYPersonaje = ((_shape.getPosition().y)+50);//porque tengo a personaje en y=400 y el piso en y=450
+
 
     // Obtiene la posición X del objeto devuelto por getDraw() de la trampa
     float posXTrampa = trampa.getPosition().x;
+    float posYTrampa = trampa.getPosition().y;
 
-    // Compara las posiciones X y devuelve true si son iguales
-    return posXPersonaje == posXTrampa;
+    if(posXPersonaje==posXTrampa&&posYPersonaje==posYTrampa){
+            return true;
+
+    }
 }
