@@ -60,6 +60,17 @@ void Personaje::cmd()
             _velocidadSaltoHorizontal = 5;
         }
     }
+
+
+
+
+
+}
+
+
+void Personaje::activarCaida(){
+
+  _estado = ESTADO::CAYENDO;
 }
 
 void Personaje::update()
@@ -71,14 +82,16 @@ void Personaje::update()
 
     case CAMINANDO_ADELANTE:
         _shape.move(_velocidadMovimiento, 0);
-        if (!sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+        if (!sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        {
             _estado = ESTADO::QUIETO;
         }
         break;
 
     case CAMINANDO_ATRAS:
         _shape.move(-_velocidadMovimiento, 0);
-        if (!sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+        if (!sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
             _estado = ESTADO::QUIETO;
         }
         break;
@@ -117,8 +130,14 @@ void Personaje::update()
         break;
 
     case CAYENDO:
+        _velocidadSalto -= 1.0f;
+        _shape.move(0, -_velocidadSalto); // Mover hacia abajo
         break;
     }
+
+
+
+
 }
 
 sf::CircleShape& Personaje::getDraw()
@@ -126,15 +145,18 @@ sf::CircleShape& Personaje::getDraw()
     return _shape;
 }
 
-bool Personaje::colisionaCon(const Obstaculo& obstaculo) {
+bool Personaje::colisionaCon(const Obstaculo& obstaculo)
+{
     return _shape.getGlobalBounds().intersects(obstaculo.getDraw().getGlobalBounds());
 }
 
-bool Personaje::colisionaCon(const Moneda& moneda)const {
-     return  _shape.getGlobalBounds().intersects(moneda.getDraw().getGlobalBounds());
+bool Personaje::colisionaCon(const Moneda& moneda)const
+{
+    return  _shape.getGlobalBounds().intersects(moneda.getDraw().getGlobalBounds());
 }
 
-bool Personaje::colisionaCon(const Trampa& trampa) const {
+bool Personaje::colisionaCon(const Trampa& trampa)
+{
     // Obtiene la posición X del objeto _shape del personaje
     float posXPersonaje = _shape.getPosition().x;
     float posYPersonaje = ((_shape.getPosition().y)+50);//porque tengo a personaje en y=400 y el piso en y=450
@@ -144,8 +166,16 @@ bool Personaje::colisionaCon(const Trampa& trampa) const {
     float posXTrampa = trampa.getPosition().x;
     float posYTrampa = trampa.getPosition().y;
 
-    if(posXPersonaje==posXTrampa&&posYPersonaje==posYTrampa){
-            return true;
+    if(posXPersonaje==posXTrampa&&posYPersonaje==posYTrampa)
+    {
+
+        activarCaida(); // Llamar a la función auxiliar para activar la caída
+        return true;
 
     }
+
+    return false; // Indicar que no hubo colisión
+
+
 }
+

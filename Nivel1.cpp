@@ -67,6 +67,7 @@ void Nivel1::actualizar()
 
             trmp.aparecer();
 
+           // gameOver = true;
         }
 
 
@@ -91,8 +92,8 @@ void Nivel1::dibujar()
         ventana.draw(m.getDraw());
         ventana.draw(obstaculo1.getDraw());
         ventana.draw(obstaculo2.getDraw());
-        ventana.draw(pp.getDraw());
         ventana.draw(trmp.getDraw());
+        ventana.draw(pp.getDraw());
     }
     ventana.display();
 }

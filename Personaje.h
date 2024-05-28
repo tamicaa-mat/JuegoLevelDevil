@@ -31,9 +31,10 @@ public:
     void cmd();
     void update();
     sf::CircleShape& getDraw();
+    void activarCaida();
     bool colisionaCon(const Obstaculo& obstaculo); // Nueva función
     bool colisionaCon(const Moneda& moneda) const; // Declaración de colisionaCon
-    bool colisionaCon(const Trampa& trampa) const;
+    bool colisionaCon(const Trampa& trampa) ;
 };
 
 #endif // PERSONAJE_H
