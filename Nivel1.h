@@ -7,12 +7,14 @@
 #include "Monedas.h"
 #include "piso.h"
 #include "Obstaculo.h"
+#include"Trampa.h"
 
 class Nivel1 {
 private:
     Personaje pp;
     Moneda m;
     Piso piso;
+    Trampa trmp;
     PuertaBlanca pb;
     Obstaculo obstaculo1;
     Obstaculo obstaculo2;

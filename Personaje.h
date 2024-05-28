@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "Obstaculo.h"
 #include"Monedas.h"
+#include"Trampa.h"
 
 enum ESTADO{
     QUIETO,
@@ -32,6 +33,7 @@ public:
     sf::CircleShape& getDraw();
     bool colisionaCon(const Obstaculo& obstaculo); // Nueva función
     bool colisionaCon(const Moneda& moneda) const; // Declaración de colisionaCon
+    bool colisionaCon(const Trampa& trampa) const;
 };
 
 #endif // PERSONAJE_H

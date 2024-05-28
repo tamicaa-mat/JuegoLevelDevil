@@ -1,6 +1,4 @@
-
 #include <SFML/Graphics.hpp>
-
 #include"Monedas.h"
 
 Moneda::Moneda()
