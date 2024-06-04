@@ -1,13 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include"Monedas.h"
 
-Moneda::Moneda()
-{
-    _shapeMoneda.setFillColor(sf::Color::Yellow);
-    _shapeMoneda.setRadius(10);
-    _shapeMoneda.setPosition(300,200);
-    _visible=true;
 
+Moneda::Moneda(float x, float y, int radio) {
+     _shapeMoneda.setFillColor(sf::Color::Yellow);
+    _shapeMoneda.setPosition(x, y);
+    _shapeMoneda.setRadius(radio);
+    _visible=true;
 }
 
 void Moneda::desaparecer(){
@@ -15,7 +14,6 @@ void Moneda::desaparecer(){
  _visible=false;
 
 }
-
 
 const sf::CircleShape& Moneda::getDraw() const {
       if (_visible) {

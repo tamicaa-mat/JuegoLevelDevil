@@ -1,15 +1,22 @@
 
 #include "Personaje.h"
 
-Personaje::Personaje() //constructor por defecto
+Personaje::Personaje(float x, float y)
 {
     _shape.setFillColor(sf::Color::Magenta);
     _shape.setRadius(20);
-    _shape.setPosition(0,400);
-    _estado=ESTADO::QUIETO;//inicialmente siempre esta quieto
-    _velocidadSalto=0;
-    _velocidadSaltoHorizontal=0;
+    _shape.setPosition(x, y); // Establecer la posición usando los parámetros x e y
+    _estado = ESTADO::QUIETO; // Inicialmente siempre está quieto
+    _velocidadSalto = 0;
+    _velocidadSaltoHorizontal = 0;
     _velocidadMovimiento = 2.0f; // Establecer una velocidad de movimiento inicial
+    _velocidadCaida=0.0001f;
+    fueraJuego = false;
+}
+
+sf::Drawable& Personaje::getDraw()
+{
+    return _shape; // Devolver el objeto _shape del personaje
 }
 
 void Personaje::cmd()
@@ -68,9 +75,10 @@ void Personaje::cmd()
 }
 
 
-void Personaje::activarCaida(){
+void Personaje::activarCaida()
+{
+    _estado = ESTADO::CAYENDO;
 
-  _estado = ESTADO::CAYENDO;
 }
 
 void Personaje::update()
@@ -129,21 +137,25 @@ void Personaje::update()
         }
         break;
 
+
     case CAYENDO:
-        _velocidadSalto -= 1.0f;
-        _shape.move(0, -_velocidadSalto); // Mover hacia abajo
+        if (_velocidadCaida < -10)
+        {
+            _velocidadCaida = 0;
+        }
+        _velocidadCaida += 0.00005; // Reducir la velocidad de caída gradualmente
+        _shape.move(0, _velocidadCaida); // Mover hacia abajo
+        if (_shape.getPosition().y > 600)
+        {
+            fueraJuego = true;
+        }
         break;
+
+
     }
-
-
-
-
 }
 
-sf::CircleShape& Personaje::getDraw()
-{
-    return _shape;
-}
+
 
 bool Personaje::colisionaCon(const Obstaculo& obstaculo)
 {

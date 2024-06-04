@@ -6,22 +6,22 @@
 #include"PuertaBlanca.h"
 #include"Monedas.h"
 
-class gamePlay{
-private:
-Personaje _p;
+//class gamePlay{
+//private:
+//Personaje _p;
 //PuertaBlanca _puerta;
-//Monedas _monedas;
-
-public:
-gamePlay ();
-void update();
-void draw(sf::RenderTarget& target,sf::RenderStates states) const;
-
-
-
-};
-
-
+//Moneda _moneda;
+//
+//public:
+//gamePlay ();
+//void update();
+//void draw(sf::RenderTarget& target,sf::RenderStates states) const;
+//
+//
+//
+//};
+//
+//
 
 
 

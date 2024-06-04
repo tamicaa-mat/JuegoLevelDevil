@@ -1,6 +1,6 @@
 #include "Nivel1.h"
 
-Nivel1::Nivel1(sf::RenderWindow& vent) : ventana(vent), piso(800, 150), pb(40, 65), obstaculo1(200, 430, 25, 25), obstaculo2(400, 430, 25, 25),trmp(500,450), vidas(3), gameOver(false), gameOverResolved(false)
+Nivel1::Nivel1(sf::RenderWindow& vent) : ventana(vent),pp(0,400),m(200.0,400.0,10),m2(450,350.0,10),m3(550.0,350.0,10), piso(800, 150),trmp(500,450),pb(40, 65),obstaculo1(200, 430, 25, 25), obstaculo2(400, 430, 25, 25),vidas(3), gameOver(false), gameOverResolved(false)
 {
     if (!fuente.loadFromFile("fuentes/Roboto-Black.ttf"))
     {
@@ -46,7 +46,7 @@ void Nivel1::actualizar()
         vidas--;
         if (vidas > 0)
         {
-            pp = Personaje(); // Reiniciar la posición del personaje
+            pp = Personaje(0,400); // Reiniciar la posición del personaje
         }
         else
         {
@@ -55,23 +55,31 @@ void Nivel1::actualizar()
         }
     }
 
-    if(pp.colisionaCon(m))
+    if(pp.colisionaCon(m) || pp.colisionaCon(m2) || pp.colisionaCon(m3))
     {
-
-        m.desaparecer();
-
+        if (pp.colisionaCon(m))
+        {
+            m.desaparecer();
+        }
+        if (pp.colisionaCon(m2))
+        {
+            m2.desaparecer();
+        }
+        if (pp.colisionaCon(m3))
+        {
+            m3.desaparecer();
+        }
     }
 
-        if(pp.colisionaCon(trmp))
-        {
+    if(pp.colisionaCon(trmp))
+    {
 
-            trmp.aparecer();
-
-           // gameOver = true;
-        }
-
+        trmp.aparecer();
+        vidas--;
+        pp=Personaje(0,400);
 
 
+    }
 
 
     textoNivel.setString("Nivel 1 Vidas: " + std::to_string(vidas));
@@ -87,13 +95,15 @@ void Nivel1::dibujar()
     else
     {
         ventana.draw(textoNivel);
-        ventana.draw(pb.getDraw());
-        ventana.draw(piso.getdraw());
+        ventana.draw(pp.getDraw());
         ventana.draw(m.getDraw());
+        ventana.draw(m2.getDraw());
+        ventana.draw(m3.getDraw());
+        ventana.draw(piso.getdraw());
+        ventana.draw(pb.getDraw());
+        ventana.draw(trmp.getDraw());
         ventana.draw(obstaculo1.getDraw());
         ventana.draw(obstaculo2.getDraw());
-        ventana.draw(trmp.getDraw());
-        ventana.draw(pp.getDraw());
     }
     ventana.display();
 }

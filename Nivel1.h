@@ -11,8 +11,9 @@
 
 class Nivel1 {
 private:
+     sf::RenderWindow& ventana;
     Personaje pp;
-    Moneda m;
+    Moneda m,m2,m3;
     Piso piso;
     Trampa trmp;
     PuertaBlanca pb;
@@ -21,7 +22,6 @@ private:
     sf::Text textoNivel;
     sf::Text textoGameOver;
     sf::Font fuente;
-    sf::RenderWindow& ventana;
     int vidas;
     bool gameOver;
     bool gameOverResolved; // Nueva variable para controlar la resolución de "Game Over"

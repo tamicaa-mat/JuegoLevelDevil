@@ -50,6 +50,9 @@
 			<Add library="sfml-system" />
 			<Add directory="C:/Program Files/CodeBlocks/SFML/lib" />
 		</Linker>
+		<Unit filename="../../../Escritorio/c++ codeblock programación II/modeloParcial2Prog.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="MenuPrincipal.cpp" />
 		<Unit filename="MenuPrincipal.h" />
 		<Unit filename="Monedas.cpp" />

@@ -4,19 +4,15 @@
 
 #include <SFML/Graphics.hpp>
 
-class Moneda{
+class Moneda {
 private:
     sf::CircleShape _shapeMoneda;
-    sf::Vector2f _posicionMoneda;
-    bool _visible; // Indicador de si la moneda está visible o no
+    bool _visible;
+
 public:
-    Moneda();
-    void cmd();
-    void update();
-  const sf::CircleShape& getDraw() const;
+    Moneda(float x, float y, int radio);
     void desaparecer();
+    const sf::CircleShape& getDraw() const;
 };
-
-
 
 #endif // MONEDAS_H_INCLUDED

@@ -32,7 +32,7 @@ const sf::RectangleShape& Trampa::getDraw() const
     }
     else
     {
-        // Si la trampá no debe ser dibujada, devuelve una forma fuera de la pantalla
+        // Si la trampá no debe ser dibujada, dibuja una forma fuera de la pantalla
         static sf::RectangleShape emptyShape;
         return emptyShape;
     }

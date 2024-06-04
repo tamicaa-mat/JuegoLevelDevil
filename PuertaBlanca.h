@@ -10,6 +10,7 @@ private:
     sf::Vector2f _posicionPuertaBlanca;
 public:
     PuertaBlanca(float ancho, float altura);
+    PuertaBlanca();
 
     // Método para dibujar la puerta
  sf::RectangleShape& getDraw();
