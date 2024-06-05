@@ -1,18 +1,18 @@
 #include "Nivel1.h"
 
 Nivel1::Nivel1(sf::RenderWindow& vent) : ventana(vent),
-pp(0,400),
-m(250.0,350.0,10),
-m2(500,350.0,10),
-m3(550.0,350.0,10),
-piso(800, 150),
-trmp(500,450),
-pb(40, 65),
-obstaculo1(200, 430, 25, 25),
-obstaculo2(400, 430, 25, 25),
-vidas(3), gameOver(false),
-gameOverResolved(false),
-contadorMonedas(0)
+    pp(0,400),
+    m(250.0,350.0,10),
+    m2(500,350.0,10),
+    m3(550.0,350.0,10),
+    piso(800, 150),
+    trmp(500,450),
+    pb(40, 65),
+    obstaculo1(200, 430, 25, 25),
+    obstaculo2(400, 430, 25, 25),
+    vidas(3), gameOver(false),
+    gameOverResolved(false),
+    contadorMonedas(0)
 {
     if (!fuente.loadFromFile("fuentes/Roboto-Black.ttf"))
     {
@@ -59,6 +59,7 @@ void Nivel1::actualizar()
         if (vidas > 0)
         {
             pp = Personaje(0,400);
+
             // Reiniciar la posición del personaje///////////////////necesito que la trampa vuelva a ponerse oculta
         }
         else
@@ -86,22 +87,27 @@ void Nivel1::actualizar()
             contadorMonedas++;
         }
     }
-
     if(pp.colisionaCon(trmp))
     {
-
         trmp.aparecer();
         vidas--;
-        pp=Personaje(0,400);
-        contadorMonedas=0;
-
-
+        if (vidas > 0)
+        {
+            trmp.setVisible(false);
+            pp = Personaje(0,400);
+            // Reiniciar la posición del personaje
+        }
+        else
+        {
+            // Activar estado de "Game Over"
+            gameOver = true;
+        }
     }
 
     if (pp.colisionPuertaBlanca(pb))
     {
         if(vidas==3)
-        gameOverResolved = true;////////////////////////////como hago para que pase al nivel dos
+            gameOverResolved = true;////////////////////////////como hago para que pase al nivel dos
         contadorMonedas==10;
     }
 

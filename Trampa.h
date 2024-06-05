@@ -12,9 +12,10 @@ public:
 Trampa(float posX, float posY);
 
 const sf::RectangleShape& getDraw() const;
-
+void setVisible(bool visible);
  sf::Vector2f getPosition()const;
  void aparecer();
+
 };
 
 

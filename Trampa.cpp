@@ -14,7 +14,9 @@ Trampa::Trampa(float posX, float posY) :
 sf::Vector2f Trampa::getPosition() const {
     return _trampa.getPosition();
 }
-
+void Trampa::setVisible(bool visible) {
+    _visible = visible;
+}
 
 void Trampa::aparecer()
 {
