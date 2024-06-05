@@ -8,6 +8,7 @@
 #include "MenuPrincipal.h"
 #include "Nivel1.h"
 #include "Obstaculo.h"
+#include "Nivel2.h"
 
 int main() {
     sf::RenderWindow ventana(sf::VideoMode(800, 600), "SFML Window");
@@ -41,7 +42,24 @@ int main() {
                 if (nivel1.isGameOverResolved()) {
                     juegoIniciado = false;
                     break;
-                    //////con el profeeeee
+                }
+            }
+
+            // Si el juego terminó porque el jugador murió, iniciar el segundo nivel
+            if (!juegoIniciado) {
+                // Crear y manejar el segundo nivel
+                Nivel2 nivel2(ventana);
+
+                while (ventana.isOpen()) {
+                    nivel2.manejarEntrada();
+                    nivel2.actualizar();
+                    nivel2.dibujar();
+
+                    // Verificar si el estado de "Game Over" ha sido resuelto en el segundo nivel
+                    if (nivel2.isGameOverResolved()) {
+                        juegoIniciado = false;
+                        break;
+                    }
                 }
             }
         }
@@ -49,5 +67,3 @@ int main() {
 
     return 0;
 }
-
-

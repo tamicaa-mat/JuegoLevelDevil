@@ -1,5 +1,5 @@
-#ifndef NIVEL1_H_INCLUDED
-#define NIVEL1_H_INCLUDED
+#ifndef NIVEL2_H_INCLUDED
+#define NIVEL2_H_INCLUDED
 
 #include <SFML/Graphics.hpp>
 #include "Personaje.h"
@@ -9,7 +9,7 @@
 #include "Obstaculo.h"
 #include"Trampa.h"
 
-class Nivel1 {
+class Nivel2 {
 private:
      sf::RenderWindow& ventana;
     Personaje pp;
@@ -24,15 +24,15 @@ private:
     sf::Font fuente;
     int vidas;
     bool gameOver;
-    bool gameOverResolved;
-    int contadorMonedas; // Nueva variable para controlar la resolución de "Game Over"
+    bool gameOverResolved; // Nueva variable para controlar la resolución de "Game Over"
 
 public:
-    Nivel1(sf::RenderWindow& vent);
+    Nivel2(sf::RenderWindow& vent);
     void manejarEntrada();
     void actualizar();
     void dibujar();
     bool isGameOverResolved() const; // Nueva función
 };
 
-#endif // NIVEL1_H_INCLUDED
+
+#endif // NIVEL2_H_INCLUDED

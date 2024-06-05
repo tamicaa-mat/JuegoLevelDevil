@@ -10,8 +10,9 @@ Personaje::Personaje(float x, float y)
     _velocidadSalto = 0;
     _velocidadSaltoHorizontal = 0;
     _velocidadMovimiento = 2.0f; // Establecer una velocidad de movimiento inicial
-    _velocidadCaida=0.0001f;
+    _velocidadCaida=0.1f;
     fueraJuego = false;
+
 }
 
 sf::Drawable& Personaje::getDraw()
@@ -136,23 +137,21 @@ void Personaje::update()
             _shape.setPosition(_shape.getPosition().x, 400); // Establecer la posición en el límite superior de la pantalla
         }
         break;
-
-
     case CAYENDO:
-        if (_velocidadCaida < -10)
+        if (_velocidadCaida < -2)
         {
-            _velocidadCaida = 0;
+            _velocidadCaida = -2; // Limitar la velocidad mínima de caída
         }
-        _velocidadCaida += 0.00005; // Reducir la velocidad de caída gradualmente
-        _shape.move(0, _velocidadCaida); // Mover hacia abajo
+        _velocidadCaida += (0.0005); // Aumentar la velocidad de caída gradualmente
+        _shape.move(0, _velocidadCaida/100); // Mover hacia abajo con la velocidad de caída actualizada
         if (_shape.getPosition().y > 600)
         {
             fueraJuego = true;
         }
         break;
-
-
     }
+
+
 }
 
 
@@ -188,6 +187,17 @@ bool Personaje::colisionaCon(const Trampa& trampa)
 
     return false; // Indicar que no hubo colisión
 
+
+}
+
+bool Personaje::colisionPuertaBlanca(const PuertaBlanca& _puertaRec){
+ float posXPersonaje = _shape.getPosition().x;
+float posYPersonaje = _shape.getPosition().y;
+ float posXPuerta = _puertaRec.getPosition().x;
+float posYPuerta = _puertaRec.getPosition().y;
+ if(posXPersonaje==posXPuerta&&posYPersonaje==posYPuerta){
+    return true;
+ }
 
 }
 

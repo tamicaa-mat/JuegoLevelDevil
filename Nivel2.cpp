@@ -1,18 +1,7 @@
-#include "Nivel1.h"
+#include"Nivel2.h"
 
-Nivel1::Nivel1(sf::RenderWindow& vent) : ventana(vent),
-pp(0,400),
-m(250.0,350.0,10),
-m2(500,350.0,10),
-m3(550.0,350.0,10),
-piso(800, 150),
-trmp(500,450),
-pb(40, 65),
-obstaculo1(200, 430, 25, 25),
-obstaculo2(400, 430, 25, 25),
-vidas(3), gameOver(false),
-gameOverResolved(false),
-contadorMonedas(0)
+
+Nivel2::Nivel2(sf::RenderWindow& vent) : ventana(vent),pp(200,100),m(600.0,100.0,10),m2(400.0,100.0,10),m3(200.0,100.0,10), piso(800, 150),trmp(0,200),pb(40, 65),obstaculo1(200, 430, 25, 25), obstaculo2(400, 430, 25, 25),vidas(3), gameOver(false), gameOverResolved(false)
 {
     if (!fuente.loadFromFile("fuentes/Roboto-Black.ttf"))
     {
@@ -31,7 +20,7 @@ contadorMonedas(0)
     textoGameOver.setPosition(100, 200);
 }
 
-void Nivel1::manejarEntrada()
+void Nivel2::manejarEntrada()
 {
     sf::Event evento;
     while (ventana.pollEvent(evento))
@@ -45,7 +34,7 @@ void Nivel1::manejarEntrada()
     }
 }
 
-void Nivel1::actualizar()
+void Nivel2::actualizar()
 {
     if (gameOver) return;
 
@@ -58,8 +47,7 @@ void Nivel1::actualizar()
         vidas--;
         if (vidas > 0)
         {
-            pp = Personaje(0,400);
-            // Reiniciar la posición del personaje///////////////////necesito que la trampa vuelva a ponerse oculta
+            pp = Personaje(0,400); // Reiniciar la posición del personaje
         }
         else
         {
@@ -73,17 +61,14 @@ void Nivel1::actualizar()
         if (pp.colisionaCon(m))
         {
             m.desaparecer();
-            contadorMonedas++;
         }
         if (pp.colisionaCon(m2))
         {
             m2.desaparecer();
-            contadorMonedas++;
         }
         if (pp.colisionaCon(m3))
         {
             m3.desaparecer();
-            contadorMonedas++;
         }
     }
 
@@ -93,24 +78,15 @@ void Nivel1::actualizar()
         trmp.aparecer();
         vidas--;
         pp=Personaje(0,400);
-        contadorMonedas=0;
 
 
     }
 
-    if (pp.colisionPuertaBlanca(pb))
-    {
-        if(vidas==3)
-        gameOverResolved = true;////////////////////////////como hago para que pase al nivel dos
-        contadorMonedas==10;
-    }
 
-    textoNivel.setString("Nivel 1 Vidas: " + std::to_string(vidas));
-
-    textoNivel.setString("Nivel 1 Puntos: " + std::to_string(contadorMonedas));
+    textoNivel.setString("Nivel 2 Vidas: " + std::to_string(vidas));
 }
 
-void Nivel1::dibujar()
+void Nivel2::dibujar()
 {
     ventana.clear();
     if (gameOver)
@@ -120,12 +96,12 @@ void Nivel1::dibujar()
     else
     {
         ventana.draw(textoNivel);
-        ventana.draw(pb.getDraw());
         ventana.draw(pp.getDraw());
         ventana.draw(m.getDraw());
         ventana.draw(m2.getDraw());
         ventana.draw(m3.getDraw());
         ventana.draw(piso.getdraw());
+        ventana.draw(pb.getDraw());
         ventana.draw(trmp.getDraw());
         ventana.draw(obstaculo1.getDraw());
         ventana.draw(obstaculo2.getDraw());
@@ -133,7 +109,7 @@ void Nivel1::dibujar()
     ventana.display();
 }
 
-bool Nivel1::isGameOverResolved() const
+bool Nivel2::isGameOverResolved() const
 {
     return gameOverResolved;
 }

@@ -59,6 +59,8 @@
 		<Unit filename="Monedas.h" />
 		<Unit filename="Nivel1.cpp" />
 		<Unit filename="Nivel1.h" />
+		<Unit filename="Nivel2.cpp" />
+		<Unit filename="Nivel2.h" />
 		<Unit filename="Obstaculo.cpp" />
 		<Unit filename="Obstaculo.h" />
 		<Unit filename="Personaje.cpp" />

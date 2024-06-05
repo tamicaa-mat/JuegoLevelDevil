@@ -7,6 +7,7 @@
 #include "Obstaculo.h"
 #include"Monedas.h"
 #include"Trampa.h"
+#include"PuertaBlanca.h"
 
 enum ESTADO{
     QUIETO,
@@ -41,6 +42,7 @@ public:
     bool colisionaCon(const Obstaculo& obstaculo); // Nueva función
     bool colisionaCon(const Moneda& moneda) const; // Declaración de colisionaCon
     bool colisionaCon(const Trampa& trampa) ;
+    bool colisionPuertaBlanca(const PuertaBlanca& puertablanca);
 };
 
 #endif // PERSONAJE_H

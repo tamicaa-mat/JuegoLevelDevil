@@ -16,3 +16,6 @@ sf::RectangleShape& PuertaBlanca::getDraw()
     return _puertaRec;
 }
 
+sf::Vector2f PuertaBlanca::getPosition() const {
+    return _puertaRec.getPosition();
+}
