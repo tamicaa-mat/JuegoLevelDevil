@@ -1,15 +1,13 @@
-
 #ifndef PERSONAJE_H
 #define PERSONAJE_H
 
 #include <SFML/Graphics.hpp>
-
 #include "Obstaculo.h"
-#include"Monedas.h"
-#include"Trampa.h"
-#include"PuertaBlanca.h"
+#include "Monedas.h"
+#include "Trampa.h"
+#include "PuertaBlanca.h"
 
-enum ESTADO{
+enum ESTADO {
     QUIETO,
     CAMINANDO_ADELANTE,
     CAMINANDO_ATRAS,
@@ -21,29 +19,28 @@ enum ESTADO{
 
 class Personaje {
 private:
- // sf::Sprite _shape;
- //sf::Texture _shapeTexture;
-  sf::CircleShape _shape;
-    ESTADO _estado; // Qué está haciendo el personaje
+    sf::CircleShape _shape;
+    ESTADO _estado;
     float _velocidadSalto;
     float _velocidadSaltoHorizontal;
     float _velocidadMovimiento;
     float _velocidadCaida;
-    bool fueraJuego=false;// Nueva variable para la velocidad de movimiento
+    bool fueraJuego;
     sf::Vector2f _posicion;
 
 public:
-    Personaje(float x,float y);
+    Personaje(float x, float y);
     void cmd();
     void update();
-    //sf::CircleShape& getDraw();
     sf::Drawable& getDraw();
     void activarCaida();
-    bool colisionaCon(const Obstaculo& obstaculo); // Nueva función
-    bool colisionaCon(const Moneda& moneda) const; // Declaración de colisionaCon
-    bool colisionaCon(const Trampa& trampa) ;
+    bool colisionaCon(const Obstaculo& obstaculo);
+    bool colisionaCon(const Moneda& moneda) const;
+    bool colisionaCon(const Trampa& trampa);
     bool colisionPuertaBlanca(const PuertaBlanca& puertablanca);
+    sf::Vector2f getPosition() const;
+    void caer();
+    void reset(float x, float y); // Nuevo método para restablecer la posición y el estado
 };
 
 #endif // PERSONAJE_H
-

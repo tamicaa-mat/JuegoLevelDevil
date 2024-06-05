@@ -1,41 +1,61 @@
 #include <SFML/Graphics.hpp>
-#include"Trampa.h"
-
+#include "Trampa.h"
 
 Trampa::Trampa(float posX, float posY) :
-    _trampa(sf::Vector2f(50.0f, 150.0f))
+    _trampa(sf::Vector2f(50.0f, 150.0f)),
+    _posicionInicial(posX, posY),
+    _visible(false),
+    _animando(false),
+    _tiempoAnimacion(0.0f),
+    _duracionAnimacion(1.0f) // La animación dura 1 segundo
 {
-    _trampa.setFillColor(sf::Color::White); // Establecer el color del piso
+    _trampa.setFillColor(sf::Color::White);
     _trampa.setPosition(posX, posY);
-    _visible =false;
 }
-
 
 sf::Vector2f Trampa::getPosition() const {
     return _trampa.getPosition();
 }
+
 void Trampa::setVisible(bool visible) {
     _visible = visible;
 }
 
-void Trampa::aparecer()
-{
-
-    _visible=true;
-
+void Trampa::aparecer() {
+    _animando = true; // Iniciar animación
+    _tiempoAnimacion = 0.0f;
+    _visible = true;
 }
 
+void Trampa::reiniciar() {
+    _trampa.setPosition(_posicionInicial);
+    _visible = false;
+    _animando = false;
+    _tiempoAnimacion = 0.0f;
+}
 
-const sf::RectangleShape& Trampa::getDraw() const
-{
-    if (_visible)
-    {
-        return _trampa;
+void Trampa::actualizar(float deltaTime) {
+    if (_animando) {
+        _tiempoAnimacion += deltaTime;
+        float factor = _tiempoAnimacion / _duracionAnimacion;
+        if (factor >= 1.0f) {
+            _animando = false;
+            factor = 1.0f;
+        }
+        // Escalado para hacer la animación de aparición
+        _trampa.setScale(factor, factor);
     }
-    else
-    {
-        // Si la trampá no debe ser dibujada, dibuja una forma fuera de la pantalla
+}
+
+const sf::RectangleShape& Trampa::getDraw() const {
+    if (_visible) {
+        return _trampa;
+    } else {
         static sf::RectangleShape emptyShape;
         return emptyShape;
     }
+}
+
+bool Trampa::getVisible() const {
+    return _visible;
 }

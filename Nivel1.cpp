@@ -1,4 +1,5 @@
 #include "Nivel1.h"
+#include <iostream> // Incluye esta cabecera para usar std::cout
 
 Nivel1::Nivel1(sf::RenderWindow& vent) : ventana(vent),
     pp(0,400),
@@ -6,8 +7,8 @@ Nivel1::Nivel1(sf::RenderWindow& vent) : ventana(vent),
     m2(500,350.0,10),
     m3(550.0,350.0,10),
     piso(800, 150),
-    trmp(500,450),
-    pb(40, 65),
+    trmp(600,450), // Asegúrate de que la posición inicial de la trampa esté correctamente establecida
+    pb(700, 350), // Ajustar la posición de la puerta blanca si es necesario
     obstaculo1(200, 430, 25, 25),
     obstaculo2(400, 430, 25, 25),
     vidas(3), gameOver(false),
@@ -18,11 +19,15 @@ Nivel1::Nivel1(sf::RenderWindow& vent) : ventana(vent),
     {
         // Manejo de error
     }
-    textoNivel.setFont(fuente);
-    textoNivel.setString("Nivel 1 Vidas: " + std::to_string(vidas));
-    textoNivel.setCharacterSize(24);
-    textoNivel.setFillColor(sf::Color::White);
-    textoNivel.setPosition(10, 10);
+    textoVidas.setFont(fuente);
+    textoVidas.setCharacterSize(24);
+    textoVidas.setFillColor(sf::Color::White);
+    textoVidas.setPosition(10, 10);
+
+    textoPuntos.setFont(fuente);
+    textoPuntos.setCharacterSize(24);
+    textoPuntos.setFillColor(sf::Color::White);
+    textoPuntos.setPosition(10, 40);
 
     textoGameOver.setFont(fuente);
     textoGameOver.setString("GAME OVER\nPresione Enter para ir al menu principal");
@@ -49,22 +54,33 @@ void Nivel1::actualizar()
 {
     if (gameOver) return;
 
+    float deltaTime = 1.0f / 60.0f; // Asumiendo 60 FPS
+
     pp.cmd();
     pp.update();
 
-    // Comprobar colisiones
+    // Imprimir el valor de x del jugador
+    std::cout << "Posición x del jugador: " << pp.getPosition().x << std::endl;
+
+    // Actualizar la trampa
+    trmp.actualizar(deltaTime);
+
+    // Comprobar si el jugador pasa por una posición determinada para activar la trampa
+    if (pp.getPosition().x >= 500 && !trmp.getVisible()) {  // Condición para hacer aparecer la trampa
+        trmp.aparecer();
+    }
+
+    // Comprobar colisiones con obstáculos y trampa
     if (pp.colisionaCon(obstaculo1) || pp.colisionaCon(obstaculo2))
     {
         vidas--;
         if (vidas > 0)
         {
-            pp = Personaje(0,400);
-
-            // Reiniciar la posición del personaje///////////////////necesito que la trampa vuelva a ponerse oculta
+            pp.reset(0,400);
+            trmp.reiniciar(); // Reiniciar la trampa cuando el jugador muere
         }
         else
         {
-            // Activar estado de "Game Over"
             gameOver = true;
         }
     }
@@ -88,29 +104,27 @@ void Nivel1::actualizar()
         }
     }
 
-    if(pp.colisionaCon(trmp)&&vidas>0)
+    // Verificar si el jugador colisiona con la trampa
+    if (pp.colisionaCon(trmp))
     {
-        trmp.aparecer();
+        pp.caer(); // Hacer que el jugador caiga por la trampa
+    }
+
+    // Si el jugador está cayendo y ha caído fuera de la pantalla
+    if (pp.getPosition().y > 600)
+    {
         vidas--;
-        pp = Personaje(0,400);
-            // Reiniciar la posición del personaje
-    }
-    else if(pp.colisionaCon(trmp)&&vidas==0){
-        gameOver=true;
+        pp.reset(0, 400); // Reiniciar la posición del jugador
+        trmp.reiniciar(); // Reiniciar la trampa
     }
 
-
-//
     if (pp.colisionPuertaBlanca(pb))
     {
-        if(vidas==3)
-            gameOverResolved = true;////////////////////////////como hago para que pase al nivel dos
-        contadorMonedas==10;
+        gameOverResolved = true; // Indicar que se ha completado el nivel
     }
 
-    textoNivel.setString("Nivel 1 Vidas: " + std::to_string(vidas));
-
-    textoNivel.setString("Nivel 1 Puntos: " + std::to_string(contadorMonedas));
+    textoVidas.setString("Nivel 1 Vidas: " + std::to_string(vidas));
+    textoPuntos.setString("Nivel 1 Puntos: " + std::to_string(contadorMonedas));
 }
 
 void Nivel1::dibujar()
@@ -122,13 +136,14 @@ void Nivel1::dibujar()
     }
     else
     {
-        ventana.draw(textoNivel);
+        ventana.draw(textoVidas);
+        ventana.draw(textoPuntos);
         ventana.draw(pb.getDraw());
-        ventana.draw(pp.getDraw());
         ventana.draw(m.getDraw());
         ventana.draw(m2.getDraw());
         ventana.draw(m3.getDraw());
         ventana.draw(piso.getdraw());
+        ventana.draw(pp.getDraw()); // Dibuja el jugador por encima de la trampa
         ventana.draw(trmp.getDraw());
         ventana.draw(obstaculo1.getDraw());
         ventana.draw(obstaculo2.getDraw());
@@ -139,4 +154,8 @@ void Nivel1::dibujar()
 bool Nivel1::isGameOverResolved() const
 {
     return gameOverResolved;
+}
+
+bool Nivel1::isGameOver() const {
+    return gameOver;
 }

@@ -7,32 +7,34 @@
 #include "Monedas.h"
 #include "piso.h"
 #include "Obstaculo.h"
-#include"Trampa.h"
+#include "Trampa.h"
 
 class Nivel1 {
 private:
-     sf::RenderWindow& ventana;
+    sf::RenderWindow& ventana;
     Personaje pp;
-    Moneda m,m2,m3;
+    Moneda m, m2, m3;
     Piso piso;
     Trampa trmp;
     PuertaBlanca pb;
     Obstaculo obstaculo1;
     Obstaculo obstaculo2;
-    sf::Text textoNivel;
+    sf::Text textoVidas;
+    sf::Text textoPuntos;
     sf::Text textoGameOver;
     sf::Font fuente;
     int vidas;
     bool gameOver;
     bool gameOverResolved;
-    int contadorMonedas; // Nueva variable para controlar la resolución de "Game Over"
+    int contadorMonedas;
 
 public:
     Nivel1(sf::RenderWindow& vent);
     void manejarEntrada();
     void actualizar();
     void dibujar();
-    bool isGameOverResolved() const; // Nueva función
+    bool isGameOverResolved() const;
+    bool isGameOver() const; // Nuevo método
 };
 
 #endif // NIVEL1_H_INCLUDED

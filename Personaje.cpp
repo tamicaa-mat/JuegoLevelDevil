@@ -1,4 +1,3 @@
-
 #include "Personaje.h"
 
 Personaje::Personaje(float x, float y)
@@ -10,9 +9,8 @@ Personaje::Personaje(float x, float y)
     _velocidadSalto = 0;
     _velocidadSaltoHorizontal = 0;
     _velocidadMovimiento = 2.0f; // Establecer una velocidad de movimiento inicial
-    _velocidadCaida=0.1f;
+    _velocidadCaida = 0.1f;
     fueraJuego = false;
-
 }
 
 sf::Drawable& Personaje::getDraw()
@@ -68,23 +66,32 @@ void Personaje::cmd()
             _velocidadSaltoHorizontal = 5;
         }
     }
-
-
-
-
-
 }
-
 
 void Personaje::activarCaida()
 {
     _estado = ESTADO::CAYENDO;
+}
 
+void Personaje::caer()
+{
+    _estado = ESTADO::CAYENDO;
+    _velocidadCaida = 5.0f; // Establece una velocidad de caída inicial
+}
+
+void Personaje::reset(float x, float y)
+{
+    _shape.setPosition(x, y);
+    _estado = ESTADO::QUIETO;
+    _velocidadSalto = 0;
+    _velocidadSaltoHorizontal = 0;
+    _velocidadCaida = 0.1f;
+    fueraJuego = false;
 }
 
 void Personaje::update()
 {
-    switch(_estado)
+    switch (_estado)
     {
     case QUIETO:
         break;
@@ -137,57 +144,43 @@ void Personaje::update()
             _shape.setPosition(_shape.getPosition().x, 400); // Establecer la posición en el límite superior de la pantalla
         }
         break;
+
     case CAYENDO:
-        if (_velocidadCaida < -2)
-        {
-            _velocidadCaida = -2; // Limitar la velocidad mínima de caída
-        }
-        _velocidadCaida += (0.0005); // Aumentar la velocidad de caída gradualmente
-        _shape.move(0, _velocidadCaida/100); // Mover hacia abajo con la velocidad de caída actualizada
-        if (_shape.getPosition().y > 600)
+        _shape.move(0, _velocidadCaida);
+        _velocidadCaida += 0.5f; // Aumentar la velocidad de caída
+        if (_shape.getPosition().y > 600) // Si cae fuera de la pantalla
         {
             fueraJuego = true;
         }
         break;
     }
-
-
 }
-
-
 
 bool Personaje::colisionaCon(const Obstaculo& obstaculo)
 {
     return _shape.getGlobalBounds().intersects(obstaculo.getDraw().getGlobalBounds());
 }
 
-bool Personaje::colisionaCon(const Moneda& moneda)const
+bool Personaje::colisionaCon(const Moneda& moneda) const
 {
-    return  _shape.getGlobalBounds().intersects(moneda.getDraw().getGlobalBounds());
+    return _shape.getGlobalBounds().intersects(moneda.getDraw().getGlobalBounds());
 }
 
 bool Personaje::colisionaCon(const Trampa& trampa)
 {
-    // Obtiene la posición X del objeto _shape del personaje
     float posXPersonaje = _shape.getPosition().x;
-    float posYPersonaje = ((_shape.getPosition().y)+50);//porque tengo a personaje en y=400 y el piso en y=450
+    float posYPersonaje = _shape.getPosition().y; // Ajuste de posición vertical
 
-
-    // Obtiene la posición X del objeto devuelto por getDraw() de la trampa
     float posXTrampa = trampa.getPosition().x;
     float posYTrampa = trampa.getPosition().y;
 
-    if(posXPersonaje==posXTrampa&&posYPersonaje==posYTrampa)
+    if (posXPersonaje == posXTrampa && posYPersonaje == posYTrampa)
     {
-
-        activarCaida(); // Llamar a la función auxiliar para activar la caída
+        activarCaida();
         return true;
-
     }
 
-    return false; // Indicar que no hubo colisión
-
-
+    return false;
 }
 
 bool Personaje::colisionPuertaBlanca(const PuertaBlanca& _puertaRec)
@@ -196,10 +189,16 @@ bool Personaje::colisionPuertaBlanca(const PuertaBlanca& _puertaRec)
     float posYPersonaje = _shape.getPosition().y;
     float posXPuerta = _puertaRec.getPosition().x;
     float posYPuerta = _puertaRec.getPosition().y;
-    if(posXPersonaje==posXPuerta&&posYPersonaje==posYPuerta)
+
+    if (posXPersonaje == posXPuerta && posYPersonaje == posYPuerta)
     {
         return true;
     }
 
+    return false;
 }
 
+sf::Vector2f Personaje::getPosition() const
+{
+    return _shape.getPosition();
+}
