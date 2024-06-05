@@ -100,7 +100,7 @@ void Nivel1::actualizar()
     }
 
 
-
+//
     if (pp.colisionPuertaBlanca(pb))
     {
         if(vidas==3)
