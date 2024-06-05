@@ -190,14 +190,16 @@ bool Personaje::colisionaCon(const Trampa& trampa)
 
 }
 
-bool Personaje::colisionPuertaBlanca(const PuertaBlanca& _puertaRec){
- float posXPersonaje = _shape.getPosition().x;
-float posYPersonaje = _shape.getPosition().y;
- float posXPuerta = _puertaRec.getPosition().x;
-float posYPuerta = _puertaRec.getPosition().y;
- if(posXPersonaje==posXPuerta&&posYPersonaje==posYPuerta){
-    return true;
- }
+bool Personaje::colisionPuertaBlanca(const PuertaBlanca& _puertaRec)
+{
+    float posXPersonaje = _shape.getPosition().x;
+    float posYPersonaje = _shape.getPosition().y;
+    float posXPuerta = _puertaRec.getPosition().x;
+    float posYPuerta = _puertaRec.getPosition().y;
+    if(posXPersonaje==posXPuerta&&posYPersonaje==posYPuerta)
+    {
+        return true;
+    }
 
 }
 

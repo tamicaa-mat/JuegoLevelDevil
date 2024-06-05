@@ -87,22 +87,19 @@ void Nivel1::actualizar()
             contadorMonedas++;
         }
     }
-    if(pp.colisionaCon(trmp))
+
+    if(pp.colisionaCon(trmp)&&vidas>0)
     {
         trmp.aparecer();
         vidas--;
-        if (vidas > 0)
-        {
-            trmp.setVisible(false);
-            pp = Personaje(0,400);
+        pp = Personaje(0,400);
             // Reiniciar la posición del personaje
-        }
-        else
-        {
-            // Activar estado de "Game Over"
-            gameOver = true;
-        }
     }
+    else if(pp.colisionaCon(trmp)&&vidas==0){
+        gameOver=true;
+    }
+
+
 
     if (pp.colisionPuertaBlanca(pb))
     {
