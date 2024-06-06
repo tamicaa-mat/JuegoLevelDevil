@@ -1,7 +1,7 @@
 #include"Nivel2.h"
 
 
-Nivel2::Nivel2(sf::RenderWindow& vent) : ventana(vent),pp(200,100),m(600.0,100.0,10),m2(400.0,100.0,10),m3(200.0,100.0,10), piso(800, 150),pisoArriba(200,145),trmp(0,200),pb(40, 65),obstaculo1(200, 430, 25, 25), obstaculo2(400, 430, 25, 25),vidas(3), gameOver(false), gameOverResolved(false)
+Nivel2::Nivel2(sf::RenderWindow& vent) : ventana(vent),pp(200,100),m(600.0,100.0,10),m2(400.0,100.0,10),m3(200.0,100.0,10), piso(800, 150),pisoArriba(200,145),trmp(175,400),pb(40, 65),obstaculo1(200, 430, 25, 25), obstaculo2(400, 430, 25, 25),vidas(3), gameOver(false), gameOverResolved(false)
 {
     if (!fuente.loadFromFile("fuentes/Roboto-Black.ttf"))
     {
@@ -44,6 +44,12 @@ void Nivel2::actualizar()
     pp.cmd();
     pp.update();
 
+    ////////////////////agregoahora
+    if(pp.getPosition().x<200||pp.getPosition().x>400){
+        pp.activarCaida();
+    }
+
+
     // Comprobar colisiones
     if (pp.colisionaCon(obstaculo1) || pp.colisionaCon(obstaculo2))
     {
@@ -75,12 +81,9 @@ void Nivel2::actualizar()
         }
     }
 
-    if(pp.colisionaCon(trmp))
-    {
-
+     if (pp.colisionaCon(trmp)) {  // Condición para hacer aparecer la trampa
         trmp.aparecer();
-        vidas--;
-        pp=Personaje(0,400);
+        pp.activarCaida();
 
 
     }

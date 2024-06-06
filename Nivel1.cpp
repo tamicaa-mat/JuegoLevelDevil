@@ -65,11 +65,6 @@ void Nivel1::actualizar()
     // Actualizar la trampa
     trmp.actualizar(deltaTime);
 
-    // Comprobar si el jugador pasa por una posición determinada para activar la trampa
-    if (pp.getPosition().y==(trmp.getPosition().y+50)&&trmp.getVisible()==false) {  // Condición para hacer aparecer la trampa
-        trmp.aparecer();
-        pp.activarCaida();
-    }
 
 
     // Comprobar colisiones con obstáculos y trampa
@@ -107,6 +102,27 @@ void Nivel1::actualizar()
     }
 
 
+    // Comprobar si el jugador pasa por una posición determinada para activar la trampa
+    if (pp.colisionaCon(trmp))    // Condición para hacer aparecer la trampa
+    {
+        trmp.aparecer();
+        pp.activarCaida();
+        vidas--;
+//TODO:ARREGLAR LAS VIDAS
+
+    }
+    if(pp.getPosition().y>600)
+    {
+        pp.reset(0,400);
+        trmp.reiniciar();
+        if(vidas==0)
+    {
+        gameOver=true;
+    }
+
+    }
+
+
     if (pp.colisionPuertaBlanca(pb))
     {
         gameOverResolved = true; // Indicar que se ha completado el nivel
@@ -137,8 +153,8 @@ void Nivel1::dibujar()
         ventana.draw(m2.getDraw());
         ventana.draw(m3.getDraw());
         ventana.draw(piso.getdraw());
-        ventana.draw(pp.getDraw()); // Dibuja el jugador por encima de la trampa
         ventana.draw(trmp.getDraw());
+        ventana.draw(pp.getDraw()); // Dibuja el jugador por encima de la trampa
         ventana.draw(obstaculo1.getDraw());
         ventana.draw(obstaculo2.getDraw());
     }

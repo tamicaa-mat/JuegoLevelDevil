@@ -169,14 +169,14 @@ bool Personaje::colisionaCon(const Moneda& moneda) const
 bool Personaje::colisionaCon(const Trampa& trampa)
 {
     float posXPersonaje = _shape.getPosition().x;
-    float posYPersonaje = _shape.getPosition().y; // Ajuste de posición vertical
+    float posYPersonaje = _shape.getPosition().y+50; // Ajuste de posición vertical
 
     float posXTrampa = trampa.getPosition().x;
     float posYTrampa = trampa.getPosition().y;
 
     if (posXPersonaje == posXTrampa && posYPersonaje == posYTrampa)
     {
-        activarCaida();
+
         return true;
     }
 
