@@ -23,7 +23,7 @@ void Trampa::setVisible(bool visible) {
 
 void Trampa::aparecer() {
     _animando = true; // Iniciar animación
-    _tiempoAnimacion = 0.0f;
+    _tiempoAnimacion = 0.5f;
     _visible = true;
 }
 

@@ -1,5 +1,5 @@
 #include "Nivel1.h"
-#include <iostream> // Incluye esta cabecera para usar std::cout
+#include <iostream> //cabecera para usar std::cout
 
 Nivel1::Nivel1(sf::RenderWindow& vent) : ventana(vent),
     pp(0,400),
@@ -60,14 +60,15 @@ void Nivel1::actualizar()
     pp.update();
 
     // Imprimir el valor de x del jugador
-    std::cout << "Posición x del jugador: " << pp.getPosition().x << std::endl;
+    //std::cout << "Posición x del jugador: " << pp.getPosition().x << std::endl;
 
     // Actualizar la trampa
     trmp.actualizar(deltaTime);
 
     // Comprobar si el jugador pasa por una posición determinada para activar la trampa
-    if (pp.getPosition().x >= 500 && !trmp.getVisible()) {  // Condición para hacer aparecer la trampa
+    if (pp.getPosition().x == trmp.getPosition().x&& !trmp.getVisible()) {  // Condición para hacer aparecer la trampa
         trmp.aparecer();
+            pp.caer();
     }
 
     // Comprobar colisiones con obstáculos y trampa
@@ -104,25 +105,17 @@ void Nivel1::actualizar()
         }
     }
 
-    // Verificar si el jugador colisiona con la trampa
-    if (pp.colisionaCon(trmp))
-    {
-        pp.caer(); // Hacer que el jugador caiga por la trampa
-    }
 
-    // Si el jugador está cayendo y ha caído fuera de la pantalla
+    if (pp.colisionPuertaBlanca(pb))
+    {
+        gameOverResolved = true; // Indicar que se ha completado el nivel
+    }
     if (pp.getPosition().y > 600)
     {
         vidas--;
         pp.reset(0, 400); // Reiniciar la posición del jugador
         trmp.reiniciar(); // Reiniciar la trampa
     }
-
-    if (pp.colisionPuertaBlanca(pb))
-    {
-        gameOverResolved = true; // Indicar que se ha completado el nivel
-    }
-
     textoVidas.setString("Nivel 1 Vidas: " + std::to_string(vidas));
     textoPuntos.setString("Nivel 1 Puntos: " + std::to_string(contadorMonedas));
 }
@@ -156,6 +149,7 @@ bool Nivel1::isGameOverResolved() const
     return gameOverResolved;
 }
 
-bool Nivel1::isGameOver() const {
+bool Nivel1::isGameOver() const
+{
     return gameOver;
 }

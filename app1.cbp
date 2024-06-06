@@ -63,6 +63,8 @@
 		<Unit filename="Nivel1.h" />
 		<Unit filename="Nivel2.cpp" />
 		<Unit filename="Nivel2.h" />
+		<Unit filename="NivelIntermedio.cpp" />
+		<Unit filename="NivelIntermedio.h" />
 		<Unit filename="Obstaculo.cpp" />
 		<Unit filename="Obstaculo.h" />
 		<Unit filename="Personaje.cpp" />
@@ -70,6 +72,7 @@
 		<Unit filename="PuertaBlanca.cpp" />
 		<Unit filename="PuertaBlanca.h" />
 		<Unit filename="Trampa.cpp" />
+		<Unit filename="Trampa.h" />
 		<Unit filename="cb.bmp" />
 		<Unit filename="gamePlay.cpp" />
 		<Unit filename="gamePlay.h" />
