@@ -2,7 +2,8 @@
 #define PISO_H_INCLUDED
 #include <SFML/Graphics.hpp>
 
-class Piso {
+class Piso
+{
 private:
     sf::RectangleShape _forma; // Forma del piso
 
@@ -11,7 +12,9 @@ public:
     void setColor(const sf::Color& color);
     void setDimensiones(float ancho, float altura);
     // Método para dibujar el piso
- sf::RectangleShape& getdraw();
+    sf::RectangleShape& getdraw();
+    void setPosition(float x, float y);
+    void setSize(float ancho, float altura);
 
 };
 
