@@ -1,7 +1,7 @@
 #include"Nivel2.h"
 
 
-Nivel2::Nivel2(sf::RenderWindow& vent) : ventana(vent),pp(200,100),m(600.0,100.0,10),m2(400.0,100.0,10),m3(200.0,100.0,10), piso(800, 150),trmp(0,200),pb(40, 65),obstaculo1(200, 430, 25, 25), obstaculo2(400, 430, 25, 25),vidas(3), gameOver(false), gameOverResolved(false)
+Nivel2::Nivel2(sf::RenderWindow& vent) : ventana(vent),pp(200,100),m(600.0,100.0,10),m2(400.0,100.0,10),m3(200.0,100.0,10), piso(800, 150),pisoArriba(200.0,200.0),trmp(0,200),pb(40, 65),obstaculo1(200, 430, 25, 25), obstaculo2(400, 430, 25, 25),vidas(3), gameOver(false), gameOverResolved(false)
 {
     if (!fuente.loadFromFile("fuentes/Roboto-Black.ttf"))
     {
@@ -36,6 +36,9 @@ void Nivel2::manejarEntrada()
 
 void Nivel2::actualizar()
 {
+    pisoArriba.setColor(sf::Color::Green);
+    pisoArriba.setDimensiones(40, 60);
+
     if (gameOver) return;
 
     pp.cmd();

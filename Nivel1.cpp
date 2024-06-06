@@ -66,10 +66,11 @@ void Nivel1::actualizar()
     trmp.actualizar(deltaTime);
 
     // Comprobar si el jugador pasa por una posición determinada para activar la trampa
-    if (pp.getPosition().x == trmp.getPosition().x&& !trmp.getVisible()) {  // Condición para hacer aparecer la trampa
+    if (pp.getPosition().y==(trmp.getPosition().y+50)&&trmp.getVisible()==false) {  // Condición para hacer aparecer la trampa
         trmp.aparecer();
-            pp.caer();
+        pp.activarCaida();
     }
+
 
     // Comprobar colisiones con obstáculos y trampa
     if (pp.colisionaCon(obstaculo1) || pp.colisionaCon(obstaculo2))

@@ -14,7 +14,7 @@ private:
      sf::RenderWindow& ventana;
     Personaje pp;
     Moneda m,m2,m3;
-    Piso piso;
+    Piso piso,pisoArriba;
     Trampa trmp;
     PuertaBlanca pb;
     Obstaculo obstaculo1;

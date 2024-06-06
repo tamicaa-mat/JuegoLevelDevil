@@ -8,7 +8,8 @@ private:
 
 public:
     Piso(float ancho, float altura);
-
+    void setColor(const sf::Color& color);
+    void setDimensiones(float ancho, float altura);
     // Método para dibujar el piso
  sf::RectangleShape& getdraw();
 

@@ -9,7 +9,12 @@
     }
 
 
-
+void Piso::setColor(const sf::Color& color) {
+    _forma.setFillColor(color);
+}
+void Piso::setDimensiones(float ancho, float altura) {
+    _forma.setSize(sf::Vector2f(ancho, altura));
+}
  sf::RectangleShape& Piso::getdraw() {
     return _forma;
 }
