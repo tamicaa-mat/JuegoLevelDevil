@@ -8,6 +8,7 @@
 #include "piso.h"
 #include "Obstaculo.h"
 #include "Trampa.h"
+#include "Jugador.h"
 
 class Nivel1 {
 private:
@@ -27,14 +28,16 @@ private:
     bool gameOver;
     bool gameOverResolved;
     int contadorMonedas;
+    Jugador& jugador;
 
 public:
-    Nivel1(sf::RenderWindow& vent);
+    Nivel1(sf::RenderWindow& vent, Jugador& jug);
     void manejarEntrada();
     void actualizar();
     void dibujar();
     bool isGameOverResolved() const;
-    bool isGameOver() const; // Nuevo método
+    bool isGameOver() const;
+    int getContadorMonedas() const;
 };
 
 #endif // NIVEL1_H_INCLUDED

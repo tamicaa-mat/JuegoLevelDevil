@@ -40,7 +40,7 @@ public:
     bool colisionPuertaBlanca(const PuertaBlanca& puertablanca);
     sf::Vector2f getPosition() const;
     void caer();
-    void reset(float x, float y); // Nuevo método para restablecer la posición y el estado
+    void reset(float x, float y);
 };
 
 #endif // PERSONAJE_H

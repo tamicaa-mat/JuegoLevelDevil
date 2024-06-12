@@ -1,14 +1,14 @@
 #include "Nivel1.h"
 #include <iostream> //cabecera para usar std::cout
 
-Nivel1::Nivel1(sf::RenderWindow& vent) : ventana(vent),
+Nivel1::Nivel1(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(jug),
     pp(0,400),
     m(250.0,350.0,10),
     m2(500,350.0,10),
     m3(550.0,350.0,10),
     piso(800, 150),
-    trmp(600,450), // Asegúrate de que la posición inicial de la trampa esté correctamente establecida
-    pb(700, 350), // Ajustar la posición de la puerta blanca si es necesario
+    trmp(600,450),
+    pb(700, 350),
     obstaculo1(200, 430, 25, 25),
     obstaculo2(400, 430, 25, 25),
     vidas(3), gameOver(false),
@@ -59,13 +59,8 @@ void Nivel1::actualizar()
     pp.cmd();
     pp.update();
 
-    // Imprimir el valor de x del jugador
-    //std::cout << "Posición x del jugador: " << pp.getPosition().x << std::endl;
-
     // Actualizar la trampa
     trmp.actualizar(deltaTime);
-
-
 
     // Comprobar colisiones con obstáculos y trampa
     if (pp.colisionaCon(obstaculo1) || pp.colisionaCon(obstaculo2))
@@ -79,6 +74,8 @@ void Nivel1::actualizar()
         else
         {
             gameOver = true;
+            jugador.setPuntaje(contadorMonedas);
+            jugador.grabarArchivo();
         }
     }
 
@@ -101,27 +98,24 @@ void Nivel1::actualizar()
         }
     }
 
-
     // Comprobar si el jugador pasa por una posición determinada para activar la trampa
     if (pp.colisionaCon(trmp))    // Condición para hacer aparecer la trampa
     {
         trmp.aparecer();
         pp.activarCaida();
         vidas--;
-//TODO:ARREGLAR LAS VIDAS
-
     }
     if(pp.getPosition().y>600)
     {
         pp.reset(0,400);
         trmp.reiniciar();
         if(vidas==0)
-    {
-        gameOver=true;
+        {
+            gameOver=true;
+            jugador.setPuntaje(contadorMonedas);
+            jugador.grabarArchivo();
+        }
     }
-
-    }
-
 
     if (pp.colisionPuertaBlanca(pb))
     {
@@ -169,4 +163,8 @@ bool Nivel1::isGameOverResolved() const
 bool Nivel1::isGameOver() const
 {
     return gameOver;
+}
+
+int Nivel1::getContadorMonedas() const {
+    return contadorMonedas;
 }

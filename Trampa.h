@@ -10,7 +10,7 @@ private:
     bool _visible;
     bool _animando;
     float _tiempoAnimacion;
-    float _duracionAnimacion; // Duración de la animación en segundos
+    float _duracionAnimacion;
 
 public:
     Trampa(float posX, float posY);

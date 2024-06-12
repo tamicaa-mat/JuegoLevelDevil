@@ -4,11 +4,11 @@ Personaje::Personaje(float x, float y)
 {
     _shape.setFillColor(sf::Color::Magenta);
     _shape.setRadius(20);
-    _shape.setPosition(x, y); // Establecer la posición usando los parámetros x e y
-    _estado = ESTADO::QUIETO; // Inicialmente siempre está quieto
+    _shape.setPosition(x, y);
+    _estado = ESTADO::QUIETO;
     _velocidadSalto = 0;
     _velocidadSaltoHorizontal = 0;
-    _velocidadMovimiento = 2.0f; // Establecer una velocidad de movimiento inicial
+    _velocidadMovimiento = 2.0f;
     _velocidadCaida = 0.1f;
     fueraJuego = false;
 }

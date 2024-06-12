@@ -1,7 +1,7 @@
 #include "NivelIntermedio.h"
 
 NivelIntermedio::NivelIntermedio(sf::RenderWindow& vent) : ventana(vent) {
-    fuente.loadFromFile("fuentes/Roboto-Black.ttf"); // Asegúrate de tener una fuente en el directorio del proyecto
+    fuente.loadFromFile("fuentes/Roboto-Black.ttf");
 
     textoIntermedio.setFont(fuente);
     textoIntermedio.setString("Nivel 1 Completado");

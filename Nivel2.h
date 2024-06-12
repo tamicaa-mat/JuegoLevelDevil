@@ -24,14 +24,14 @@ private:
     sf::Font fuente;
     int vidas;
     bool gameOver;
-    bool gameOverResolved; // Nueva variable para controlar la resolución de "Game Over"
+    bool gameOverResolved;
 
 public:
     Nivel2(sf::RenderWindow& vent);
     void manejarEntrada();
     void actualizar();
     void dibujar();
-    bool isGameOverResolved() const; // Nueva función
+    bool isGameOverResolved() const;
 };
 
 

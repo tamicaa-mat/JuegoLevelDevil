@@ -9,7 +9,7 @@ private:
 
 public:
     Obstaculo(float x, float y, float width, float height);
-    const sf::RectangleShape& getDraw() const; // Declarar la función como constante
+    const sf::RectangleShape& getDraw() const;
 };
 
 #endif // OBSTACULO_H_INCLUDED
