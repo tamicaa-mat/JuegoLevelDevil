@@ -4,7 +4,7 @@ Nivel2::Nivel2(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     pp(200, 100),
     m(600.0, 100.0, 10),
     m2(400.0, 100.0, 10),
-    m3(200.0, 100.0, 10),
+    m3(0.0, 400.0, 10),
     piso(800, 150),
     pisoArriba(200, 145),
     trmp(170, 450),
@@ -22,11 +22,15 @@ Nivel2::Nivel2(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
         // Manejar el error aquí, por ejemplo, cerrando el programa
         exit(EXIT_FAILURE);
     }
-    textoNivel.setFont(fuente);
-    textoNivel.setString("Nivel 2 Vidas: " + std::to_string(vidas));
-    textoNivel.setCharacterSize(24);
-    textoNivel.setFillColor(sf::Color::White);
-    textoNivel.setPosition(10, 10);
+    textoVidas.setFont(fuente);
+    textoVidas.setCharacterSize(24);
+    textoVidas.setFillColor(sf::Color::White);
+    textoVidas.setPosition(10, 10);
+
+    textoPuntos.setFont(fuente);
+    textoPuntos.setCharacterSize(24);
+    textoPuntos.setFillColor(sf::Color::White);
+    textoPuntos.setPosition(10, 40);
 
     textoGameOver.setFont(fuente);
     textoGameOver.setString("GAME OVER\nPresione Enter para ir al menu principal");
@@ -62,7 +66,7 @@ void Nivel2::actualizar()
     ////////////////////agregoahora
 
      trmp.actualizar(deltaTime);
-    if(pp.getPosition().x<180||pp.getPosition().x>410){
+    if(pp.getPosition().x<180&&pp.getPosition().y<100||pp.getPosition().x>410&&pp.getPosition().y<100){
         pp.activarCaida();
 
         }
@@ -70,7 +74,7 @@ void Nivel2::actualizar()
 
 
 
-
+//TODO:ARREGLAR COLISION OBSTACULOS N2
 
     if (pp.colisionaCon(obstaculo1) || pp.colisionaCon(obstaculo2))
     {
@@ -91,14 +95,17 @@ void Nivel2::actualizar()
         if (pp.colisionaCon(m))
         {
             m.desaparecer();
+            contadorMonedas++;
         }
         if (pp.colisionaCon(m2))
         {
             m2.desaparecer();
+            contadorMonedas++;
         }
         if (pp.colisionaCon(m3))
         {
             m3.desaparecer();
+            contadorMonedas++;
         }
     }
 
@@ -126,9 +133,10 @@ void Nivel2::actualizar()
     }
 
 
+    textoVidas.setString("Nivel 2 Vidas: " + std::to_string(vidas));
+    textoPuntos.setString("Puntos: " + std::to_string(contadorMonedas));
 
 
-    textoNivel.setString("Nivel 2 Vidas: " + std::to_string(vidas));
 }
 
 void Nivel2::dibujar()
@@ -140,7 +148,8 @@ void Nivel2::dibujar()
     }
     else
     {
-        ventana.draw(textoNivel);
+        ventana.draw(textoVidas);
+        ventana.draw(textoPuntos);
         ventana.draw(pisoArriba.getdraw());
         ventana.draw(m.getDraw());
         ventana.draw(m2.getDraw());

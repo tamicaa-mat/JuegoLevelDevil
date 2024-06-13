@@ -133,7 +133,7 @@ void Nivel1::actualizar()
         trmp.reiniciar(); // Reiniciar la trampa
     }
     textoVidas.setString("Nivel 1 Vidas: " + std::to_string(vidas));
-    textoPuntos.setString("Nivel 1 Puntos: " + std::to_string(contadorMonedas));
+    textoPuntos.setString("Puntos: " + std::to_string(contadorMonedas));
 }
 
 void Nivel1::dibujar()

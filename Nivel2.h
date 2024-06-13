@@ -21,7 +21,8 @@ private:
     PuertaBlanca pb;
     Obstaculo obstaculo1;
     Obstaculo obstaculo2;
-    sf::Text textoNivel;
+    sf::Text textoVidas;
+    sf::Text textoPuntos;
     sf::Text textoGameOver;
     sf::Font fuente;
     int vidas;
