@@ -24,6 +24,10 @@ private:
     sf::Text textoPuntos;
     sf::Text textoGameOver;
     sf::Font fuente;
+    sf::Texture fondoTexture;
+    sf::Sprite fondoSprite;
+
+
     int vidas;
     bool gameOver;
     bool gameOverResolved;

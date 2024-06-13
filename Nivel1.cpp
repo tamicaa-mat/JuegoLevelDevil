@@ -19,6 +19,16 @@ Nivel1::Nivel1(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     {
         // Manejo de error
     }
+
+
+     if (!fondoTexture.loadFromFile("fondo2.jpg")) {
+            std::cerr << "Error al cargar la imagen de fondo" << std::endl;
+        }
+        fondoSprite.setTexture(fondoTexture);
+
+
+
+
     textoVidas.setFont(fuente);
     textoVidas.setCharacterSize(24);
     textoVidas.setFillColor(sf::Color::White);
@@ -139,6 +149,13 @@ void Nivel1::actualizar()
 void Nivel1::dibujar()
 {
     ventana.clear();
+
+
+    ventana.draw(fondoSprite);  // Dibujar el fondo primero
+
+
+
+
     if (gameOver)
     {
         ventana.draw(textoGameOver);

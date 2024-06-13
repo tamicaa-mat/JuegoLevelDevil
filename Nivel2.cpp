@@ -16,12 +16,22 @@ Nivel2::Nivel2(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     gameOverResolved(false),
     contadorMonedas(0)
 {
+
+
     if (!fuente.loadFromFile("fuentes/Roboto-Black.ttf"))
     {
         std::cerr << "Error al cargar la fuente" << std::endl;
         // Manejar el error aquí, por ejemplo, cerrando el programa
         exit(EXIT_FAILURE);
     }
+
+        if (!fondoTexture.loadFromFile("fondo2.jpg")) {
+            std::cerr << "Error al cargar la imagen de fondo" << std::endl;
+        }
+
+
+    fondoSprite.setTexture(fondoTexture);
+
     textoVidas.setFont(fuente);
     textoVidas.setCharacterSize(24);
     textoVidas.setFillColor(sf::Color::White);
@@ -66,11 +76,12 @@ void Nivel2::actualizar()
     ////////////////////agregoahora
 
      trmp.actualizar(deltaTime);
-    if(pp.getPosition().x<180&&pp.getPosition().y<100||pp.getPosition().x>410&&pp.getPosition().y<100){
+
+    if((pp.getPosition().x<180&&pp.getPosition().y<=100)||(pp.getPosition().x>400&&pp.getPosition().y<=100)){
         pp.activarCaida();
 
         }
-         //std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
+         std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
 
 
 
@@ -109,7 +120,7 @@ void Nivel2::actualizar()
         }
     }
 
- std::cout << "Posición del personaje ANTES: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
+        //std::cout << "Posición del personaje ANTES: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
 
     if (pp.colisionaConTrampaN2(trmp))    // Condición para hacer aparecer la trampa
     {
@@ -142,6 +153,9 @@ void Nivel2::actualizar()
 void Nivel2::dibujar()
 {
     ventana.clear();
+
+      ventana.draw(fondoSprite);
+
     if (gameOver)
     {
         ventana.draw(textoGameOver);
