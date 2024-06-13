@@ -17,13 +17,19 @@ sf::Vector2f Trampa::getPosition() const {
     return _trampa.getPosition();
 }
 
+   sf::Vector2f Trampa::getSize() const {
+        return _trampa.getSize();
+    }
+
+
+
 void Trampa::setVisible(bool visible) {
     _visible = visible;
 }
 
 void Trampa::aparecer() {
     _animando = true; // Iniciar animación
-    _tiempoAnimacion = 0.5f;
+    _tiempoAnimacion = 5.0f;
     _visible = true;
 }
 
@@ -59,3 +65,5 @@ const sf::RectangleShape& Trampa::getDraw() const {
 bool Trampa::getVisible() const {
     return _visible;
 }
+
+

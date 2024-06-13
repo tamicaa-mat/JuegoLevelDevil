@@ -52,9 +52,13 @@
 			<Add library="sfml-system" />
 			<Add directory="C:/Program Files/CodeBlocks/SFML/lib" />
 		</Linker>
-		<Unit filename="../../../Escritorio/c++ codeblock programación II/modeloParcial2Prog.cpp">
+		<Unit filename="../../c++ codeblock programación II/modeloParcial2Prog.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="DarNombreJugador.cpp" />
+		<Unit filename="DarNombreJugador.h" />
+		<Unit filename="Jugador.cpp" />
+		<Unit filename="Jugador.h" />
 		<Unit filename="MenuPrincipal.cpp" />
 		<Unit filename="MenuPrincipal.h" />
 		<Unit filename="Monedas.cpp" />
@@ -71,6 +75,8 @@
 		<Unit filename="Personaje.h" />
 		<Unit filename="PuertaBlanca.cpp" />
 		<Unit filename="PuertaBlanca.h" />
+		<Unit filename="Records.cpp" />
+		<Unit filename="Records.h" />
 		<Unit filename="Trampa.cpp" />
 		<Unit filename="Trampa.h" />
 		<Unit filename="cb.bmp" />

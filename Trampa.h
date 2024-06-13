@@ -17,10 +17,12 @@ public:
     const sf::RectangleShape& getDraw() const;
     void setVisible(bool visible);
     sf::Vector2f getPosition() const;
+    sf::Vector2f getSize() const;
     void aparecer();
     void reiniciar();
     void actualizar(float deltaTime);
     bool getVisible() const;
+
 };
 
 #endif // TRAMPA_H_INCLUDED

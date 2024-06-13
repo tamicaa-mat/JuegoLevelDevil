@@ -1,3 +1,4 @@
+#include <cmath>
 #include "Personaje.h"
 
 Personaje::Personaje(float x, float y)
@@ -12,6 +13,11 @@ Personaje::Personaje(float x, float y)
     _velocidadCaida = 0.1f;
     fueraJuego = false;
 }
+
+ void Personaje::setEstado(ESTADO est){
+    _estado=est;
+    }
+
 
 sf::Drawable& Personaje::getDraw()
 {
@@ -71,12 +77,13 @@ void Personaje::cmd()
 void Personaje::activarCaida()
 {
     _estado = ESTADO::CAYENDO;
+    _velocidadCaida = 5.0f; // Establece una velocidad de caída inicial
 }
 
 void Personaje::caer()
 {
     _estado = ESTADO::CAYENDO;
-    _velocidadCaida = 5.0f; // Establece una velocidad de caída inicial
+
 }
 
 void Personaje::reset(float x, float y)
@@ -94,6 +101,7 @@ void Personaje::update()
     switch (_estado)
     {
     case QUIETO:
+
         break;
 
     case CAMINANDO_ADELANTE:
@@ -182,6 +190,38 @@ bool Personaje::colisionaCon(const Trampa& trampa)
 
     return false;
 }
+
+
+
+bool Personaje::colisionaConTrampaN2(const Trampa& trampa)
+{
+    sf::Vector2f posPersonaje = _shape.getPosition();
+    float radioPersonaje = _shape.getRadius();
+
+    sf::Vector2f posTrampa = trampa.getPosition();
+    sf::Vector2f sizeTrampa = trampa.getSize();
+
+    // Obtener el centro del círculo (personaje)
+    sf::Vector2f centroPersonaje = sf::Vector2f(posPersonaje.x + radioPersonaje, posPersonaje.y + radioPersonaje);
+
+    // Obtener el centro del rectángulo (trampa)
+    sf::Vector2f centroTrampa = sf::Vector2f(posTrampa.x + sizeTrampa.x / 2, posTrampa.y + sizeTrampa.y / 2);
+
+    // Calcular la distancia entre los centros
+    float distanciaX = std::abs(centroPersonaje.x - centroTrampa.x);
+    float distanciaY = std::abs(centroPersonaje.y - centroTrampa.y);
+
+    // Comparar la distancia con los radios y dimensiones
+    if (distanciaX <= (radioPersonaje + sizeTrampa.x / 2) &&
+        distanciaY <= (radioPersonaje + sizeTrampa.y / 2))
+
+    {
+        return true;
+    }
+
+    return false;
+}
+
 
 bool Personaje::colisionPuertaBlanca(const PuertaBlanca& _puertaRec)
 {

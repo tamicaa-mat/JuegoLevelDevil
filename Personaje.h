@@ -37,10 +37,13 @@ public:
     bool colisionaCon(const Obstaculo& obstaculo);
     bool colisionaCon(const Moneda& moneda) const;
     bool colisionaCon(const Trampa& trampa);
+    bool colisionaConTrampaN2(const Trampa& trampa);
     bool colisionPuertaBlanca(const PuertaBlanca& puertablanca);
     sf::Vector2f getPosition() const;
     void caer();
     void reset(float x, float y);
+    void setEstado(ESTADO est);
+
 };
 
 #endif // PERSONAJE_H

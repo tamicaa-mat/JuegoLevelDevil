@@ -8,10 +8,12 @@
 #include "piso.h"
 #include "Obstaculo.h"
 #include"Trampa.h"
-
+#include"Jugador.h"
+#include"DarNombreJugador.h"
 class Nivel2 {
 private:
      sf::RenderWindow& ventana;
+    Jugador& jugador;
     Personaje pp;
     Moneda m,m2,m3;
     Piso piso,pisoArriba;
@@ -25,9 +27,10 @@ private:
     int vidas;
     bool gameOver;
     bool gameOverResolved;
+    int contadorMonedas;
 
 public:
-    Nivel2(sf::RenderWindow& vent);
+    Nivel2(sf::RenderWindow& vent, Jugador& jug);
     void manejarEntrada();
     void actualizar();
     void dibujar();

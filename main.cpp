@@ -74,7 +74,7 @@ int main() {
             }
 
             // Crear y manejar el segundo nivel
-            Nivel2 nivel2(ventana);
+            Nivel2 nivel2(ventana,*jugador);
 
             while (ventana.isOpen()) {
                 nivel2.manejarEntrada();

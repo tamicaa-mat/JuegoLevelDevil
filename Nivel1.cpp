@@ -7,7 +7,7 @@ Nivel1::Nivel1(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     m2(500,350.0,10),
     m3(550.0,350.0,10),
     piso(800, 150),
-    trmp(600,450),
+    trmp(550,450),
     pb(700, 350),
     obstaculo1(200, 430, 25, 25),
     obstaculo2(400, 430, 25, 25),
@@ -101,6 +101,8 @@ void Nivel1::actualizar()
     // Comprobar si el jugador pasa por una posición determinada para activar la trampa
     if (pp.colisionaCon(trmp))    // Condición para hacer aparecer la trampa
     {
+    std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
+    std::cout << "Posición de la trampa: (" << trmp.getPosition().x << ", " << trmp.getPosition().y << ")" << std::endl;
         trmp.aparecer();
         pp.activarCaida();
         vidas--;
@@ -119,6 +121,9 @@ void Nivel1::actualizar()
 
     if (pp.colisionPuertaBlanca(pb))
     {
+    std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
+    std::cout << "Posición de la puerta: (" << pb.getPosition().x << ", " << pb.getPosition().y << ")" << std::endl;
+
         gameOverResolved = true; // Indicar que se ha completado el nivel
     }
     if (pp.getPosition().y > 600)

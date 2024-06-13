@@ -1,14 +1,29 @@
 #include"Nivel2.h"
-
-
-Nivel2::Nivel2(sf::RenderWindow& vent) : ventana(vent),pp(200,100),m(600.0,100.0,10),m2(400.0,100.0,10),m3(200.0,100.0,10), piso(800, 150),pisoArriba(200,145),trmp(175,400),pb(40, 65),obstaculo1(200, 430, 25, 25), obstaculo2(400, 430, 25, 25),vidas(3), gameOver(false), gameOverResolved(false)
+#include <iostream> //cabecera para usar std::cout
+Nivel2::Nivel2(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(jug),
+    pp(200, 100),
+    m(600.0, 100.0, 10),
+    m2(400.0, 100.0, 10),
+    m3(200.0, 100.0, 10),
+    piso(800, 150),
+    pisoArriba(200, 145),
+    trmp(170, 450),
+    pb(40, 65),
+    obstaculo1(550, 430, 25, 25),
+    obstaculo2(400, 430, 25, 25),
+    vidas(3),
+    gameOver(false),
+    gameOverResolved(false),
+    contadorMonedas(0)
 {
     if (!fuente.loadFromFile("fuentes/Roboto-Black.ttf"))
     {
-        // Manejo de error
+        std::cerr << "Error al cargar la fuente" << std::endl;
+        // Manejar el error aquí, por ejemplo, cerrando el programa
+        exit(EXIT_FAILURE);
     }
     textoNivel.setFont(fuente);
-    textoNivel.setString("Nivel 1 Vidas: " + std::to_string(vidas));
+    textoNivel.setString("Nivel 2 Vidas: " + std::to_string(vidas));
     textoNivel.setCharacterSize(24);
     textoNivel.setFillColor(sf::Color::White);
     textoNivel.setPosition(10, 10);
@@ -40,23 +55,29 @@ void Nivel2::actualizar()
     pisoArriba.setPosition(200,145);
     pisoArriba.setSize(200,50);
     if (gameOver) return;
-
+    float deltaTime = 1.0f / 60.0f; // Asumiendo 60 FPS
     pp.cmd();
     pp.update();
 
     ////////////////////agregoahora
-    if(pp.getPosition().x<200||pp.getPosition().x>400){
+
+     trmp.actualizar(deltaTime);
+    if(pp.getPosition().x<180||pp.getPosition().x>410){
         pp.activarCaida();
-    }
+
+        }
+         //std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
 
 
-    // Comprobar colisiones
+
+
+
     if (pp.colisionaCon(obstaculo1) || pp.colisionaCon(obstaculo2))
     {
         vidas--;
         if (vidas > 0)
         {
-            pp = Personaje(0,400); // Reiniciar la posición del personaje
+            pp = Personaje(200,100); // Reiniciar la posición del personaje
         }
         else
         {
@@ -81,12 +102,30 @@ void Nivel2::actualizar()
         }
     }
 
-     if (pp.colisionaCon(trmp)) {  // Condición para hacer aparecer la trampa
+ std::cout << "Posición del personaje ANTES: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
+
+    if (pp.colisionaConTrampaN2(trmp))    // Condición para hacer aparecer la trampa
+    {
+    std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
+    std::cout << "Posición de la trampa: (" << trmp.getPosition().x << ", " << trmp.getPosition().y << ")" << std::endl;
         trmp.aparecer();
+        //pp.setEstado(QUIETO);
         pp.activarCaida();
-
-
+        vidas--;
     }
+    if(pp.getPosition().y>600)
+    {
+        pp.reset(200,100);
+        trmp.reiniciar();
+        if(vidas==0)
+        {
+            gameOver=true;
+            jugador.setPuntaje(contadorMonedas);
+            jugador.grabarArchivo();
+        }
+    }
+
+
 
 
     textoNivel.setString("Nivel 2 Vidas: " + std::to_string(vidas));
@@ -103,13 +142,13 @@ void Nivel2::dibujar()
     {
         ventana.draw(textoNivel);
         ventana.draw(pisoArriba.getdraw());
-        ventana.draw(pp.getDraw());
         ventana.draw(m.getDraw());
         ventana.draw(m2.getDraw());
         ventana.draw(m3.getDraw());
         ventana.draw(piso.getdraw());
         ventana.draw(pb.getDraw());
         ventana.draw(trmp.getDraw());
+        ventana.draw(pp.getDraw());
         ventana.draw(obstaculo1.getDraw());
         ventana.draw(obstaculo2.getDraw());
     }
