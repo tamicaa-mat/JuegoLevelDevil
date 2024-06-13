@@ -2,7 +2,7 @@
 #include <iostream> //cabecera para usar std::cout
 Nivel2::Nivel2(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(jug),
     pp(200, 100),
-    m(600.0, 100.0, 10),
+    m(600.0, 400.0, 10),
     m2(400.0, 100.0, 10),
     m3(0.0, 400.0, 10),
     piso(800, 150),
