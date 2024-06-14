@@ -13,6 +13,7 @@
 class Nivel1 {
 private:
     sf::RenderWindow& ventana;
+    Jugador& jugador;
     Personaje pp;
     Moneda m, m2, m3;
     Piso piso;
@@ -32,7 +33,6 @@ private:
     bool gameOver;
     bool gameOverResolved;
     int contadorMonedas;
-    Jugador& jugador;
 
 public:
     Nivel1(sf::RenderWindow& vent, Jugador& jug);

@@ -67,6 +67,8 @@
 		<Unit filename="Nivel1.h" />
 		<Unit filename="Nivel2.cpp" />
 		<Unit filename="Nivel2.h" />
+		<Unit filename="Nivel3.cpp" />
+		<Unit filename="Nivel3.h" />
 		<Unit filename="NivelIntermedio.cpp" />
 		<Unit filename="NivelIntermedio.h" />
 		<Unit filename="Obstaculo.cpp" />

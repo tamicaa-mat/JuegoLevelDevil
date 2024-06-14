@@ -1,27 +1,27 @@
-#ifndef NIVEL2_H_INCLUDED
-#define NIVEL2_H_INCLUDED
-
+#ifndef NIVEL3_H_INCLUDED
+#define NIVEL3_H_INCLUDED
 #include <SFML/Graphics.hpp>
 #include "Personaje.h"
 #include "PuertaBlanca.h"
 #include "Monedas.h"
 #include "piso.h"
 #include "Obstaculo.h"
-#include"Trampa.h"
-#include"Jugador.h"
-#include"DarNombreJugador.h"
-class Nivel2 {
+#include "Trampa.h"
+#include "Jugador.h"
+
+
+class Nivel3{
 private:
-     sf::RenderWindow& ventana;
+   sf::RenderWindow& ventana;
     Jugador& jugador;
     Personaje pp;
-    Moneda m,m2,m3;
-    Piso piso,pisoArriba;
+    Moneda m, m2, m3, m4, m5, m6, m7, m8, m9, m10;
+    Piso piso;
     Trampa trmp;
+    //Trampa trmp2;
     PuertaBlanca pb;
     Obstaculo obstaculo1;
     Obstaculo obstaculo2;
-
     sf::Text textoVidas;
     sf::Text textoPuntos;
     sf::Text textoGameOver;
@@ -36,14 +36,26 @@ private:
     int contadorMonedas;
 
 public:
-    Nivel2(sf::RenderWindow& vent, Jugador& jug);
+    Nivel3(sf::RenderWindow& vent, Jugador& jug);
     void manejarEntrada();
     void actualizar();
     void dibujar();
-    bool isGameOver() const;
     bool isGameOverResolved() const;
-     int getContadorMonedas() const;
+    bool isGameOver() const;
+    int getContadorMonedas() const;
+
+
 };
 
 
-#endif // NIVEL2_H_INCLUDED
+
+
+
+
+
+
+
+
+
+
+#endif // NIVEL3_H_INCLUDED

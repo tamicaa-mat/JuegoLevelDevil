@@ -9,8 +9,8 @@ Nivel1::Nivel1(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     piso(800, 150),
     trmp(550,450),
     pb(700, 350),
-    obstaculo1(200, 430, 25, 25),
-    obstaculo2(400, 430, 25, 25),
+    obstaculo1(200.0, 430.0, 25.0, 25.0),
+    obstaculo2(400.0, 430.0, 25.0, 25.0),
     vidas(3), gameOver(false),
     gameOverResolved(false),
     contadorMonedas(0)
@@ -136,12 +136,15 @@ void Nivel1::actualizar()
 
         gameOverResolved = true; // Indicar que se ha completado el nivel
     }
+
+    /////????? este bloque IF creo que esta de mas
     if (pp.getPosition().y > 600)
     {
         vidas--;
         pp.reset(0, 400); // Reiniciar la posición del jugador
         trmp.reiniciar(); // Reiniciar la trampa
     }
+
     textoVidas.setString("Nivel 1 Vidas: " + std::to_string(vidas));
     textoPuntos.setString("Puntos: " + std::to_string(contadorMonedas));
 }
