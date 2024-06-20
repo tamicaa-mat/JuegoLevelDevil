@@ -18,7 +18,7 @@ Nivel3::Nivel3(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     trmp(400, 400),
     pb(40, 65),
     obstaculo1(550.0, 430.0, 25.0, 25.0),
-    obstaculo2(400.0, 430.0, 25.0, 25.0),
+    obstaculo2(600.0, 430.0, 25.0, 25.0),
     vidas(3),
     gameOver(false),
     gameOverResolved(false),
@@ -89,7 +89,8 @@ void Nivel3::actualizar()
         if (vidas > 0)
         {
             pp.reset(0,400);
-            trmp.reiniciar(); // Reiniciar la trampa cuando el jugador muere
+            trmp.reiniciar();
+            isGameOverModifica(); // Reiniciar la trampa cuando el jugador muere
         }
         else
         {
@@ -118,28 +119,28 @@ void Nivel3::actualizar()
         }
         if (pp.colisionaCon(m4))
         {
-            m2.desaparecer();
+            m4.desaparecer();
             contadorMonedas++;
         }
         if (pp.colisionaCon(m5))
         {
-            m2.desaparecer();
+            m5.desaparecer();
             contadorMonedas++;
         }
         if (pp.colisionaCon(m6))
         {
-            m2.desaparecer();
+            m6.desaparecer();
             contadorMonedas++;
         }
 
         if (pp.colisionaCon(m7))
         {
-            m2.desaparecer();
+            m7.desaparecer();
             contadorMonedas++;
         }
         if (pp.colisionaCon(m9))
         {
-            m2.desaparecer();
+            m8.desaparecer();
             contadorMonedas++;
         }
         if (pp.colisionaCon(m10))
@@ -161,6 +162,7 @@ void Nivel3::actualizar()
     {
         pp.reset(0,400);
         trmp.reiniciar();
+        isGameOverModifica();
         if(vidas==0)
         {
             gameOver=true;
@@ -184,6 +186,7 @@ void Nivel3::actualizar()
     {
         pp.reset(0,400);
         trmp.reiniciar();
+        isGameOverModifica();
         if(vidas==0)
         {
             gameOver=true;
@@ -199,14 +202,19 @@ void Nivel3::actualizar()
 
         gameOverResolved = true; // Indicar que se ha completado el nivel
     }
+
+
     if (pp.getPosition().y > 600)
     {
         vidas--;
         pp.reset(0, 400); // Reiniciar la posición del jugador
         trmp.reiniciar(); // Reiniciar la trampa
     }
+
+
     textoVidas.setString("Nivel 3 Vidas: " + std::to_string(vidas));
     textoPuntos.setString("Puntos: " + std::to_string(contadorMonedas));
+
 }
 
 
@@ -256,7 +264,28 @@ bool Nivel3::isGameOverResolved() const
 bool Nivel3::isGameOver() const
 {
     return gameOver;
+
 }
+
+
+void Nivel3::isGameOverModifica(){
+    m.aparecer();
+    m2.aparecer();
+    m3.aparecer();
+    m4.aparecer();
+    m5.aparecer();
+    m6.aparecer();
+    m7.aparecer();
+    m8.aparecer();
+    m9.aparecer();
+    m10.aparecer();
+    contadorMonedas=0;
+}
+
+
+
+
+
 
 int Nivel3::getContadorMonedas() const
 {

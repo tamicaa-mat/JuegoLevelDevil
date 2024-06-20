@@ -40,6 +40,7 @@ public:
     void manejarEntrada();
     void actualizar();
     void dibujar();
+    void isGameOverModifica();
     bool isGameOver() const;
     bool isGameOverResolved() const;
      int getContadorMonedas() const;

@@ -96,7 +96,8 @@ void Nivel2::actualizar()
         vidas--;
         if (vidas > 0)
         {
-            pp = Personaje(200,100); // Reiniciar la posición del personaje
+            pp = Personaje(200,100);
+            isGameOverModifica();// Reiniciar la posición del personaje
         }
         else
         {
@@ -138,6 +139,7 @@ void Nivel2::actualizar()
         vidas--;
         pp.reset(200,100);
         trmp.reiniciar();
+        isGameOverModifica();
         if(vidas==0)
         {
             gameOver=true;
@@ -204,7 +206,13 @@ bool Nivel2::isGameOver() const
     return gameOver;
 }
 
+void Nivel2::isGameOverModifica(){
+    m.aparecer();
+    m2.aparecer();
+    m3.aparecer();
+    contadorMonedas=0;
 
+}
 
 int Nivel2::getContadorMonedas() const {
     return contadorMonedas;

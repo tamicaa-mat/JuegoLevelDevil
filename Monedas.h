@@ -12,6 +12,7 @@ private:
 public:
     Moneda(float x, float y, int radio);
     void desaparecer();
+    void aparecer();
     const sf::CircleShape& getDraw() const;
 };
 

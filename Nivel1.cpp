@@ -78,8 +78,10 @@ void Nivel1::actualizar()
         vidas--;
         if (vidas > 0)
         {
+            isGameOverModifica();
             pp.reset(0,400);
-            trmp.reiniciar(); // Reiniciar la trampa cuando el jugador muere
+            trmp.reiniciar();
+        // Reiniciar la trampa cuando el jugador muere
         }
         else
         {
@@ -121,6 +123,7 @@ void Nivel1::actualizar()
     {
         pp.reset(0,400);
         trmp.reiniciar();
+        isGameOverModifica();///////////////agrego funcion para reset las monedas y puntaje a 0
         if(vidas==0)
         {
             gameOver=true;
@@ -182,13 +185,22 @@ void Nivel1::dibujar()
 
 bool Nivel1::isGameOverResolved() const
 {
-    return gameOverResolved;
+    return gameOverResolved;//si resolvio el nivel, si se paso
 }
 
 bool Nivel1::isGameOver() const
 {
     return gameOver;
+
 }
+
+void Nivel1::isGameOverModifica(){
+    m.aparecer();
+    m2.aparecer();
+    m3.aparecer();
+    contadorMonedas=0;
+}
+
 
 int Nivel1::getContadorMonedas() const {
     return contadorMonedas;

@@ -15,6 +15,10 @@ void Moneda::desaparecer(){
 
 }
 
+void Moneda::aparecer(){
+_visible=true;
+}
+
 const sf::CircleShape& Moneda::getDraw() const {
       if (_visible) {
         return _shapeMoneda;

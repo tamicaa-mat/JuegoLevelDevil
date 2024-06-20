@@ -41,6 +41,7 @@ public:
     void dibujar();
     bool isGameOverResolved() const;
     bool isGameOver() const;
+    void isGameOverModifica();
     int getContadorMonedas() const;
 };
 
