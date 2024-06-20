@@ -7,6 +7,7 @@
 #include "NivelIntermedio.h"
 #include "Nivel2.h"
 #include "Records.h"
+#include "Nivel3.h"
 
 int main()
 {
@@ -20,6 +21,7 @@ int main()
     bool juegoIniciado = false;
     bool nivel1Completado = false;
     bool nivel2Completado = false;
+    bool nivel3Completado = false;
     bool pedirNombreJugador = false;
     bool mostrarRecords = false;
 
@@ -35,7 +37,8 @@ int main()
 
                 if (menuPrincipal.esBotonJugarPresionado())
                 {
-                    pedirNombreJugador = true;
+                    pedirNombreJugador = true;///agregar alguna condicion para que no lo pida  siempre, sino solo si queres iniciar una partida nueva, sino
+                    ///te tiene que dar la opcion de continuar tu partida
                 }
                 if (menuPrincipal.esBotonRecordsPresionado())
                 {
@@ -61,6 +64,9 @@ int main()
                 }
             }
         }
+
+
+
         else if (mostrarRecords)
         {
             Records records(ventana);
@@ -73,7 +79,9 @@ int main()
             mostrarRecords = false; // Resetear para volver al menú principal
             menuPrincipal.resetBotones(); // Resetear los botones
         }
-        else if (nivel1Completado)
+
+
+        else if (nivel1Completado)// si se completo nivel1 , comienza nivel 2
         {
             // Mostrar la pantalla intermedia
             NivelIntermedio nivelIntermedio(ventana);
@@ -91,7 +99,7 @@ int main()
                 }
             }
 
-            // Crear y manejar el segundo nivel falta nivel 3 en main
+            /// Crear y manejar el segundo nivel
             Nivel2 nivel2(ventana,*jugador);
 
             while (ventana.isOpen())
@@ -100,7 +108,7 @@ int main()
                 nivel2.actualizar();
                 nivel2.dibujar();
 
-                // Verificar si el estado de "Game Over" ha sido resuelto en el segundo nivel
+                ///Verificar si el estado de "Game Over" ha sido resuelto en el segundo nivel
                 if (nivel2.isGameOverResolved())
                 {
                     if (nivel2.isGameOver())   // Utiliza el nuevo método isGameOver
@@ -114,7 +122,7 @@ int main()
                     }
                     else
                     {
-                        nivel2Completado = true; // Indicar que el nivel 1 ha sido completado
+                        nivel2Completado = true; // Indicar que el nivel 2 ha sido completado
                     }
                     break;
                 }
@@ -122,7 +130,7 @@ int main()
         }
         else
         {
-            // Crear y manejar el primer nivel
+            // Crear y manejar el primer nivel, si nivel1completado es falso, arranca nivel1
             Nivel1 nivel1(ventana, *jugador);
 
             while (ventana.isOpen())
@@ -151,6 +159,77 @@ int main()
                 }
             }
         }
+
+
+        ///agrego aca nivel3 prueba//////////////////////////////////////////////////////ELSE AQUI/////////////////////////////////////////////////////////////////////////
+
+        if(nivel2Completado && !nivel3Completado)
+        {
+
+            NivelIntermedio nivelIntermedio(ventana);
+
+            while (ventana.isOpen())
+            {
+                nivelIntermedio.manejarEntrada();
+                nivelIntermedio.actualizar();
+                nivelIntermedio.dibujarN2();
+
+                if (nivelIntermedio.esBotonJugarNivel3Presionado())
+                {
+                    nivel2Completado = false; // Resetear el estado del nivel intermedio
+                    break;
+                }
+            }
+
+            ///crear NIVEL3
+            Nivel3 nivel3(ventana,*jugador);
+
+            while (ventana.isOpen())
+            {
+                nivel3.manejarEntrada();
+                nivel3.actualizar();
+                nivel3.dibujar();
+
+                ///Verificar si el estado de "Game Over" ha sido resuelto en el segundo nivel
+                if (nivel3.isGameOverResolved())
+                {
+                    if (nivel3.isGameOver())   // Utiliza el nuevo método isGameOver
+                    {
+                        jugador->setPuntaje(nivel3.getContadorMonedas());
+                        jugador->grabarArchivo(); // Guardar el puntaje del jugador en el archivo
+                        juegoIniciado = false; // Si es "Game Over", regresar al menú principal
+                        pedirNombreJugador = false; // Resetear para pedir el nombre del jugador otra vez
+                        menuPrincipal.resetBotones(); // Resetear los botones
+                        darNombreJugador.resetNombreIngresado(); // Resetear el estado del nombre ingresado
+                    }
+                    else
+                    {
+                        nivel3Completado = true; // Indicar que el nivel 3 ha sido completado
+                    }
+                    break;
+
+                }
+            }
+        }
+
+
+
+
+
+
+///////////////////////////////////////////////////////yo aca
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     if (jugador)

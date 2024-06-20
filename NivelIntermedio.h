@@ -7,7 +7,9 @@ class NivelIntermedio {
 private:
     sf::RenderWindow& ventana;
     sf::Font fuente;
-    sf::Text textoIntermedio;
+    sf::Text textoIntermedio1;
+    sf::Text textoIntermedio2;
+
     sf::Text botonJugarNivel2;
     sf::Text botonJugarNivel3;
 
@@ -16,8 +18,10 @@ public:
     void manejarEntrada();
     void actualizar();
     void dibujar();
+    void dibujarN2();
     bool esBotonJugarNivel2Presionado();
     bool esBotonJugarNivel3Presionado();
+
 };
 
 #endif // NIVELINTERMEDIO_H_INCLUDED

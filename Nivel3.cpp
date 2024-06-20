@@ -33,9 +33,10 @@ Nivel3::Nivel3(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
         exit(EXIT_FAILURE);
     }
 
-        if (!fondoTexture.loadFromFile("fondo2.jpg")) {
-            std::cerr << "Error al cargar la imagen de fondo" << std::endl;
-        }
+    if (!fondoTexture.loadFromFile("fondo2.jpg"))
+    {
+        std::cerr << "Error al cargar la imagen de fondo" << std::endl;
+    }
 
 
     fondoSprite.setTexture(fondoTexture);
@@ -115,33 +116,33 @@ void Nivel3::actualizar()
             m3.desaparecer();
             contadorMonedas++;
         }
-         if (pp.colisionaCon(m4))
+        if (pp.colisionaCon(m4))
         {
             m2.desaparecer();
             contadorMonedas++;
         }
-         if (pp.colisionaCon(m5))
+        if (pp.colisionaCon(m5))
         {
             m2.desaparecer();
             contadorMonedas++;
         }
-         if (pp.colisionaCon(m6))
+        if (pp.colisionaCon(m6))
         {
             m2.desaparecer();
             contadorMonedas++;
         }
 
-         if (pp.colisionaCon(m7))
+        if (pp.colisionaCon(m7))
         {
             m2.desaparecer();
             contadorMonedas++;
         }
-         if (pp.colisionaCon(m9))
+        if (pp.colisionaCon(m9))
         {
             m2.desaparecer();
             contadorMonedas++;
         }
-         if (pp.colisionaCon(m10))
+        if (pp.colisionaCon(m10))
         {
             m2.desaparecer();
             contadorMonedas++;
@@ -150,7 +151,8 @@ void Nivel3::actualizar()
     }
 
     ///se activa la trampa si colisiona con moneda8
-    if(pp.colisionaCon(m8)){
+    if(pp.colisionaCon(m8))
+    {
         trmp.aparecer();
         pp.activarCaida();
     }
@@ -172,8 +174,8 @@ void Nivel3::actualizar()
     // Comprobar si el jugador pasa por una posición determinada para activar la trampa
     if (pp.colisionaCon(trmp))    // Condición para hacer aparecer la trampa
     {
-    std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
-    std::cout << "Posición de la trampa: (" << trmp.getPosition().x << ", " << trmp.getPosition().y << ")" << std::endl;
+        std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
+        std::cout << "Posición de la trampa: (" << trmp.getPosition().x << ", " << trmp.getPosition().y << ")" << std::endl;
         trmp.aparecer();
         pp.activarCaida();
         vidas--;
@@ -192,8 +194,8 @@ void Nivel3::actualizar()
 
     if (pp.colisionPuertaBlanca(pb))
     {
-    std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
-    std::cout << "Posición de la puerta: (" << pb.getPosition().x << ", " << pb.getPosition().y << ")" << std::endl;
+        std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
+        std::cout << "Posición de la puerta: (" << pb.getPosition().x << ", " << pb.getPosition().y << ")" << std::endl;
 
         gameOverResolved = true; // Indicar que se ha completado el nivel
     }
@@ -203,7 +205,7 @@ void Nivel3::actualizar()
         pp.reset(0, 400); // Reiniciar la posición del jugador
         trmp.reiniciar(); // Reiniciar la trampa
     }
-    textoVidas.setString("Nivel 1 Vidas: " + std::to_string(vidas));
+    textoVidas.setString("Nivel 3 Vidas: " + std::to_string(vidas));
     textoPuntos.setString("Puntos: " + std::to_string(contadorMonedas));
 }
 
@@ -230,6 +232,13 @@ void Nivel3::dibujar()
         ventana.draw(m.getDraw());
         ventana.draw(m2.getDraw());
         ventana.draw(m3.getDraw());
+        ventana.draw(m4.getDraw());
+        ventana.draw(m5.getDraw());
+        ventana.draw(m6.getDraw());
+        ventana.draw(m7.getDraw());
+        ventana.draw(m8.getDraw());
+        ventana.draw(m9.getDraw());
+        ventana.draw(m10.getDraw());
         ventana.draw(piso.getdraw());
         ventana.draw(trmp.getDraw());
         ventana.draw(pp.getDraw()); // Dibuja el jugador por encima de la trampa
@@ -249,7 +258,8 @@ bool Nivel3::isGameOver() const
     return gameOver;
 }
 
-int Nivel3::getContadorMonedas() const {
+int Nivel3::getContadorMonedas() const
+{
     return contadorMonedas;
 }
 
