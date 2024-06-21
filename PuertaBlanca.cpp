@@ -3,11 +3,12 @@
 #include"PuertaBlanca.h"
 
 
-PuertaBlanca::PuertaBlanca(float ancho, float altura) {
+PuertaBlanca::PuertaBlanca(float x, float y) {
         _puertaRec.setSize(sf::Vector2f(40, 65)); // Establecer el tamaño d LA PUERTA
         _puertaRec.setFillColor(sf::Color::White); // Establecer el color de PUERTA
         // Establecer la posición del piso como fijo en la parte inferior de la ventana
-        _puertaRec.setPosition(700,400);
+        _puertaRec.setPosition(x,y);
+
     }
 
 sf::RectangleShape& PuertaBlanca::getDraw()
@@ -19,3 +20,10 @@ sf::RectangleShape& PuertaBlanca::getDraw()
 sf::Vector2f PuertaBlanca::getPosition() const {
     return _puertaRec.getPosition();
 }
+
+
+void PuertaBlanca::setPosicion(float x, float y) {
+    _puertaRec.setPosition(x, y);
+}
+
+

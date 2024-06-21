@@ -77,7 +77,8 @@ void Personaje::cmd()
 void Personaje::activarCaida()
 {
     _estado = ESTADO::CAYENDO;
-    _velocidadCaida = 5.0f; // Establece una velocidad de caída inicial
+    _velocidadCaida = 5.0f;
+
 }
 
 void Personaje::caer()
@@ -133,7 +134,7 @@ void Personaje::update()
 
     case SALTANDO_ADELANTE:
         _velocidadSalto -= 1.0f; // Aplica gravedad
-        _shape.move(_velocidadMovimiento, -_velocidadSalto);
+        _shape.move(_velocidadMovimiento+1, -_velocidadSalto);
         if (_shape.getPosition().y > 400)
         {
             _estado = ESTADO::QUIETO; // Cambiar al estado QUIETO
@@ -144,7 +145,7 @@ void Personaje::update()
 
     case SALTANDO_ATRAS:
         _velocidadSalto -= 1.0f;
-        _shape.move(-_velocidadMovimiento, -_velocidadSalto);
+        _shape.move(-_velocidadMovimiento-1, -_velocidadSalto);
         if (_shape.getPosition().y > 400)
         {
             _estado = ESTADO::QUIETO; // Cambiar al estado QUIETO

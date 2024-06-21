@@ -16,7 +16,7 @@ Nivel3::Nivel3(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     m10(500.0, 400.0, 10),
     piso(800, 150),
     trmp(400, 450),
-    pb(40, 65),
+    pb(700, 400),
     obstaculo1(550.0, 430.0, 25.0, 25.0),
     obstaculo2(600.0, 430.0, 25.0, 25.0),
     vidas(3),
@@ -78,7 +78,7 @@ void Nivel3::actualizar()
 
     pp.cmd();
     pp.update();
-
+    obstaculo1.moverIzquierda();
     // Actualizar la trampa
     trmp.actualizar(deltaTime);
 

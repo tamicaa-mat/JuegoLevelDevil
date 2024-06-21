@@ -10,13 +10,20 @@ private:
     sf::Vector2f _posicionPuertaBlanca;
 public:
     PuertaBlanca(float ancho, float altura);
-    PuertaBlanca();
+    //PuertaBlanca();
+ void setPosicion(float x, float y);
 
-    sf::Vector2f getPosition() const;
+ sf::Vector2f getPosition() const;
     // Método para dibujar la puerta
  sf::RectangleShape& getDraw();
 
+
+
+
 };
+
+
+
 #endif // PUERTABLANCA_H_INCLUDED
 
 

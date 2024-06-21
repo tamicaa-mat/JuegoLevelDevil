@@ -8,7 +8,7 @@ Nivel1::Nivel1(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     m3(550.0,350.0,10),
     piso(800, 150),
     trmp(550,450),
-    pb(700, 350),
+    pb(700, 400),
     obstaculo1(200.0, 430.0, 25.0, 25.0),
     obstaculo2(400.0, 430.0, 25.0, 25.0),
     vidas(3), gameOver(false),

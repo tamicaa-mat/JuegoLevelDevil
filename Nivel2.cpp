@@ -8,7 +8,7 @@ Nivel2::Nivel2(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     piso(800, 150),
     pisoArriba(200, 145),
     trmp(170, 450),
-    pb(40, 65),
+    pb(700,400),
     obstaculo1(550, 430, 25, 25),
     obstaculo2(400, 430, 25, 25),
 
@@ -134,6 +134,7 @@ void Nivel2::actualizar()
         trmp.aparecer();
         pp.activarCaida();
     }
+
     ///colision con trampa horizontal
 
     if(pp.colisionaCon(trmp)){
@@ -219,6 +220,7 @@ void Nivel2::isGameOverModifica(){
     m.aparecer();
     m2.aparecer();
     m3.aparecer();
+    obstaculo1;
     contadorMonedas=0;
 
 }
