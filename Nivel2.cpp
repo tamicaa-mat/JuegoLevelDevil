@@ -125,8 +125,8 @@ void Nivel2::actualizar()
         }
     }
 
-        //std::cout << "Posición del personaje ANTES: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
 
+///colision con trampa vertical
     if (pp.colisionaConTrampaN2(trmp))
     {
     std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
@@ -134,6 +134,15 @@ void Nivel2::actualizar()
         trmp.aparecer();
         pp.activarCaida();
     }
+    ///colision con trampa horizontal
+
+    if(pp.colisionaCon(trmp)){
+    std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
+    std::cout << "Posición de la trampa: (" << trmp.getPosition().x << ", " << trmp.getPosition().y << ")" << std::endl;
+        trmp.aparecer();
+        pp.activarCaida();
+    }
+
     if(pp.getPosition().y>600)
     {
         vidas--;

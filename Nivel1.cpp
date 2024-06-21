@@ -110,7 +110,7 @@ void Nivel1::actualizar()
         }
     }
 
-    // Comprobar si el jugador pasa por una posición determinada para activar la trampa
+    /// colision con trampa horizontal
     if (pp.colisionaCon(trmp))    // Condición para hacer aparecer la trampa
     {
     std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;

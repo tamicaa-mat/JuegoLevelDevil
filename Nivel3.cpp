@@ -15,7 +15,7 @@ Nivel3::Nivel3(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     m9(450.0, 400.0, 10),
     m10(500.0, 400.0, 10),
     piso(800, 150),
-    trmp(400, 400),
+    trmp(400, 450),
     pb(40, 65),
     obstaculo1(550.0, 430.0, 25.0, 25.0),
     obstaculo2(600.0, 430.0, 25.0, 25.0),
@@ -138,39 +138,24 @@ void Nivel3::actualizar()
             m7.desaparecer();
             contadorMonedas++;
         }
-        if (pp.colisionaCon(m9))
+         if (pp.colisionaCon(m8))
         {
             m8.desaparecer();
             contadorMonedas++;
         }
+
+        if (pp.colisionaCon(m9))
+        {
+            m9.desaparecer();
+            contadorMonedas++;
+        }
         if (pp.colisionaCon(m10))
         {
-            m2.desaparecer();
+            m10.desaparecer();
             contadorMonedas++;
         }
 
     }
-
-    ///se activa la trampa si colisiona con moneda8
-    if(pp.colisionaCon(m8))
-    {
-        trmp.aparecer();
-        pp.activarCaida();
-    }
-
-    if(pp.getPosition().y>600)
-    {
-        pp.reset(0,400);
-        trmp.reiniciar();
-        isGameOverModifica();
-        if(vidas==0)
-        {
-            gameOver=true;
-            jugador.setPuntaje(contadorMonedas);
-            jugador.grabarArchivo();
-        }
-    }
-
 
 
     // Comprobar si el jugador pasa por una posición determinada para activar la trampa
