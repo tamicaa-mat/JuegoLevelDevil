@@ -203,7 +203,7 @@ bool Personaje::colisionaConTrampaN2(const Trampa& trampa)
     sf::Vector2f sizeTrampa = trampa.getSize();
 
     // Obtener el centro del círculo (personaje)
-    sf::Vector2f centroPersonaje = sf::Vector2f(posPersonaje.x + radioPersonaje, posPersonaje.y + radioPersonaje);
+    sf::Vector2f centroPersonaje = sf::Vector2f(posPersonaje.x + radioPersonaje, (posPersonaje.y) + radioPersonaje);
 
     // Obtener el centro del rectángulo (trampa)
     sf::Vector2f centroTrampa = sf::Vector2f(posTrampa.x + sizeTrampa.x / 2, posTrampa.y + sizeTrampa.y / 2);

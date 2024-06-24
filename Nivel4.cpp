@@ -1,37 +1,35 @@
-#include"Nivel2.h"
-#include <iostream>//cabecera para usar std::cout
-Nivel2::Nivel2(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(jug),
-    pp(200, 100),
-    m(600.0, 400.0, 10),
-    m2(400.0, 100.0, 10),
-    m3(0.0, 400.0, 10),
+#include "Nivel4.h"
+
+
+
+Nivel4::Nivel4(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(jug),
+    pp(0,400),
+    m(250.0,350.0,10),
+    m2(500,350.0,10),
+    m3(550.0,350.0,10),
     piso(800, 150),
-    pisoArriba(200, 145),
-    trmp(170, 450),
+    trmp(550,450),
     pb(700.0, 400.0),
-    obstaculo1(550, 430, 25, 25),
-    obstaculo2(400, 430, 25, 25),
-    vidas(3),
-    gameOver(false),
+    obstaculo1(200.0, 430.0, 25.0, 25.0),
+    obstaculo2(400.0, 430.0, 25.0, 25.0),
+    vidas(3), gameOver(false),
     gameOverResolved(false),
     contadorMonedas(0)
 {
-
-
     if (!fuente.loadFromFile("fuentes/Roboto-Black.ttf"))
     {
-        std::cerr << "Error al cargar la fuente" << std::endl;
-
-        exit(EXIT_FAILURE);
+        // Manejo de error
     }
+
 
     if (!fondoTexture.loadFromFile("fondo2.jpg"))
     {
         std::cerr << "Error al cargar la imagen de fondo" << std::endl;
     }
-
-
     fondoSprite.setTexture(fondoTexture);
+
+
+
 
     textoVidas.setFont(fuente);
     textoVidas.setCharacterSize(24);
@@ -50,7 +48,8 @@ Nivel2::Nivel2(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     textoGameOver.setPosition(100, 200);
 }
 
-void Nivel2::manejarEntrada()
+
+void Nivel4::manejarEntrada()
 {
     sf::Event evento;
     while (ventana.pollEvent(evento))
@@ -59,43 +58,34 @@ void Nivel2::manejarEntrada()
             ventana.close();
         if (gameOver && evento.type == sf::Event::KeyPressed && evento.key.code == sf::Keyboard::Enter)
         {
-            gameOverResolved = true;
+            gameOverResolved = true; // Indicar que se ha resuelto el estado de "Game Over"
         }
     }
 }
 
-void Nivel2::actualizar()
+
+void Nivel4::actualizar()
 {
     if (gameOver) return;
 
-    pisoArriba.setColor(sf::Color::Green);
-    pisoArriba.setPosition(200,145);
-    pisoArriba.setSize(200,50);
-
     float deltaTime = 1.0f / 60.0f; // Asumiendo 60 FPS
+
     pp.cmd();
     pp.update();
 
-    ////////////////////agregoahora
-
+    // Actualizar la trampa
     trmp.actualizar(deltaTime);
 
-    if((pp.getPosition().x<180&&pp.getPosition().y<=100)||(pp.getPosition().x>400&&pp.getPosition().y<=100))
-    {
-        pp.activarCaida();
-
-    }
-
-//TODO:ARREGLAR COLISION OBSTACULOS N2
-
-    if (pp.colisionaCon(obstaculo1))
+    // Comprobar colisiones con obstáculos y trampa
+    if (pp.colisionaCon(obstaculo1) || pp.colisionaCon(obstaculo2))
     {
         vidas--;
-        if (vidas>0)
+        if (vidas > 0)
         {
             isGameOverModifica();
-            pp.reset(200,100);
+            pp.reset(0,400);
             trmp.reiniciar();
+            // Reiniciar la trampa cuando el jugador muere
         }
         else
         {
@@ -104,29 +94,7 @@ void Nivel2::actualizar()
             jugador.setPuntaje(contadorMonedas);
             jugador.grabarArchivo();
         }
-
     }
-
-    if (pp.colisionaCon(obstaculo2))
-    {
-        vidas--;
-        if (vidas>0)
-        {
-            isGameOverModifica();
-            pp.reset(200,100);
-            trmp.reiniciar();
-        }
-        else
-        {
-
-            gameOver = true;
-            jugador.setPuntaje(contadorMonedas);
-            jugador.grabarArchivo();
-        }
-
-    }
-
-
 
     if(pp.colisionaCon(m) || pp.colisionaCon(m2) || pp.colisionaCon(m3))
     {
@@ -147,56 +115,52 @@ void Nivel2::actualizar()
         }
     }
 
- // std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
-    if (pp.colisionaConTrampaN2(trmp)||pp.colisionaCon(trmp))
+    /// colision con trampa horizontal
+    if (pp.colisionaCon(trmp))    // Condición para hacer aparecer la trampa
     {
         std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
         std::cout << "Posición de la trampa: (" << trmp.getPosition().x << ", " << trmp.getPosition().y << ")" << std::endl;
         trmp.aparecer();
         pp.activarCaida();
 
-
     }
 
-
-
- if (pp.colisionPuertaBlanca(pb))
+    if (pp.colisionPuertaBlanca(pb))
     {
         std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
         std::cout << "Posición de la puerta: (" << pb.getPosition().x << ", " << pb.getPosition().y << ")" << std::endl;
+
         gameOverResolved = true; // Indicar que se ha completado el nivel
     }
 
-     if (pp.getPosition().y > 600)
+    ///????? este bloque IF creo que esta de mas
+    if(pp.getPosition().y>600)
+    {
+        vidas--;
+        pp.reset(0,400);
+        trmp.reiniciar();
+        isGameOverModifica();
+        if(vidas==0)
         {
-            vidas--;
-            if (vidas>0)
-            {
-                isGameOverModifica();
-                pp.reset(200, 100);
-                trmp.reiniciar();
-            }
-            else
-            {
 
-                gameOver = true;
-                jugador.setPuntaje(contadorMonedas);
-                jugador.grabarArchivo();
-            }
+            gameOver=true;
+            jugador.setPuntaje(contadorMonedas);
+            jugador.grabarArchivo();
         }
-
-
-    textoVidas.setString("Nivel 2 Vidas: " + std::to_string(vidas));
+    }
+    textoVidas.setString("Nivel 4 Vidas: " + std::to_string(vidas));
     textoPuntos.setString("Puntos: " + std::to_string(contadorMonedas));
-
-
 }
 
-void Nivel2::dibujar()
+void Nivel4::dibujar()
 {
     ventana.clear();
 
-    ventana.draw(fondoSprite);
+
+    ventana.draw(fondoSprite);  // Dibujar el fondo primero
+
+
+
 
     if (gameOver)
     {
@@ -206,41 +170,49 @@ void Nivel2::dibujar()
     {
         ventana.draw(textoVidas);
         ventana.draw(textoPuntos);
-        ventana.draw(pisoArriba.getdraw());
+        ventana.draw(pb.getDraw());
         ventana.draw(m.getDraw());
         ventana.draw(m2.getDraw());
         ventana.draw(m3.getDraw());
         ventana.draw(piso.getdraw());
-        ventana.draw(pb.getDraw());
         ventana.draw(trmp.getDraw());
-        ventana.draw(pp.getDraw());
+        ventana.draw(pp.getDraw()); // Dibuja el jugador por encima de la trampa
         ventana.draw(obstaculo1.getDraw());
         ventana.draw(obstaculo2.getDraw());
-
     }
     ventana.display();
 }
 
-bool Nivel2::isGameOverResolved() const
+bool Nivel4::isGameOverResolved() const
 {
-    return gameOverResolved;
+    return gameOverResolved;//si resolvio el nivel, si se paso
 }
 
-bool Nivel2::isGameOver() const
+bool Nivel4::isGameOver() const
 {
     return gameOver;
+
 }
 
-void Nivel2::isGameOverModifica()
+void Nivel4::isGameOverModifica()
 {
     m.aparecer();
     m2.aparecer();
     m3.aparecer();
     contadorMonedas=0;
-
 }
 
-int Nivel2::getContadorMonedas() const
+
+int Nivel4::getContadorMonedas() const
 {
     return contadorMonedas;
 }
+
+
+
+
+
+
+
+
+

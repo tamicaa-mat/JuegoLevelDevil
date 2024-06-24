@@ -16,7 +16,7 @@ Nivel3::Nivel3(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     m10(500.0, 400.0, 10),
     piso(800, 150),
     trmp(400, 450),
-    pb(700, 400),
+    pb(700.0, 400.0),
     obstaculo1(550.0, 430.0, 25.0, 25.0),
     obstaculo2(600.0, 430.0, 25.0, 25.0),
     vidas(3),
@@ -78,6 +78,7 @@ void Nivel3::actualizar()
 
     pp.cmd();
     pp.update();
+
     obstaculo1.moverIzquierda();
     // Actualizar la trampa
     trmp.actualizar(deltaTime);
@@ -86,11 +87,12 @@ void Nivel3::actualizar()
     if (pp.colisionaCon(obstaculo1) || pp.colisionaCon(obstaculo2))
     {
         vidas--;
+
         if (vidas > 0)
         {
             pp.reset(0,400);
             trmp.reiniciar();
-            isGameOverModifica(); // Reiniciar la trampa cuando el jugador muere
+            isGameOverModifica(); // Reiniciar
         }
         else
         {
@@ -98,7 +100,11 @@ void Nivel3::actualizar()
             jugador.setPuntaje(contadorMonedas);
             jugador.grabarArchivo();
         }
+
+
     }
+
+
 
     if(pp.colisionaCon(m) || pp.colisionaCon(m2) || pp.colisionaCon(m3)||pp.colisionaCon(m4)||pp.colisionaCon(m5)||pp.colisionaCon(m6)||pp.colisionaCon(m7)||pp.colisionaCon(m9)||pp.colisionaCon(m10))
     {
@@ -138,7 +144,7 @@ void Nivel3::actualizar()
             m7.desaparecer();
             contadorMonedas++;
         }
-         if (pp.colisionaCon(m8))
+        if (pp.colisionaCon(m8))
         {
             m8.desaparecer();
             contadorMonedas++;
@@ -158,27 +164,16 @@ void Nivel3::actualizar()
     }
 
 
-    // Comprobar si el jugador pasa por una posición determinada para activar la trampa
+    /// Colisiona trampa horizontal
     if (pp.colisionaCon(trmp))    // Condición para hacer aparecer la trampa
     {
         std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
         std::cout << "Posición de la trampa: (" << trmp.getPosition().x << ", " << trmp.getPosition().y << ")" << std::endl;
         trmp.aparecer();
         pp.activarCaida();
-        vidas--;
+
     }
-    if(pp.getPosition().y>600)
-    {
-        pp.reset(0,400);
-        trmp.reiniciar();
-        isGameOverModifica();
-        if(vidas==0)
-        {
-            gameOver=true;
-            jugador.setPuntaje(contadorMonedas);
-            jugador.grabarArchivo();
-        }
-    }
+
 
     if (pp.colisionPuertaBlanca(pb))
     {
@@ -188,12 +183,19 @@ void Nivel3::actualizar()
         gameOverResolved = true; // Indicar que se ha completado el nivel
     }
 
-
-    if (pp.getPosition().y > 600)
+    if(pp.getPosition().y>600)
     {
         vidas--;
-        pp.reset(0, 400); // Reiniciar la posición del jugador
-        trmp.reiniciar(); // Reiniciar la trampa
+        pp.reset(0,400);
+        trmp.reiniciar();
+
+        isGameOverModifica();
+        if(vidas==0)
+        {
+            gameOver=true;
+            jugador.setPuntaje(contadorMonedas);
+            jugador.grabarArchivo();/// TODO: se deberia grabar archivo cuando gameoverResolved, no cuando haces game over.
+        }
     }
 
 
@@ -253,7 +255,8 @@ bool Nivel3::isGameOver() const
 }
 
 
-void Nivel3::isGameOverModifica(){
+void Nivel3::isGameOverModifica()
+{
     m.aparecer();
     m2.aparecer();
     m3.aparecer();
@@ -264,6 +267,8 @@ void Nivel3::isGameOverModifica(){
     m8.aparecer();
     m9.aparecer();
     m10.aparecer();
+    obstaculo1.aparecer();
+    obstaculo2.aparecer();
     contadorMonedas=0;
 }
 

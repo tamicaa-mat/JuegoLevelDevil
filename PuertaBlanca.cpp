@@ -22,7 +22,7 @@ sf::Vector2f PuertaBlanca::getPosition() const {
 }
 
 
-void PuertaBlanca::setPosicion(float x, float y) {
+void PuertaBlanca::setPosition(float x, float y) {
     _puertaRec.setPosition(x, y);
 }
 

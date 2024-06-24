@@ -8,7 +8,7 @@ Nivel1::Nivel1(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     m3(550.0,350.0,10),
     piso(800, 150),
     trmp(550,450),
-    pb(700, 400),
+    pb(700.0, 400.0),
     obstaculo1(200.0, 430.0, 25.0, 25.0),
     obstaculo2(400.0, 430.0, 25.0, 25.0),
     vidas(3), gameOver(false),
@@ -21,10 +21,11 @@ Nivel1::Nivel1(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     }
 
 
-     if (!fondoTexture.loadFromFile("fondo2.jpg")) {
-            std::cerr << "Error al cargar la imagen de fondo" << std::endl;
-        }
-        fondoSprite.setTexture(fondoTexture);
+    if (!fondoTexture.loadFromFile("fondo2.jpg"))
+    {
+        std::cerr << "Error al cargar la imagen de fondo" << std::endl;
+    }
+    fondoSprite.setTexture(fondoTexture);
 
 
 
@@ -81,10 +82,11 @@ void Nivel1::actualizar()
             isGameOverModifica();
             pp.reset(0,400);
             trmp.reiniciar();
-        // Reiniciar la trampa cuando el jugador muere
+            // Reiniciar la trampa cuando el jugador muere
         }
         else
         {
+
             gameOver = true;
             jugador.setPuntaje(contadorMonedas);
             jugador.grabarArchivo();
@@ -113,41 +115,36 @@ void Nivel1::actualizar()
     /// colision con trampa horizontal
     if (pp.colisionaCon(trmp))    // Condición para hacer aparecer la trampa
     {
-    std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
-    std::cout << "Posición de la trampa: (" << trmp.getPosition().x << ", " << trmp.getPosition().y << ")" << std::endl;
+        std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
+        std::cout << "Posición de la trampa: (" << trmp.getPosition().x << ", " << trmp.getPosition().y << ")" << std::endl;
         trmp.aparecer();
         pp.activarCaida();
-        vidas--;
+
     }
+
+    if (pp.colisionPuertaBlanca(pb))
+    {
+        std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
+        std::cout << "Posición de la puerta: (" << pb.getPosition().x << ", " << pb.getPosition().y << ")" << std::endl;
+
+        gameOverResolved = true; // Indicar que se ha completado el nivel
+    }
+
+    ///????? este bloque IF creo que esta de mas
     if(pp.getPosition().y>600)
     {
+        vidas--;
         pp.reset(0,400);
         trmp.reiniciar();
-        isGameOverModifica();///////////////agrego funcion para reset las monedas y puntaje a 0
+        isGameOverModifica();
         if(vidas==0)
         {
+
             gameOver=true;
             jugador.setPuntaje(contadorMonedas);
             jugador.grabarArchivo();
         }
     }
-
-    if (pp.colisionPuertaBlanca(pb))
-    {
-    std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
-    std::cout << "Posición de la puerta: (" << pb.getPosition().x << ", " << pb.getPosition().y << ")" << std::endl;
-
-        gameOverResolved = true; // Indicar que se ha completado el nivel
-    }
-
-    /////????? este bloque IF creo que esta de mas
-    if (pp.getPosition().y > 600)
-    {
-        vidas--;
-        pp.reset(0, 400); // Reiniciar la posición del jugador
-        trmp.reiniciar(); // Reiniciar la trampa
-    }
-
     textoVidas.setString("Nivel 1 Vidas: " + std::to_string(vidas));
     textoPuntos.setString("Puntos: " + std::to_string(contadorMonedas));
 }
@@ -194,7 +191,8 @@ bool Nivel1::isGameOver() const
 
 }
 
-void Nivel1::isGameOverModifica(){
+void Nivel1::isGameOverModifica()
+{
     m.aparecer();
     m2.aparecer();
     m3.aparecer();
@@ -202,6 +200,7 @@ void Nivel1::isGameOverModifica(){
 }
 
 
-int Nivel1::getContadorMonedas() const {
+int Nivel1::getContadorMonedas() const
+{
     return contadorMonedas;
 }

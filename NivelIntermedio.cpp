@@ -29,6 +29,18 @@ NivelIntermedio::NivelIntermedio(sf::RenderWindow& vent) : ventana(vent) {
     botonJugarNivel3.setPosition(300, 300);
 
 
+    textoIntermedio3.setFont(fuente);
+    textoIntermedio3.setString("Nivel 3 Completado");
+    textoIntermedio3.setCharacterSize(50);
+    textoIntermedio3.setFillColor(sf::Color::White);
+    textoIntermedio3.setPosition(150, 100);
+
+    botonJugarNivel4.setFont(fuente);
+    botonJugarNivel4.setString("Jugar Nivel 4");
+    botonJugarNivel4.setCharacterSize(30);
+    botonJugarNivel4.setFillColor(sf::Color::White);
+    botonJugarNivel4.setPosition(300, 300);
+
 
 }
 
@@ -59,6 +71,15 @@ void NivelIntermedio::dibujarN2() {
     ventana.display();
 }
 
+
+void NivelIntermedio::dibujarN3() {
+    ventana.clear();
+    ventana.draw(textoIntermedio3);
+    ventana.draw(botonJugarNivel4);
+    ventana.display();
+}
+
+
 bool NivelIntermedio::esBotonJugarNivel2Presionado() {
     return sf::Mouse::isButtonPressed(sf::Mouse::Left) && botonJugarNivel2.getGlobalBounds().contains(ventana.mapPixelToCoords(sf::Mouse::getPosition(ventana)));
 }
@@ -66,3 +87,9 @@ bool NivelIntermedio::esBotonJugarNivel2Presionado() {
 bool NivelIntermedio::esBotonJugarNivel3Presionado() {
     return sf::Mouse::isButtonPressed(sf::Mouse::Left) && botonJugarNivel3.getGlobalBounds().contains(ventana.mapPixelToCoords(sf::Mouse::getPosition(ventana)));
 }
+
+bool NivelIntermedio::esBotonJugarNivel4Presionado() {
+    return sf::Mouse::isButtonPressed(sf::Mouse::Left) && botonJugarNivel4.getGlobalBounds().contains(ventana.mapPixelToCoords(sf::Mouse::getPosition(ventana)));
+}
+
+
