@@ -8,6 +8,8 @@ class PuertaBlanca
 private:
     sf::RectangleShape _puertaRec;
     sf::Vector2f _posicionPuertaBlanca;
+    bool _cerrando;
+    float _tiempoAchicando;
 public:
     PuertaBlanca(float x, float y);
     //PuertaBlanca();
@@ -16,6 +18,8 @@ public:
  sf::Vector2f getPosition() const;
     // Método para dibujar la puerta
  sf::RectangleShape& getDraw();
+ void iniciarCerrado();
+ void achicar(float deltaTime);
 
 };
 

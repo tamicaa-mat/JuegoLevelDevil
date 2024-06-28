@@ -17,10 +17,17 @@ private:
     Personaje pp;
     Moneda m, m2, m3;
     Piso piso;
+    Piso pisoArriba;
     Trampa trmp;
     PuertaBlanca pb;
     Obstaculo obstaculo1;
     Obstaculo obstaculo2;
+    Obstaculo obstaculo3;
+    Obstaculo obstaculo4;
+    Obstaculo obstaculo5;
+    Obstaculo obstaculo6;
+    Obstaculo obstaculo7;
+    Obstaculo obstaculo8;
     sf::Text textoVidas;
     sf::Text textoPuntos;
     sf::Text textoGameOver;

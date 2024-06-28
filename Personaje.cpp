@@ -14,8 +14,8 @@ Personaje::Personaje(float x, float y)
     fueraJuego = false;
 }
 
- void Personaje::setEstado(ESTADO est){
-    _estado=est;
+ void Personaje::setSaltando(){
+     _estado = ESTADO::SALTANDO;
     }
 
 
@@ -221,6 +221,14 @@ bool Personaje::colisionaConTrampaN2(const Trampa& trampa)
     }
 
     return false;
+}
+
+bool Personaje::colisionaObstN4(const Obstaculo& _obsta){
+if(_shape.getPosition().x==_obsta.getPositionO().x){
+    return true;
+}
+return false;
+
 }
 
 

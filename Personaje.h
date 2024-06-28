@@ -35,6 +35,7 @@ public:
     sf::Drawable& getDraw();
     void activarCaida();
     bool colisionaCon(const Obstaculo& obstaculo);
+    bool colisionaObstN4(const Obstaculo& _obsta);
     bool colisionaCon(const Moneda& moneda) const;
     bool colisionaCon(const Trampa& trampa);
     bool colisionaConTrampaN2(const Trampa& trampa);
@@ -42,7 +43,7 @@ public:
     sf::Vector2f getPosition() const;
     void caer();
     void reset(float x, float y);
-    void setEstado(ESTADO est);
+    void setSaltando();
 
 };
 

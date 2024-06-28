@@ -8,10 +8,17 @@ Nivel4::Nivel4(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     m2(500,350.0,10),
     m3(550.0,350.0,10),
     piso(800, 150),
-    trmp(550,450),
+    pisoArriba(800,600),
+    trmp(100,450),
     pb(700.0, 400.0),
-    obstaculo1(200.0, 430.0, 25.0, 25.0),
-    obstaculo2(400.0, 430.0, 25.0, 25.0),
+    obstaculo1(0.0, 150.0, 50.0, 40.0),
+    obstaculo2(100.0, 150.0, 50.0, 40.0),
+    obstaculo3(200.0, 150.0, 50.0, 40.0),
+    obstaculo4(300.0, 150.0, 50.0, 40.0),
+    obstaculo5(400.0, 150.0, 50.0, 40.0),
+    obstaculo6(500.0, 150.0, 50.0, 40.0),
+    obstaculo7(600.0, 150.0, 50.0, 40.0),
+    obstaculo8(700.0, 150.0, 50.0, 40.0),
     vidas(3), gameOver(false),
     gameOverResolved(false),
     contadorMonedas(0)
@@ -72,10 +79,54 @@ void Nivel4::actualizar()
 
     pp.cmd();
     pp.update();
+    pb.achicar(deltaTime);
+    obstaculo1.actualizarObst(deltaTime);
+    obstaculo2.actualizarObst(deltaTime);
+    obstaculo3.actualizarObst(deltaTime);
+    obstaculo4.actualizarObst(deltaTime);
+    obstaculo5.actualizarObst(deltaTime);
+    obstaculo6.actualizarObst(deltaTime);
+    obstaculo7.actualizarObst(deltaTime);
+    obstaculo8.actualizarObst(deltaTime);
 
-    // Actualizar la trampa
+    trmp.setVisible(true);
     trmp.actualizar(deltaTime);
 
+    if(pp.colisionaObstN4(obstaculo1)){
+        obstaculo1.iniciarCaida();
+    }
+
+     if(pp.colisionaObstN4(obstaculo2)){
+        obstaculo2.iniciarCaida();
+    }
+
+
+    if(pp.colisionaObstN4(obstaculo3)){
+        obstaculo3.iniciarCaida();
+    }
+
+     if(pp.colisionaObstN4(obstaculo4)){
+        obstaculo4.iniciarCaida();
+    }
+
+    if(pp.colisionaObstN4(obstaculo5)){
+        obstaculo5.iniciarCaida();
+    }
+
+     if(pp.colisionaObstN4(obstaculo6)){
+        obstaculo6.iniciarCaida();
+    }
+
+
+    if(pp.colisionaObstN4(obstaculo7)){
+        obstaculo7.iniciarCaida();
+    }
+
+     if(pp.colisionaObstN4(obstaculo8)){
+        obstaculo8.iniciarCaida();
+    }
+
+     pb.iniciarCerrado();
     // Comprobar colisiones con obstáculos y trampa
     if (pp.colisionaCon(obstaculo1) || pp.colisionaCon(obstaculo2))
     {
@@ -168,6 +219,7 @@ void Nivel4::dibujar()
     }
     else
     {
+        ventana.draw(pisoArriba.getdraw());
         ventana.draw(textoVidas);
         ventana.draw(textoPuntos);
         ventana.draw(pb.getDraw());
@@ -179,6 +231,12 @@ void Nivel4::dibujar()
         ventana.draw(pp.getDraw()); // Dibuja el jugador por encima de la trampa
         ventana.draw(obstaculo1.getDraw());
         ventana.draw(obstaculo2.getDraw());
+        ventana.draw(obstaculo3.getDraw());
+        ventana.draw(obstaculo4.getDraw());
+        ventana.draw(obstaculo5.getDraw());
+        ventana.draw(obstaculo6.getDraw());
+        ventana.draw(obstaculo7.getDraw());
+        ventana.draw(obstaculo8.getDraw());
     }
     ventana.display();
 }

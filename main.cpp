@@ -216,8 +216,6 @@ int main()
             }
         }
 
-        //////algo pasa del nivel 3 va al 1, y no al 4
-
         if((nivel3Completado)&&(!nivel4Completado)){
 
 

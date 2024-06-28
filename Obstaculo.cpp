@@ -3,7 +3,7 @@
 
 
 Obstaculo::Obstaculo(float x, float y, float width, float height)
-    : _velocidadHorizontal(0.0f) {
+    : _velocidadHorizontal(0.0f),_velocidadVertical(0.0f) {
     _shape.setSize(sf::Vector2f(width, height));
     _shape.setFillColor(sf::Color::Red);
     _shape.setPosition(x, y);
@@ -18,6 +18,29 @@ void Obstaculo::moverIzquierda() {
     _position.x -= (_velocidadHorizontal);
     _shape.move(_position.x,_position.y);
     _shape.setPosition(_position);
+}
+
+void Obstaculo::caer(){
+    _velocidadVertical=2.5f;
+    _position.y -= (-_velocidadVertical);
+    _shape.move(_position.x,_position.y);
+    _shape.setPosition(_position);
+}
+
+//void Obstaculo::caer(){
+//    _velocidadVertical = 2.5f;
+//    _position.y += _velocidadVertical;
+//    _shape.setPosition(_position);
+//}
+
+void Obstaculo::iniciarCaida() {
+    _debeCaer = true;
+}
+
+void Obstaculo::actualizarObst(float deltaTime) {
+    if (_debeCaer) {
+        caer();
+    }
 }
 
 void Obstaculo::setVelocidadHorizontal(float velocidad) {
@@ -51,4 +74,9 @@ const sf::RectangleShape& Obstaculo::getDraw() const {
         return emptyShape;
     }
 
+}
+
+sf::Vector2f Obstaculo::getPositionO()const
+{
+    return _shape.getPosition();
 }
