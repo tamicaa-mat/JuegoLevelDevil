@@ -111,56 +111,55 @@ void Nivel3::actualizar()
         if (pp.colisionaCon(m))
         {
             m.desaparecer();
-            contadorMonedas++;
+
         }
         if (pp.colisionaCon(m2))
         {
             m2.desaparecer();
-            contadorMonedas++;
+
         }
         if (pp.colisionaCon(m3))
         {
             m3.desaparecer();
-            contadorMonedas++;
+
         }
         if (pp.colisionaCon(m4))
         {
             m4.desaparecer();
-            contadorMonedas++;
+
         }
         if (pp.colisionaCon(m5))
         {
             m5.desaparecer();
-            contadorMonedas++;
+
         }
         if (pp.colisionaCon(m6))
         {
             m6.desaparecer();
-            contadorMonedas++;
         }
 
         if (pp.colisionaCon(m7))
         {
             m7.desaparecer();
-            contadorMonedas++;
+
         }
         if (pp.colisionaCon(m8))
         {
             m8.desaparecer();
-            contadorMonedas++;
+
         }
 
         if (pp.colisionaCon(m9))
         {
             m9.desaparecer();
-            contadorMonedas++;
+
         }
         if (pp.colisionaCon(m10))
         {
             m10.desaparecer();
-            contadorMonedas++;
-        }
 
+        }
+            contadorMonedas++;
     }
 
 

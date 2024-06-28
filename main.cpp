@@ -167,7 +167,7 @@ int main()
 
         ///agrego aca nivel3 prueba//////////////////////////////////////////////////////ELSE AQUI/////////////////////////////////////////////////////////////////////////
 
-        if((nivel2Completado)&&(!nivel3Completado))
+       if((nivel2Completado)&&(!nivel3Completado))
         {
 
             NivelIntermedio nivelIntermedio(ventana);
@@ -243,7 +243,7 @@ int main()
                 nivel4.actualizar();
                 nivel4.dibujar();
 
-                ///Verificar si el estado de "Game Over" ha sido resuelto en el segundo nivel
+
                 if (nivel4.isGameOverResolved())
                 {
                     if (nivel4.isGameOver())   // Utiliza el nuevo método isGameOver

@@ -86,6 +86,20 @@ void Nivel2::actualizar()
 
     }
 
+
+       if (pp.colisionaConTrampaN2(trmp))
+    {
+        std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
+        std::cout << "Posición de la trampa: (" << trmp.getPosition().x << ", " << trmp.getPosition().y << ")" << std::endl;
+        trmp.aparecer();
+        pp.activarCaida();
+
+
+    }
+
+
+
+
 //TODO:ARREGLAR COLISION OBSTACULOS N2
 
     if (pp.colisionaCon(obstaculo1))
@@ -133,22 +147,23 @@ void Nivel2::actualizar()
         if (pp.colisionaCon(m))
         {
             m.desaparecer();
-            contadorMonedas++;
+
         }
         if (pp.colisionaCon(m2))
         {
             m2.desaparecer();
-            contadorMonedas++;
+
         }
         if (pp.colisionaCon(m3))
         {
             m3.desaparecer();
-            contadorMonedas++;
+
         }
+            contadorMonedas++;
     }
 
  // std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
-    if (pp.colisionaConTrampaN2(trmp)||pp.colisionaCon(trmp))
+    if (pp.colisionaCon(trmp))
     {
         std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
         std::cout << "Posición de la trampa: (" << trmp.getPosition().x << ", " << trmp.getPosition().y << ")" << std::endl;
@@ -170,6 +185,7 @@ void Nivel2::actualizar()
      if (pp.getPosition().y > 600)
         {
             vidas--;
+
             if (vidas>0)
             {
                 isGameOverModifica();
