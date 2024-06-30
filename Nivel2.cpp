@@ -29,7 +29,11 @@ Nivel2::Nivel2(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     {
         std::cerr << "Error al cargar la imagen de fondo" << std::endl;
     }
-
+      if (!buffer.loadFromFile("moneda.ogg")) {
+    std::cerr << "Error al cargar el archivo de sonido" << std::endl;
+    } else {
+    sound.setBuffer(buffer);
+    }
 
     fondoSprite.setTexture(fondoTexture);
 
@@ -71,8 +75,9 @@ void Nivel2::actualizar()
     pisoArriba.setColor(sf::Color::Green);
     pisoArriba.setPosition(200,145);
     pisoArriba.setSize(200,50);
-
+    pb.setVisible(true);
     float deltaTime = 1.0f / 60.0f; // Asumiendo 60 FPS
+    ArchivoJugador archiJgdr;
     pp.cmd();
     pp.update();
 
@@ -116,7 +121,7 @@ void Nivel2::actualizar()
 
             gameOver = true;
             jugador.setPuntaje(contadorMonedas);
-            jugador.grabarArchivo();
+            jugador.setNivel(2);
         }
 
     }
@@ -134,8 +139,9 @@ void Nivel2::actualizar()
         {
 
             gameOver = true;
+            jugador.setNivel(2);
             jugador.setPuntaje(contadorMonedas);
-            jugador.grabarArchivo();
+
         }
 
     }
@@ -147,16 +153,19 @@ void Nivel2::actualizar()
         if (pp.colisionaCon(m))
         {
             m.desaparecer();
+            sound.play();
 
         }
         if (pp.colisionaCon(m2))
         {
             m2.desaparecer();
+            sound.play();
 
         }
         if (pp.colisionaCon(m3))
         {
             m3.desaparecer();
+            sound.play();
 
         }
             contadorMonedas++;
@@ -197,7 +206,7 @@ void Nivel2::actualizar()
 
                 gameOver = true;
                 jugador.setPuntaje(contadorMonedas);
-                jugador.grabarArchivo();
+                jugador.setNivel(1);
             }
         }
 

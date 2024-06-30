@@ -2,6 +2,7 @@
 #define NIVEL1_H_INCLUDED
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "Personaje.h"
 #include "PuertaBlanca.h"
 #include "Monedas.h"
@@ -9,7 +10,7 @@
 #include "Obstaculo.h"
 #include "Trampa.h"
 #include "Jugador.h"
-
+#include "ArchivoJugador.h"
 class Nivel1 {
 private:
     sf::RenderWindow& ventana;
@@ -27,6 +28,8 @@ private:
     sf::Font fuente;
     sf::Texture fondoTexture;
     sf::Sprite fondoSprite;
+    sf::SoundBuffer buffer;
+    sf::Sound sound;
 
 
     int vidas;

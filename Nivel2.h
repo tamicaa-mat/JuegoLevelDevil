@@ -1,5 +1,6 @@
 #ifndef NIVEL2_H_INCLUDED
 #define NIVEL2_H_INCLUDED
+#include <SFML/Audio.hpp>
 
 #include <SFML/Graphics.hpp>
 #include "Personaje.h"
@@ -9,7 +10,8 @@
 #include "Obstaculo.h"
 #include"Trampa.h"
 #include"Jugador.h"
-#include"DarNombreJugador.h"
+
+#include"ArchivoJugador.h"
 class Nivel2 {
 private:
      sf::RenderWindow& ventana;
@@ -28,7 +30,8 @@ private:
     sf::Font fuente;
     sf::Texture fondoTexture;
     sf::Sprite fondoSprite;
-
+    sf::SoundBuffer buffer;
+    sf::Sound sound;
 
     int vidas;
     bool gameOver;

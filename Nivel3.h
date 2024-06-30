@@ -1,6 +1,8 @@
 #ifndef NIVEL3_H_INCLUDED
 #define NIVEL3_H_INCLUDED
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+
 #include "Personaje.h"
 #include "PuertaBlanca.h"
 #include "Monedas.h"
@@ -8,6 +10,7 @@
 #include "Obstaculo.h"
 #include "Trampa.h"
 #include "Jugador.h"
+#include"ArchivoJugador.h"
 
 
 class Nivel3{
@@ -28,7 +31,8 @@ private:
     sf::Font fuente;
     sf::Texture fondoTexture;
     sf::Sprite fondoSprite;
-
+    sf::SoundBuffer buffer;
+    sf::Sound sound;
 
     int vidas;
     bool gameOver;

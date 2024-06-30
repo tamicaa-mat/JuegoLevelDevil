@@ -1,6 +1,6 @@
 #include "MenuPrincipal.h"
 
-MenuPrincipal::MenuPrincipal(sf::RenderWindow& vent) : ventana(vent), botonJugarPresionado(false), botonRecordsPresionado(false) {
+MenuPrincipal::MenuPrincipal(sf::RenderWindow& vent) : ventana(vent), botonJugarPresionado(false), botonRecordsPresionado(false),botonContinuarPartidaPresionado(false) {
 
      if (!fondoTexture.loadFromFile("fondo2.jpg")) {
             std::cerr << "Error al cargar la imagen de fondo" << std::endl;
@@ -22,10 +22,18 @@ MenuPrincipal::MenuPrincipal(sf::RenderWindow& vent) : ventana(vent), botonJugar
     botonJugar.setPosition(350, 300);
 
     botonRecords.setFont(fuente);
-    botonRecords.setString("* Records");
+    botonRecords.setString("* Ver Partidas");
     botonRecords.setCharacterSize(30);
     botonRecords.setFillColor(sf::Color::White);
     botonRecords.setPosition(350, 350);
+
+    botonContinuarPartida.setFont(fuente);
+    botonContinuarPartida.setString("* Continuar Partida");
+    botonContinuarPartida.setCharacterSize(30);
+    botonContinuarPartida.setFillColor(sf::Color::White);
+    botonContinuarPartida.setPosition(350, 400);
+
+
 }
 
 void MenuPrincipal::manejarEntrada() {
@@ -42,6 +50,10 @@ void MenuPrincipal::manejarEntrada() {
                 if (botonRecords.getGlobalBounds().contains(ventana.mapPixelToCoords(sf::Mouse::getPosition(ventana)))) {
                     botonRecordsPresionado = true;
                 }
+                 if (botonContinuarPartida.getGlobalBounds().contains(ventana.mapPixelToCoords(sf::Mouse::getPosition(ventana)))) {
+                    botonContinuarPartidaPresionado = true;
+                }
+
             }
         }
     }
@@ -58,6 +70,7 @@ void MenuPrincipal::dibujar() {
     ventana.draw(textoBienvenida);
     ventana.draw(botonJugar);
     ventana.draw(botonRecords);
+    ventana.draw(botonContinuarPartida);
     ventana.display();
 }
 
@@ -67,8 +80,29 @@ bool MenuPrincipal::esBotonJugarPresionado() const {
 
 bool MenuPrincipal::esBotonRecordsPresionado() const {
     return botonRecordsPresionado;
+
 }
+
+
+bool MenuPrincipal::esBotonContinuarPartidaPresionado() const {
+
+    return botonContinuarPartidaPresionado;
+
+}
+
+int MenuPrincipal::nivelJugador(){
+    int numPartida=0,numNivel=0;
+    Jugador objJug;
+    ArchivoJugador archiJug;
+    std::cout<<"Ingrese su numero de partida: "<<std::endl;
+    std::cin>>numPartida;
+    objJug=archiJug.leerRegistro(numPartida);
+    numNivel=objJug.getNivel();
+    return numNivel;
+}
+
 void MenuPrincipal::resetBotones() {
     botonJugarPresionado = false;
     botonRecordsPresionado = false;
+    botonContinuarPartidaPresionado=false;
 }

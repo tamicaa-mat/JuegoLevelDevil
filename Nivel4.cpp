@@ -7,10 +7,13 @@ Nivel4::Nivel4(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     m(250.0,350.0,10),
     m2(500,350.0,10),
     m3(550.0,350.0,10),
+    m4(300.0,400.0,10),
+    m5(600.0,350.0,10),
     piso(800, 150),
     pisoArriba(800,600),
-    trmp(100,450),
+    trmp(300,450),
     pb(700.0, 400.0),
+    pb2(700,400),
     obstaculo1(0.0, 150.0, 50.0, 40.0),
     obstaculo2(100.0, 150.0, 50.0, 40.0),
     obstaculo3(200.0, 150.0, 50.0, 40.0),
@@ -35,7 +38,11 @@ Nivel4::Nivel4(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     }
     fondoSprite.setTexture(fondoTexture);
 
-
+      if (!buffer.loadFromFile("moneda.ogg")) {
+    std::cerr << "Error al cargar el archivo de sonido" << std::endl;
+    } else {
+    sound.setBuffer(buffer);
+    }
 
 
     textoVidas.setFont(fuente);
@@ -76,9 +83,11 @@ void Nivel4::actualizar()
     if (gameOver) return;
 
     float deltaTime = 1.0f / 60.0f; // Asumiendo 60 FPS
+    ArchivoJugador archiJgdr;
 
     pp.cmd();
     pp.update();
+    pb.setVisible(true);
     pb.achicar(deltaTime);
     obstaculo1.actualizarObst(deltaTime);
     obstaculo2.actualizarObst(deltaTime);
@@ -90,6 +99,7 @@ void Nivel4::actualizar()
     obstaculo8.actualizarObst(deltaTime);
 
     trmp.setVisible(true);
+
     trmp.actualizar(deltaTime);
 
     if(pp.colisionaObstN4(obstaculo1)){
@@ -128,7 +138,7 @@ void Nivel4::actualizar()
 
      pb.iniciarCerrado();
     // Comprobar colisiones con obstáculos y trampa
-    if (pp.colisionaCon(obstaculo1) || pp.colisionaCon(obstaculo2))
+    if (pp.colisionaCon(obstaculo1) || pp.colisionaCon(obstaculo2)|| pp.colisionaCon(obstaculo3)|| pp.colisionaCon(obstaculo4)|| pp.colisionaCon(obstaculo5))
     {
         vidas--;
         if (vidas > 0)
@@ -142,63 +152,59 @@ void Nivel4::actualizar()
         {
 
             gameOver = true;
+            jugador.setNivel(4);
             jugador.setPuntaje(contadorMonedas);
-            jugador.grabarArchivo();
+
         }
     }
 
-    if(pp.colisionaCon(m) || pp.colisionaCon(m2) || pp.colisionaCon(m3))
+    if(pp.colisionaCon(m) || pp.colisionaCon(m2) || pp.colisionaCon(m3)|| pp.colisionaCon(m4)|| pp.colisionaCon(m5))
     {
         if (pp.colisionaCon(m))
         {
             m.desaparecer();
-            contadorMonedas++;
+              sound.play();
+
         }
         if (pp.colisionaCon(m2))
         {
             m2.desaparecer();
-            contadorMonedas++;
+              sound.play();
+
         }
         if (pp.colisionaCon(m3))
         {
             m3.desaparecer();
-            contadorMonedas++;
+              sound.play();
         }
+        if (pp.colisionaCon(m5))
+        {
+            m5.desaparecer();
+              sound.play();
+        }
+         if (pp.colisionaCon(m4))
+        {
+            m4.desaparecer();
+              sound.play();
+            pb2.setVisible(true);
+
+        }
+
+
+            contadorMonedas++;
     }
 
-    /// colision con trampa horizontal
-    if (pp.colisionaCon(trmp))    // Condición para hacer aparecer la trampa
+
+
+    if (pp.colisionPuertaBlanca(pb2)||pp.colisionPuertaBlanca(pb))
     {
         std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
-        std::cout << "Posición de la trampa: (" << trmp.getPosition().x << ", " << trmp.getPosition().y << ")" << std::endl;
-        trmp.aparecer();
-        pp.activarCaida();
-
-    }
-
-    if (pp.colisionPuertaBlanca(pb))
-    {
-        std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
-        std::cout << "Posición de la puerta: (" << pb.getPosition().x << ", " << pb.getPosition().y << ")" << std::endl;
+        std::cout << "Posición de la puerta: (" << pb2.getPosition().x << ", " << pb2.getPosition().y << ")" << std::endl;
 
         gameOverResolved = true; // Indicar que se ha completado el nivel
     }
 
-    ///????? este bloque IF creo que esta de mas
-    if(pp.getPosition().y>600)
-    {
-        vidas--;
-        pp.reset(0,400);
-        trmp.reiniciar();
-        isGameOverModifica();
-        if(vidas==0)
-        {
 
-            gameOver=true;
-            jugador.setPuntaje(contadorMonedas);
-            jugador.grabarArchivo();
-        }
-    }
     textoVidas.setString("Nivel 4 Vidas: " + std::to_string(vidas));
     textoPuntos.setString("Puntos: " + std::to_string(contadorMonedas));
 }
@@ -223,9 +229,12 @@ void Nivel4::dibujar()
         ventana.draw(textoVidas);
         ventana.draw(textoPuntos);
         ventana.draw(pb.getDraw());
+        ventana.draw(pb2.getDraw());
         ventana.draw(m.getDraw());
         ventana.draw(m2.getDraw());
         ventana.draw(m3.getDraw());
+        ventana.draw(m4.getDraw());
+        ventana.draw(m5.getDraw());
         ventana.draw(piso.getdraw());
         ventana.draw(trmp.getDraw());
         ventana.draw(pp.getDraw()); // Dibuja el jugador por encima de la trampa

@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+
 #include "gamePlay.h"
 #include "MenuPrincipal.h"
 #include "DarNombreJugador.h"
@@ -9,6 +11,8 @@
 #include "Records.h"
 #include "Nivel3.h"
 #include "Nivel4.h"
+#include "ArchivoJugador.h"
+
 
 int main()
 {
@@ -18,12 +22,14 @@ int main()
     MenuPrincipal menuPrincipal(ventana);
     DarNombreJugador darNombreJugador(ventana);
     Jugador* jugador = nullptr;
-
+    Jugador objJugador;
+    ArchivoJugador archiJugador;
+    //int numNivel = 1;
     bool juegoIniciado = false;
     bool nivel1Completado = false;
     bool nivel2Completado = false;
     bool nivel3Completado = false;
-    bool nivel4Completado= false;
+    bool nivel4Completado = false;
 
     bool pedirNombreJugador = false;
     bool mostrarRecords = false;
@@ -32,7 +38,7 @@ int main()
     {
         if (!juegoIniciado && !mostrarRecords)
         {
-            if (!pedirNombreJugador)
+            if(!pedirNombreJugador)
             {
                 menuPrincipal.manejarEntrada();
                 menuPrincipal.actualizar();
@@ -40,14 +46,36 @@ int main()
 
                 if (menuPrincipal.esBotonJugarPresionado())
                 {
-                    pedirNombreJugador = true;///agregar alguna condicion para que no lo pida  siempre, sino solo si queres iniciar una partida nueva, sino
-                    ///te tiene que dar la opcion de continuar tu partida
+                    pedirNombreJugador = true;
+
                 }
                 if (menuPrincipal.esBotonRecordsPresionado())
                 {
                     mostrarRecords = true;
                 }
+                if (menuPrincipal.esBotonContinuarPartidaPresionado())
+                {
+
+                    int numNivel = menuPrincipal.nivelJugador();
+
+                    switch (numNivel)
+                    {
+                    case 1:
+                        nivel1Completado = false;
+                        break;
+                    case 2:
+                        nivel2Completado = false;
+                        break;
+                    case 3:
+                        nivel3Completado = false;
+                        break;
+                    case 4:
+                        nivel4Completado = false;
+                        break;
+                    }
+                }
             }
+
             else
             {
                 darNombreJugador.manejarEntrada();
@@ -63,13 +91,10 @@ int main()
                     jugador = new Jugador(darNombreJugador.getNombreJugador());
                     juegoIniciado = true;
                     nivel1Completado = false;
-                    pedirNombreJugador = false; // Resetear para la próxima vez
+                    pedirNombreJugador = false;
                 }
             }
         }
-
-
-
         else if (mostrarRecords)
         {
             Records records(ventana);
@@ -79,14 +104,12 @@ int main()
                 records.manejarEntrada();
                 records.dibujar();
             }
-            mostrarRecords = false; // Resetear para volver al menú principal
-            menuPrincipal.resetBotones(); // Resetear los botones
+            mostrarRecords = false;
+            menuPrincipal.resetBotones();
         }
 
-
-        else if (nivel1Completado)// si se completo nivel1 , comienza nivel 2
+        else if (nivel1Completado)
         {
-            // Mostrar la pantalla intermedia
             NivelIntermedio nivelIntermedio(ventana);
 
             while (ventana.isOpen())
@@ -97,13 +120,12 @@ int main()
 
                 if (nivelIntermedio.esBotonJugarNivel2Presionado())
                 {
-                    nivel1Completado = false; // Resetear el estado del nivel intermedio
+                    nivel1Completado = false;
                     break;
                 }
             }
 
-            /// Crear y manejar el segundo nivel
-            Nivel2 nivel2(ventana,*jugador);
+            Nivel2 nivel2(ventana, *jugador);
 
             while (ventana.isOpen())
             {
@@ -111,22 +133,22 @@ int main()
                 nivel2.actualizar();
                 nivel2.dibujar();
 
-                ///Verificar si el estado de "Game Over" ha sido resuelto en el segundo nivel
-
                 if (nivel2.isGameOverResolved())
                 {
-                    if (nivel2.isGameOver())   // Utiliza el nuevo método isGameOver
+                    if (nivel2.isGameOver())
                     {
-                        jugador->setPuntaje(nivel2.getContadorMonedas());
-                        jugador->grabarArchivo(); // Guardar el puntaje del jugador en el archivo
-                        juegoIniciado = false; // Si es "Game Over", regresar al menú principal
-                        pedirNombreJugador = false; // Resetear para pedir el nombre del jugador otra vez
-                        menuPrincipal.resetBotones(); // Resetear los botones
-                        darNombreJugador.resetNombreIngresado(); // Resetear el estado del nombre ingresado
+                        objJugador.getNivel();
+                        objJugador.getPuntaje();
+                        objJugador.getNombre();
+                        archiJugador.grabarArchivo(*jugador);
+                        juegoIniciado = false;
+                        pedirNombreJugador = false;
+                        menuPrincipal.resetBotones();
+                        darNombreJugador.resetNombreIngresado();
                     }
                     else
                     {
-                        nivel2Completado = true; // Indicar que el nivel 2 ha sido completado
+                        nivel2Completado = true;
                     }
                     break;
                 }
@@ -134,7 +156,6 @@ int main()
         }
         else
         {
-            // Crear y manejar el primer nivel, si nivel1completado es falso, arranca nivel1
             Nivel1 nivel1(ventana, *jugador);
 
             while (ventana.isOpen())
@@ -143,33 +164,30 @@ int main()
                 nivel1.actualizar();
                 nivel1.dibujar();
 
-                // Verificar si el estado de "Game Over" ha sido resuelto
                 if (nivel1.isGameOverResolved())
                 {
-                    if (nivel1.isGameOver())   // Utiliza el nuevo método isGameOver
+                    if (nivel1.isGameOver())
                     {
-                        jugador->setPuntaje(nivel1.getContadorMonedas());
-                        jugador->grabarArchivo(); // Guardar el puntaje del jugador en el archivo
-                        juegoIniciado = false; // Si es "Game Over", regresar al menú principal
-                        pedirNombreJugador = false; // Resetear para pedir el nombre del jugador otra vez
-                        menuPrincipal.resetBotones(); // Resetear los botones
-                        darNombreJugador.resetNombreIngresado(); // Resetear el estado del nombre ingresado
+                        objJugador.getNivel();
+                        objJugador.getPuntaje();
+                        objJugador.getNombre();
+                        archiJugador.grabarArchivo(*jugador);
+                        juegoIniciado = false;
+                        pedirNombreJugador = false;
+                        menuPrincipal.resetBotones();
+                        darNombreJugador.resetNombreIngresado();
                     }
                     else
                     {
-                        nivel1Completado = true; // Indicar que el nivel 1 ha sido completado
+                        nivel1Completado = true;
                     }
                     break;
                 }
             }
         }
 
-
-        ///agrego aca nivel3 prueba//////////////////////////////////////////////////////ELSE AQUI/////////////////////////////////////////////////////////////////////////
-
-       if((nivel2Completado)&&(!nivel3Completado))
+        if ((nivel2Completado) && (!nivel3Completado))
         {
-
             NivelIntermedio nivelIntermedio(ventana);
 
             while (ventana.isOpen())
@@ -180,13 +198,12 @@ int main()
 
                 if (nivelIntermedio.esBotonJugarNivel3Presionado())
                 {
-                    nivel2Completado = false; // Resetear el estado del nivel intermedio
+                    nivel2Completado = false;
                     break;
                 }
             }
 
-            ///crear NIVEL3
-            Nivel3 nivel3(ventana,*jugador);
+            Nivel3 nivel3(ventana, *jugador);
 
             while (ventana.isOpen())
             {
@@ -194,31 +211,30 @@ int main()
                 nivel3.actualizar();
                 nivel3.dibujar();
 
-                ///Verificar si el estado de "Game Over" ha sido resuelto en el segundo nivel
                 if (nivel3.isGameOverResolved())
                 {
-                    if (nivel3.isGameOver())   // Utiliza el nuevo método isGameOver
+                    if (nivel3.isGameOver())
                     {
-                        jugador->setPuntaje(nivel3.getContadorMonedas());
-                        jugador->grabarArchivo(); // Guardar el puntaje del jugador en el archivo
-                        juegoIniciado = false; // Si es "Game Over", regresar al menú principal
-                        pedirNombreJugador = false; // Resetear para pedir el nombre del jugador otra vez
-                        menuPrincipal.resetBotones(); // Resetear los botones
-                        darNombreJugador.resetNombreIngresado(); // Resetear el estado del nombre ingresado
+                        objJugador.getNivel();
+                        objJugador.getPuntaje();
+                        objJugador.getNombre();
+                        archiJugador.grabarArchivo(*jugador);
+                        juegoIniciado = false;
+                        pedirNombreJugador = false;
+                        menuPrincipal.resetBotones();
+                        darNombreJugador.resetNombreIngresado();
                     }
                     else
                     {
                         nivel3Completado = true;
                     }
                     break;
-
                 }
             }
         }
 
-        if((nivel3Completado)&&(!nivel4Completado)){
-
-
+        if ((nivel3Completado) && (!nivel4Completado))
+        {
             NivelIntermedio nivelIntermedio(ventana);
 
             while (ventana.isOpen())
@@ -229,13 +245,12 @@ int main()
 
                 if (nivelIntermedio.esBotonJugarNivel3Presionado())
                 {
-                    nivel3Completado = false; // Resetear el estado del nivel intermedio
+                    nivel3Completado = false;
                     break;
                 }
             }
 
-            ///crear NIVEL4
-            Nivel4 nivel4(ventana,*jugador);
+            Nivel4 nivel4(ventana, *jugador);
 
             while (ventana.isOpen())
             {
@@ -243,45 +258,37 @@ int main()
                 nivel4.actualizar();
                 nivel4.dibujar();
 
-
                 if (nivel4.isGameOverResolved())
                 {
-                    if (nivel4.isGameOver())   // Utiliza el nuevo método isGameOver
+                    if (nivel4.isGameOver())
                     {
-                        jugador->setPuntaje(nivel4.getContadorMonedas());
-                        jugador->grabarArchivo(); // Guardar el puntaje del jugador en el archivo
-                        juegoIniciado = false; // Si es "Game Over", regresar al menú principal
-                        pedirNombreJugador = false; // Resetear para pedir el nombre del jugador otra vez
-                        menuPrincipal.resetBotones(); // Resetear los botones
-                        darNombreJugador.resetNombreIngresado(); // Resetear el estado del nombre ingresado
+                        objJugador.getNivel();
+                        objJugador.getPuntaje();
+                        objJugador.getNombre();
+                        archiJugador.grabarArchivo(*jugador);
+                        juegoIniciado = false;
+                        pedirNombreJugador = false;
+                        menuPrincipal.resetBotones();
+                        darNombreJugador.resetNombreIngresado();
                     }
                     else
                     {
-                        nivel4Completado = true; //
+                        nivel4Completado = true;
                     }
                     break;
-
                 }
             }
         }
-
-
-
-
-
-        }
-
-
-
-
-///////////////////////////////////////////////////////yo aca
-
-
+    }
 
     if (jugador)
     {
         delete jugador;
     }
 
+    system("pause");
     return 0;
 }
+
+
+

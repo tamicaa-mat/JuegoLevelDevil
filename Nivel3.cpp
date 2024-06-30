@@ -38,6 +38,11 @@ Nivel3::Nivel3(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
         std::cerr << "Error al cargar la imagen de fondo" << std::endl;
     }
 
+  if (!buffer.loadFromFile("moneda.ogg")) {
+    std::cerr << "Error al cargar el archivo de sonido" << std::endl;
+    } else {
+    sound.setBuffer(buffer);
+    }
 
     fondoSprite.setTexture(fondoTexture);
     textoVidas.setFont(fuente);
@@ -75,10 +80,10 @@ void Nivel3::actualizar()
     if (gameOver) return;
 
     float deltaTime = 1.0f / 60.0f; // Asumiendo 60 FPS
-
+    ArchivoJugador archiJgdr;
     pp.cmd();
     pp.update();
-
+    pb.setVisible(true);
     obstaculo1.moverIzquierda();
     // Actualizar la trampa
     trmp.actualizar(deltaTime);
@@ -97,8 +102,9 @@ void Nivel3::actualizar()
         else
         {
             gameOver = true;
+            jugador.setNivel(3);
             jugador.setPuntaje(contadorMonedas);
-            jugador.grabarArchivo();
+
         }
 
 
@@ -111,11 +117,13 @@ void Nivel3::actualizar()
         if (pp.colisionaCon(m))
         {
             m.desaparecer();
+            sound.play();
 
         }
         if (pp.colisionaCon(m2))
         {
             m2.desaparecer();
+            sound.play();
 
         }
         if (pp.colisionaCon(m3))
@@ -126,37 +134,43 @@ void Nivel3::actualizar()
         if (pp.colisionaCon(m4))
         {
             m4.desaparecer();
+            sound.play();
 
         }
         if (pp.colisionaCon(m5))
         {
             m5.desaparecer();
+            sound.play();
 
         }
         if (pp.colisionaCon(m6))
         {
             m6.desaparecer();
+            sound.play();
         }
 
         if (pp.colisionaCon(m7))
         {
             m7.desaparecer();
+            sound.play();
 
         }
         if (pp.colisionaCon(m8))
         {
             m8.desaparecer();
+            sound.play();
 
         }
 
         if (pp.colisionaCon(m9))
         {
             m9.desaparecer();
-
+              sound.play();
         }
         if (pp.colisionaCon(m10))
         {
             m10.desaparecer();
+            sound.play();
 
         }
             contadorMonedas++;
@@ -192,8 +206,9 @@ void Nivel3::actualizar()
         if(vidas==0)
         {
             gameOver=true;
+            jugador.setNivel(3);
             jugador.setPuntaje(contadorMonedas);
-            jugador.grabarArchivo();/// TODO: se deberia grabar archivo cuando gameoverResolved, no cuando haces game over.
+
         }
     }
 

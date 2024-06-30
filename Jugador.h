@@ -9,14 +9,16 @@ class Jugador {
 private:
     char nombre[30];
     int puntaje;
-
+    int _nivel;
 public:
-    Jugador(const std::string& nombreJugador, int puntajeInicial = 0);
-    bool grabarArchivo(const char* filename = "records.dat");
+    Jugador();
+    Jugador(const std::string& nombreJugador, int puntajeInicial = 0, int nivel=1);
     void setPuntaje(int puntaje);
     int getPuntaje() const;
+    void setNivel(int niv);
+    int getNivel()const;
+    void mostrarDatos();
     const char* getNombre() const;
-    static void mostrarTodosJugadores(const char* filename = "records.dat");
 };
 
 #endif // JUGADOR_H_INCLUDED

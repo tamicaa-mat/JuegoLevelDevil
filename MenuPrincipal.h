@@ -2,6 +2,8 @@
 #define MENUPRINCIPAL_H_INCLUDED
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "ArchivoJugador.h"
+#include "Jugador.h"
 
 class MenuPrincipal {
 private:
@@ -9,11 +11,13 @@ private:
     sf::Text textoBienvenida;
     sf::Text botonJugar;
     sf::Text botonRecords;
+    sf::Text botonContinuarPartida;
     sf::RenderWindow& ventana;
     sf::Texture fondoTexture;
     sf::Sprite fondoSprite;
     bool botonJugarPresionado;
     bool botonRecordsPresionado;
+    bool botonContinuarPartidaPresionado;
 
 public:
     MenuPrincipal(sf::RenderWindow& vent);
@@ -22,7 +26,9 @@ public:
     void dibujar();
     bool esBotonJugarPresionado() const;
     bool esBotonRecordsPresionado() const;
+    bool esBotonContinuarPartidaPresionado() const;
     void resetBotones();
+    int nivelJugador();
 };
 
 #endif // MENUPRINCIPAL_H_INCLUDED

@@ -10,6 +10,7 @@ private:
     sf::Vector2f _posicionPuertaBlanca;
     bool _cerrando;
     float _tiempoAchicando;
+    bool _visiblePB;
 public:
     PuertaBlanca(float x, float y);
     //PuertaBlanca();
@@ -20,7 +21,8 @@ public:
  sf::RectangleShape& getDraw();
  void iniciarCerrado();
  void achicar(float deltaTime);
-
+ void aparecerPB();
+ void setVisible(bool ver);
 };
 
 

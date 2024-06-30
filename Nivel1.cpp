@@ -1,6 +1,6 @@
-#include "Nivel1.h"
+#include <SFML/Audio.hpp>
 #include <iostream> //cabecera para usar std::cout
-
+#include "Nivel1.h"
 Nivel1::Nivel1(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(jug),
     pp(0,400),
     m(250.0,350.0,10),
@@ -27,7 +27,11 @@ Nivel1::Nivel1(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     }
     fondoSprite.setTexture(fondoTexture);
 
-
+    if (!buffer.loadFromFile("moneda.ogg")) {
+    std::cerr << "Error al cargar el archivo de sonido" << std::endl;
+    } else {
+    sound.setBuffer(buffer);
+    }
 
 
     textoVidas.setFont(fuente);
@@ -64,9 +68,9 @@ void Nivel1::manejarEntrada()
 void Nivel1::actualizar()
 {
     if (gameOver) return;
-
+    ArchivoJugador archiJgdr;
     float deltaTime = 1.0f / 60.0f; // Asumiendo 60 FPS
-
+    pb.setVisible(true);
     pp.cmd();
     pp.update();
 
@@ -88,8 +92,9 @@ void Nivel1::actualizar()
         {
 
             gameOver = true;
+            jugador.setNivel(1);
             jugador.setPuntaje(contadorMonedas);
-            jugador.grabarArchivo();
+
         }
     }
 
@@ -98,18 +103,23 @@ void Nivel1::actualizar()
         if (pp.colisionaCon(m))
         {
             m.desaparecer();
-            contadorMonedas++;
+            sound.play();
+
         }
         if (pp.colisionaCon(m2))
         {
             m2.desaparecer();
-            contadorMonedas++;
+            sound.play();
+
         }
         if (pp.colisionaCon(m3))
         {
             m3.desaparecer();
-            contadorMonedas++;
+            sound.play();
+
         }
+
+         contadorMonedas++;
     }
 
     /// colision con trampa horizontal
@@ -142,7 +152,7 @@ void Nivel1::actualizar()
 
             gameOver=true;
             jugador.setPuntaje(contadorMonedas);
-            jugador.grabarArchivo();
+            jugador.setNivel(1);
         }
     }
     textoVidas.setString("Nivel 1 Vidas: " + std::to_string(vidas));

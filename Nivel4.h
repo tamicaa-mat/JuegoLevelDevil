@@ -1,6 +1,8 @@
 #ifndef NIVEL4_H_INCLUDED
 #define NIVEL4_H_INCLUDED
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+
 #include "Personaje.h"
 #include "PuertaBlanca.h"
 #include "Monedas.h"
@@ -8,18 +10,18 @@
 #include "Obstaculo.h"
 #include "Trampa.h"
 #include "Jugador.h"
-
+#include "ArchivoJugador.h"
 
 class Nivel4 {
 private:
     sf::RenderWindow& ventana;
     Jugador& jugador;
     Personaje pp;
-    Moneda m, m2, m3;
+    Moneda m, m2, m3 ,m4,m5;
     Piso piso;
     Piso pisoArriba;
     Trampa trmp;
-    PuertaBlanca pb;
+    PuertaBlanca pb,pb2;
     Obstaculo obstaculo1;
     Obstaculo obstaculo2;
     Obstaculo obstaculo3;
@@ -34,7 +36,8 @@ private:
     sf::Font fuente;
     sf::Texture fondoTexture;
     sf::Sprite fondoSprite;
-
+    sf::SoundBuffer buffer;
+    sf::Sound sound;
 
     int vidas;
     bool gameOver;

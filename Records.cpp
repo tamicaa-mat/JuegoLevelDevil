@@ -1,6 +1,6 @@
 #include "Records.h"
 #include <algorithm> // Para std::sort
-
+#include "ArchivoJugador.h"
 Records::Records(sf::RenderWindow& vent) : ventana(vent) {
     fuente.loadFromFile("fuentes/Roboto-Black.ttf");
     textoTitulo.setFont(fuente);
@@ -13,7 +13,8 @@ Records::Records(sf::RenderWindow& vent) : ventana(vent) {
 }
 
 void Records::cargarRecords() {
-    FILE* p = fopen("records.dat", "rb");
+
+    FILE* p = fopen("partidas.dat", "rb");
     if (p == NULL) {
         sf::Text textoNoDatos;
         textoNoDatos.setFont(fuente);
@@ -24,7 +25,6 @@ void Records::cargarRecords() {
         textosJugadores.push_back(textoNoDatos);
         return;
     }
-
     std::vector<Jugador> jugadores;
     Jugador jugador("", 0);
     while (fread(&jugador, sizeof jugador, 1, p) == 1) {
@@ -41,12 +41,13 @@ void Records::cargarRecords() {
     for (const auto& jug : jugadores) {
         sf::Text textoJugador;
         textoJugador.setFont(fuente);
-        textoJugador.setString(jug.getNombre() + std::string(" - ") + std::to_string(jug.getPuntaje()));
+
+        textoJugador.setString(jug.getNombre() + std::string(" Puntos: ") + std::to_string(jug.getPuntaje()) + std::to_string(jug.getNivel()));
         textoJugador.setCharacterSize(30);
         textoJugador.setFillColor(sf::Color::White);
         textoJugador.setPosition(200, y);
-        textosJugadores.push_back(textoJugador);
         y += 40;
+        textosJugadores.push_back(textoJugador);
     }
 }
 

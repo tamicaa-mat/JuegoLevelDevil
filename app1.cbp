@@ -55,6 +55,8 @@
 		<Unit filename="../../c++ codeblock programación II/modeloParcial2Prog.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="ArchivoJugador.cpp" />
+		<Unit filename="ArchivoJugador.h" />
 		<Unit filename="DarNombreJugador.cpp" />
 		<Unit filename="DarNombreJugador.h" />
 		<Unit filename="Jugador.cpp" />
