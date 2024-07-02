@@ -24,7 +24,7 @@ Nivel4::Nivel4(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     obstaculo8(700.0, 150.0, 50.0, 40.0),
     vidas(3), gameOver(false),
     gameOverResolved(false),
-    contadorMonedas(0)
+    contadorMonedas(jugador.getPuntaje())
 {
     if (!fuente.loadFromFile("fuentes/Roboto-Black.ttf"))
     {
@@ -192,6 +192,7 @@ void Nivel4::actualizar()
 
 
             contadorMonedas++;
+            jugador.setPuntaje(contadorMonedas);
     }
 
 
@@ -202,6 +203,7 @@ void Nivel4::actualizar()
         std::cout << "Posición de la puerta: (" << pb2.getPosition().x << ", " << pb2.getPosition().y << ")" << std::endl;
 
         gameOverResolved = true; // Indicar que se ha completado el nivel
+        jugador.setPuntaje(contadorMonedas);
     }
 
 

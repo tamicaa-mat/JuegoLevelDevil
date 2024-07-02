@@ -13,6 +13,8 @@
 #include "Nivel4.h"
 #include "ArchivoJugador.h"
 
+
+
 int main()
 {
      sf::RenderWindow ventana(sf::VideoMode(800, 600), "SFML Window");
@@ -94,8 +96,8 @@ int main()
         else if(continuaPartida){
 
         numNivel = archiJugador.nivelJugador();
-        //objJugador.setPuntaje(archiJugador.leerPuntajeJugador());
-
+        objJugador.setPuntaje(archiJugador.leerPuntajeJugador());
+        objJugador.setNivel(numNivel);
 
 
                     switch (numNivel)
@@ -165,6 +167,9 @@ int main()
                     else
                     {
                         nivel2Completado = true;
+                        objJugador.setPuntaje(nivel2.getContadorMonedas());///agrego
+                        archiJugador.grabarArchivo(objJugador);
+
                     }
                     break;
                 }
@@ -184,9 +189,8 @@ int main()
                 {
                     if (nivel1.isGameOver())
                     {
-                        objJugador.getNivel();
-                        objJugador.getPuntaje();
-                        objJugador.getNombre();
+                        objJugador.setNivel(1);
+                        objJugador.setPuntaje(nivel1.getContadorMonedas());
                         archiJugador.grabarArchivo(objJugador);
                         juegoIniciado = false;
                         pedirNombreJugador = false;
@@ -196,7 +200,8 @@ int main()
                     else
                     {
                         nivel1Completado = true;
-
+                        objJugador.setPuntaje(nivel1.getContadorMonedas());
+                        archiJugador.grabarArchivo(objJugador);
                     }
                     break;
                 }
@@ -244,6 +249,8 @@ int main()
                     else
                     {
                         nivel3Completado = true;
+                        objJugador.setPuntaje(nivel3.getContadorMonedas());///agrego
+                        archiJugador.grabarArchivo(objJugador);
                     }
                     break;
                 }
@@ -291,13 +298,16 @@ int main()
                     else
                     {
                         nivel4Completado = true;
+                        objJugador.setPuntaje(nivel4.getContadorMonedas());///agrego
+                        archiJugador.grabarArchivo(objJugador);
+
                     }
                     break;
                 }
             }
         }
     }
-
+//
 
     system("pause");
     return 0;

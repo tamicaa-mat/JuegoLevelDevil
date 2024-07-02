@@ -2,7 +2,7 @@
 #include <cstring>
 #include <iostream>
 
-Jugador::Jugador(const std::string& nombreJugador, int puntajeInicial,int nivel) : puntaje(puntajeInicial),_nivel(nivel) {
+Jugador::Jugador(const std::string& nombreJugador)  {
     strncpy(nombre, nombreJugador.c_str(), sizeof(nombre) - 1);
     nombre[sizeof(nombre) - 1] = '\0';
 }

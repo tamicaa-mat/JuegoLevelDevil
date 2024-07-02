@@ -1,5 +1,5 @@
 #include"Nivel2.h"
-#include <iostream>//cabecera para usar std::cout
+#include <iostream>
 Nivel2::Nivel2(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(jug),
     pp(200, 100),
     m(600.0, 400.0, 10),
@@ -76,12 +76,12 @@ void Nivel2::actualizar()
     pisoArriba.setPosition(200,145);
     pisoArriba.setSize(200,50);
     pb.setVisible(true);
-    float deltaTime = 1.0f / 60.0f; // Asumiendo 60 FPS
+    float deltaTime = 1.0f / 60.0f;
     ArchivoJugador archiJgdr;
     pp.cmd();
     pp.update();
 
-    ////////////////////agregoahora
+
 
     trmp.actualizar(deltaTime);
 
@@ -103,10 +103,6 @@ void Nivel2::actualizar()
     }
 
 
-
-
-//TODO:ARREGLAR COLISION OBSTACULOS N2
-
     if (pp.colisionaCon(obstaculo1))
     {
         vidas--;
@@ -120,8 +116,8 @@ void Nivel2::actualizar()
         {
 
             gameOver = true;
-            jugador.setPuntaje(contadorMonedas);
             jugador.setNivel(2);
+            jugador.setPuntaje(contadorMonedas);
         }
 
     }
@@ -169,6 +165,7 @@ void Nivel2::actualizar()
 
         }
             contadorMonedas++;
+            jugador.setPuntaje(contadorMonedas);
     }
 
  // std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
@@ -189,11 +186,7 @@ void Nivel2::actualizar()
         std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
         std::cout << "Posición de la puerta: (" << pb.getPosition().x << ", " << pb.getPosition().y << ")" << std::endl;
         gameOverResolved = true; // Indicar que se ha completado el nivel
-        if(vidas==3){
-                contadorMonedas=10;
-           }
-            jugador.setNivel(2);
-            jugador.setPuntaje(contadorMonedas);
+        jugador.setPuntaje(contadorMonedas);
 
 
     }
@@ -201,19 +194,14 @@ void Nivel2::actualizar()
      if (pp.getPosition().y > 600)
         {
             vidas--;
+            pp.reset(200, 100);
+            trmp.reiniciar();
+            isGameOverModifica();
 
-            if (vidas>0)
-            {
-                isGameOverModifica();
-                pp.reset(200, 100);
-                trmp.reiniciar();
-            }
-            else
-            {
-
+            if (vidas==0){
                 gameOver = true;
                 jugador.setPuntaje(contadorMonedas);
-                jugador.setNivel(1);
+                jugador.setNivel(2);
             }
         }
 

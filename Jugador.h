@@ -13,7 +13,7 @@ private:
 public:
         Jugador();
 
-    Jugador(const std::string& nombreJugador, int puntajeInicial = 0, int nivel=1);
+    Jugador(const std::string& nombreJugador);
     void setPuntaje(int puntaje);
     int getPuntaje() const;
     void setNivel(int niv);

@@ -13,7 +13,7 @@ Nivel1::Nivel1(sf::RenderWindow& vent, const Jugador& jugador) : ventana(vent), 
     obstaculo2(400.0, 430.0, 25.0, 25.0),
     vidas(3), gameOver(false),
     gameOverResolved(false),
-    contadorMonedasN1(0)
+    contadorMonedasN1(jugador.getPuntaje())
 {
     if (!fuente.loadFromFile("fuentes/Roboto-Black.ttf"))
     {
@@ -60,7 +60,8 @@ void Nivel1::manejarEntrada()
             ventana.close();
         if (gameOver && evento.type == sf::Event::KeyPressed && evento.key.code == sf::Keyboard::Enter)
         {
-            gameOverResolved = true; // Indicar que se ha resuelto el estado de "Game Over"
+            gameOverResolved = true;
+
         }
     }
 }
@@ -93,7 +94,7 @@ void Nivel1::actualizar()
 
             gameOver = true;
             jugador.setNivel(1);
-            jugador.setPuntaje(getContadorMonedas());
+            jugador.setPuntaje(contadorMonedasN1);
 
         }
     }
@@ -120,6 +121,7 @@ void Nivel1::actualizar()
         }
 
          contadorMonedasN1++;
+        jugador.setPuntaje(contadorMonedasN1);
     }
 
     /// colision con trampa horizontal
@@ -138,10 +140,7 @@ void Nivel1::actualizar()
         std::cout << "Posición de la puerta: (" << pb.getPosition().x << ", " << pb.getPosition().y << ")" << std::endl;
 
         gameOverResolved = true;
-        if(vidas==3){
-            jugador.setNivel(1);
-            jugador.setPuntaje(contadorMonedasN1);
-        }
+        jugador.setPuntaje(contadorMonedasN1);
 
     }
 
@@ -152,9 +151,9 @@ void Nivel1::actualizar()
         pp.reset(0,400);
         trmp.reiniciar();
         isGameOverModifica();
+
         if(vidas==0)
         {
-
             gameOver=true;
             jugador.setPuntaje(contadorMonedasN1);
             jugador.setNivel(1);

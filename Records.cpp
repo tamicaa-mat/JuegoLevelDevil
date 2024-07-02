@@ -26,7 +26,7 @@ FILE* p = fopen("partidas.dat", "rb");
         return;
     }
     std::vector<Jugador> jugadores;
-    Jugador jugador("", 0, 0);
+    Jugador jugador("");
     while (fread(&jugador, sizeof jugador, 1, p) == 1) {
         jugadores.push_back(jugador);
     }
