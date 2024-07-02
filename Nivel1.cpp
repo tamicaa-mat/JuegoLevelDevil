@@ -1,7 +1,7 @@
 #include <SFML/Audio.hpp>
 #include <iostream> //cabecera para usar std::cout
 #include "Nivel1.h"
-Nivel1::Nivel1(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(jug),
+Nivel1::Nivel1(sf::RenderWindow& vent, const Jugador& jugador) : ventana(vent), jugador(jugador),
     pp(0,400),
     m(250.0,350.0,10),
     m2(500,350.0,10),
@@ -13,7 +13,7 @@ Nivel1::Nivel1(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     obstaculo2(400.0, 430.0, 25.0, 25.0),
     vidas(3), gameOver(false),
     gameOverResolved(false),
-    contadorMonedas(0)
+    contadorMonedasN1(0)
 {
     if (!fuente.loadFromFile("fuentes/Roboto-Black.ttf"))
     {
@@ -93,7 +93,7 @@ void Nivel1::actualizar()
 
             gameOver = true;
             jugador.setNivel(1);
-            jugador.setPuntaje(contadorMonedas);
+            jugador.setPuntaje(getContadorMonedas());
 
         }
     }
@@ -119,7 +119,7 @@ void Nivel1::actualizar()
 
         }
 
-         contadorMonedas++;
+         contadorMonedasN1++;
     }
 
     /// colision con trampa horizontal
@@ -137,7 +137,12 @@ void Nivel1::actualizar()
         std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
         std::cout << "Posición de la puerta: (" << pb.getPosition().x << ", " << pb.getPosition().y << ")" << std::endl;
 
-        gameOverResolved = true; // Indicar que se ha completado el nivel
+        gameOverResolved = true;
+        if(vidas==3){
+            jugador.setNivel(1);
+            jugador.setPuntaje(contadorMonedasN1);
+        }
+
     }
 
     ///????? este bloque IF creo que esta de mas
@@ -151,12 +156,12 @@ void Nivel1::actualizar()
         {
 
             gameOver=true;
-            jugador.setPuntaje(contadorMonedas);
+            jugador.setPuntaje(contadorMonedasN1);
             jugador.setNivel(1);
         }
     }
     textoVidas.setString("Nivel 1 Vidas: " + std::to_string(vidas));
-    textoPuntos.setString("Puntos: " + std::to_string(contadorMonedas));
+    textoPuntos.setString("Puntos: " + std::to_string(contadorMonedasN1));
 }
 
 void Nivel1::dibujar()
@@ -206,11 +211,11 @@ void Nivel1::isGameOverModifica()
     m.aparecer();
     m2.aparecer();
     m3.aparecer();
-    contadorMonedas=0;
+    contadorMonedasN1=0;
 }
 
 
 int Nivel1::getContadorMonedas() const
 {
-    return contadorMonedas;
+    return contadorMonedasN1;
 }

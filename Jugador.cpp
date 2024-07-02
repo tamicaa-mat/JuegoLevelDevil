@@ -7,8 +7,17 @@ Jugador::Jugador(const std::string& nombreJugador, int puntajeInicial,int nivel)
     nombre[sizeof(nombre) - 1] = '\0';
 }
 
+void Jugador::setNombre(const std::string& nombreJugador) {
 
-Jugador::Jugador() : puntaje(0), _nivel(1) {
+    std::strncpy(nombre, nombreJugador.c_str(), sizeof(nombre) - 1);
+
+    nombre[sizeof(nombre) - 1] = '\0';
+}
+
+
+
+
+Jugador::Jugador()  {
     nombre[0] = '\0';
 }
 
@@ -35,7 +44,7 @@ const char* Jugador::getNombre() const {
 }
 
 
-    //Jugador jugador("", 0 , 1);
+//    Jugador jugador("", 0 , 1);
 //
 //    while (fread(&jugador, sizeof jugador, 1, p) == 1) {
 //        std::cout << "Nombre: " << jugador.getNombre() << ", Puntaje: " << jugador.getPuntaje() << std::endl;

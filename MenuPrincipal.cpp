@@ -15,6 +15,13 @@ MenuPrincipal::MenuPrincipal(sf::RenderWindow& vent) : ventana(vent), botonJugar
     textoBienvenida.setFillColor(sf::Color::White);
     textoBienvenida.setPosition(300, 100);
 
+    fuente.loadFromFile("fuentes/Roboto-Black.ttf");
+    textoPartidas.setFont(fuente);
+    textoPartidas.setString("Ya existe una partida guardada");
+    textoPartidas.setCharacterSize(30);
+    textoPartidas.setFillColor(sf::Color::White);
+    textoPartidas.setPosition(300, 100);
+
     botonJugar.setFont(fuente);
     botonJugar.setString("* Jugar");
     botonJugar.setCharacterSize(30);
@@ -90,16 +97,7 @@ bool MenuPrincipal::esBotonContinuarPartidaPresionado() const {
 
 }
 
-int MenuPrincipal::nivelJugador(){
-    int numPartida=0,numNivel=0;
-    Jugador objJug;
-    ArchivoJugador archiJug;
-    std::cout<<"Ingrese su numero de partida: "<<std::endl;
-    std::cin>>numPartida;
-    objJug=archiJug.leerRegistro(numPartida);
-    numNivel=objJug.getNivel();
-    return numNivel;
-}
+
 
 void MenuPrincipal::resetBotones() {
     botonJugarPresionado = false;

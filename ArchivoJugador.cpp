@@ -29,7 +29,7 @@ int ArchivoJugador::contarRegistros(){
 bool ArchivoJugador::grabarArchivo(Jugador obj){
 
        FILE *p;
-    p=fopen("partidas.dat", "ab");
+    p=fopen("partidas.dat", "wb");
     if(p==NULL){
        std:: cout<<"ERROR DE ARCHIVO"<<std::endl;
         return false;
@@ -58,6 +58,21 @@ Jugador ArchivoJugador::leerRegistro(int pos){
     return obj;
 }
 
+int ArchivoJugador::nivelJugador(){
+    int numNivel=0,numPartida=0;
+    Jugador objJug;
+    ArchivoJugador archiJug("partidas.dat");
+    objJug=archiJug.leerRegistro(0);
+    numNivel=objJug.getNivel();
+    return numNivel;
+}
+
+int ArchivoJugador::leerPuntajeJugador(){
+Jugador objJug;
+objJug=leerRegistro(0);
+int puntaje=objJug.getPuntaje();
+return puntaje;
+}
 
 void ArchivoJugador::mostrarTodosJugadores(const char* filename) {
     int cantRegistros=contarRegistros();

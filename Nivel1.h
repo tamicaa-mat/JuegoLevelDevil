@@ -14,7 +14,7 @@
 class Nivel1 {
 private:
     sf::RenderWindow& ventana;
-    Jugador& jugador;
+    Jugador jugador;
     Personaje pp;
     Moneda m, m2, m3;
     Piso piso;
@@ -35,10 +35,10 @@ private:
     int vidas;
     bool gameOver;
     bool gameOverResolved;
-    int contadorMonedas;
+    int contadorMonedasN1;
 
 public:
-    Nivel1(sf::RenderWindow& vent, Jugador& jug);
+    Nivel1(sf::RenderWindow& vent, const Jugador& jugador);
     void manejarEntrada();
     void actualizar();
     void dibujar();

@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
-#include "gamePlay.h"
+
 #include "MenuPrincipal.h"
 #include "DarNombreJugador.h"
 #include "Jugador.h"
@@ -13,30 +13,30 @@
 #include "Nivel4.h"
 #include "ArchivoJugador.h"
 
-
 int main()
 {
-    sf::RenderWindow ventana(sf::VideoMode(800, 600), "SFML Window");
+     sf::RenderWindow ventana(sf::VideoMode(800, 600), "SFML Window");
     ventana.setFramerateLimit(60);
 
     MenuPrincipal menuPrincipal(ventana);
     DarNombreJugador darNombreJugador(ventana);
-    Jugador* jugador = nullptr;
     Jugador objJugador;
     ArchivoJugador archiJugador;
-    //int numNivel = 1;
+    int numNivel = 0;
     bool juegoIniciado = false;
     bool nivel1Completado = false;
     bool nivel2Completado = false;
     bool nivel3Completado = false;
     bool nivel4Completado = false;
-
+    int puntajePartida=0;
     bool pedirNombreJugador = false;
     bool mostrarRecords = false;
+    bool continuaPartida = false;
+
 
     while (ventana.isOpen())
     {
-        if (!juegoIniciado && !mostrarRecords)
+        if (!juegoIniciado && !mostrarRecords && !continuaPartida)
         {
             if(!pedirNombreJugador)
             {
@@ -47,32 +47,20 @@ int main()
                 if (menuPrincipal.esBotonJugarPresionado())
                 {
                     pedirNombreJugador = true;
+                    menuPrincipal.resetBotones();
 
                 }
                 if (menuPrincipal.esBotonRecordsPresionado())
                 {
                     mostrarRecords = true;
+                    menuPrincipal.resetBotones();
                 }
                 if (menuPrincipal.esBotonContinuarPartidaPresionado())
                 {
 
-                    int numNivel = menuPrincipal.nivelJugador();
+                    continuaPartida=true;
+                    menuPrincipal.resetBotones();
 
-                    switch (numNivel)
-                    {
-                    case 1:
-                        nivel1Completado = false;
-                        break;
-                    case 2:
-                        nivel2Completado = false;
-                        break;
-                    case 3:
-                        nivel3Completado = false;
-                        break;
-                    case 4:
-                        nivel4Completado = false;
-                        break;
-                    }
                 }
             }
 
@@ -84,11 +72,7 @@ int main()
 
                 if (darNombreJugador.esNombreIngresado())
                 {
-                    if (jugador)
-                    {
-                        delete jugador;
-                    }
-                    jugador = new Jugador(darNombreJugador.getNombreJugador());
+                    objJugador.setNombre(darNombreJugador.getNombreJugador());
                     juegoIniciado = true;
                     nivel1Completado = false;
                     pedirNombreJugador = false;
@@ -107,6 +91,38 @@ int main()
             mostrarRecords = false;
             menuPrincipal.resetBotones();
         }
+        else if(continuaPartida){
+
+        numNivel = archiJugador.nivelJugador();
+        //objJugador.setPuntaje(archiJugador.leerPuntajeJugador());
+
+
+
+                    switch (numNivel)
+                    {
+                    case 1:
+                        nivel1Completado = false;
+                        break;
+                    case 2:
+                        nivel1Completado=true;
+                        nivel2Completado = false;
+                        break;
+                    case 3:
+                        nivel1Completado=true;
+                        nivel2Completado=true;
+                        nivel3Completado = false;
+                        break;
+                    case 4:
+                        nivel1Completado=true;
+                        nivel2Completado=true;
+                        nivel3Completado=true;
+                        nivel4Completado = false;
+                        break;
+                    }
+                    juegoIniciado=true;
+                    continuaPartida=false;
+        }
+
 
         else if (nivel1Completado)
         {
@@ -125,7 +141,7 @@ int main()
                 }
             }
 
-            Nivel2 nivel2(ventana, *jugador);
+            Nivel2 nivel2(ventana, objJugador);
 
             while (ventana.isOpen())
             {
@@ -140,7 +156,7 @@ int main()
                         objJugador.getNivel();
                         objJugador.getPuntaje();
                         objJugador.getNombre();
-                        archiJugador.grabarArchivo(*jugador);
+                        archiJugador.grabarArchivo(objJugador);
                         juegoIniciado = false;
                         pedirNombreJugador = false;
                         menuPrincipal.resetBotones();
@@ -156,7 +172,7 @@ int main()
         }
         else
         {
-            Nivel1 nivel1(ventana, *jugador);
+            Nivel1 nivel1(ventana, objJugador);
 
             while (ventana.isOpen())
             {
@@ -171,7 +187,7 @@ int main()
                         objJugador.getNivel();
                         objJugador.getPuntaje();
                         objJugador.getNombre();
-                        archiJugador.grabarArchivo(*jugador);
+                        archiJugador.grabarArchivo(objJugador);
                         juegoIniciado = false;
                         pedirNombreJugador = false;
                         menuPrincipal.resetBotones();
@@ -180,6 +196,7 @@ int main()
                     else
                     {
                         nivel1Completado = true;
+
                     }
                     break;
                 }
@@ -203,7 +220,7 @@ int main()
                 }
             }
 
-            Nivel3 nivel3(ventana, *jugador);
+            Nivel3 nivel3(ventana, objJugador);
 
             while (ventana.isOpen())
             {
@@ -218,7 +235,7 @@ int main()
                         objJugador.getNivel();
                         objJugador.getPuntaje();
                         objJugador.getNombre();
-                        archiJugador.grabarArchivo(*jugador);
+                        archiJugador.grabarArchivo(objJugador);
                         juegoIniciado = false;
                         pedirNombreJugador = false;
                         menuPrincipal.resetBotones();
@@ -250,7 +267,7 @@ int main()
                 }
             }
 
-            Nivel4 nivel4(ventana, *jugador);
+            Nivel4 nivel4(ventana, objJugador);
 
             while (ventana.isOpen())
             {
@@ -265,7 +282,7 @@ int main()
                         objJugador.getNivel();
                         objJugador.getPuntaje();
                         objJugador.getNombre();
-                        archiJugador.grabarArchivo(*jugador);
+                        archiJugador.grabarArchivo(objJugador);
                         juegoIniciado = false;
                         pedirNombreJugador = false;
                         menuPrincipal.resetBotones();
@@ -281,14 +298,9 @@ int main()
         }
     }
 
-    if (jugador)
-    {
-        delete jugador;
-    }
 
     system("pause");
     return 0;
 }
-
 
 

@@ -10,7 +10,7 @@
 #include "Obstaculo.h"
 #include"Trampa.h"
 #include"Jugador.h"
-
+#include "Nivel1.h"
 #include"ArchivoJugador.h"
 class Nivel2 {
 private:

@@ -52,6 +52,9 @@
 			<Add library="sfml-system" />
 			<Add directory="C:/Program Files/CodeBlocks/SFML/lib" />
 		</Linker>
+		<Unit filename="../../c++ codeblock programación II/mainLevel.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="../../c++ codeblock programación II/modeloParcial2Prog.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
@@ -86,8 +89,6 @@
 		<Unit filename="Trampa.cpp" />
 		<Unit filename="Trampa.h" />
 		<Unit filename="cb.bmp" />
-		<Unit filename="gamePlay.cpp" />
-		<Unit filename="gamePlay.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="piso.cpp" />
 		<Unit filename="piso.h" />

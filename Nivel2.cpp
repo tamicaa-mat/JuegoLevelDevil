@@ -14,7 +14,7 @@ Nivel2::Nivel2(sf::RenderWindow& vent, Jugador& jug) : ventana(vent), jugador(ju
     vidas(3),
     gameOver(false),
     gameOverResolved(false),
-    contadorMonedas(0)
+    contadorMonedas(jugador.getPuntaje())
 {
 
 
@@ -189,6 +189,13 @@ void Nivel2::actualizar()
         std::cout << "Posición del personaje: (" << pp.getPosition().x << ", " << pp.getPosition().y << ")" << std::endl;
         std::cout << "Posición de la puerta: (" << pb.getPosition().x << ", " << pb.getPosition().y << ")" << std::endl;
         gameOverResolved = true; // Indicar que se ha completado el nivel
+        if(vidas==3){
+                contadorMonedas=10;
+           }
+            jugador.setNivel(2);
+            jugador.setPuntaje(contadorMonedas);
+
+
     }
 
      if (pp.getPosition().y > 600)

@@ -15,6 +15,7 @@ private:
     sf::RenderWindow& ventana;
     sf::Texture fondoTexture;
     sf::Sprite fondoSprite;
+    sf::Text textoPartidas;
     bool botonJugarPresionado;
     bool botonRecordsPresionado;
     bool botonContinuarPartidaPresionado;
@@ -28,7 +29,8 @@ public:
     bool esBotonRecordsPresionado() const;
     bool esBotonContinuarPartidaPresionado() const;
     void resetBotones();
-    int nivelJugador();
+//    int nivelJugador();
+//    bool partidasVacias();
 };
 
 #endif // MENUPRINCIPAL_H_INCLUDED

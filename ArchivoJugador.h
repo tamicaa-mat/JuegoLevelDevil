@@ -14,8 +14,10 @@ public:
 
     }
     int contarRegistros();
+    int nivelJugador();
     bool grabarArchivo(Jugador obj);
     void mostrarTodosJugadores(const char* filename = "partidas.dat");
+    int leerPuntajeJugador();
     Jugador leerRegistro(int pos);
 };
 
