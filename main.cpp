@@ -24,7 +24,7 @@ int main()
     DarNombreJugador darNombreJugador(ventana);
     Jugador objJugador;
     ArchivoJugador archiJugador;
-    int numNivel = 0;
+    int numNivel = 1;
     bool juegoIniciado = false;
     bool nivel1Completado = false;
     bool nivel2Completado = false;
